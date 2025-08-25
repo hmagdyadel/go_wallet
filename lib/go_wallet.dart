@@ -88,7 +88,7 @@ class GoWallet extends StatelessWidget {
   // Function to build app theme
   ThemeData _buildAppTheme() {
     return ThemeData(
-      fontFamily: 'Cairo',
+      fontFamily: 'Zain',
       scaffoldBackgroundColor: Colors.white,
       colorScheme: ColorScheme.fromSeed(seedColor: AppColor.primaryColor),
     );
