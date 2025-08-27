@@ -8,3 +8,4 @@ double heightEdge=20.h;
 const double radius=20;
 const double radiusInner=12;
 const double radiusInput=15;
+const isOnBoardingViewSeen='isOnBoardingViewSeen';

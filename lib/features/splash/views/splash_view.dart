@@ -3,6 +3,9 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../core/constants/dimensions_constants.dart';
+import '../../../core/helpers/extensions.dart';
+import '../../../core/routing/routes.dart';
+import '../../../core/services/shared_preferences_singleton.dart';
 import '../../../core/utils/app_color.dart';
 import '../../../generated/assets.dart';
 
@@ -16,20 +19,19 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    initialization();
+    _initializeApp();
     super.initState();
   }
 
-  void initialization() async {
+  Future<void> _initializeApp() async {
     try {
       FlutterNativeSplash.remove();
 
-      if (!mounted) {
-        debugPrint("Widget not mounted");
-        return;
-      }
+      if (!mounted) return;
+
+      await _navigateAfterSplash();
     } catch (e) {
-      debugPrint("Splash error: $e");
+      debugPrint("Splash initialization error: $e");
     }
   }
 
@@ -49,5 +51,22 @@ class _SplashViewState extends State<SplashView> {
         ),
       ),
     );
+  }
+
+  Future<void> _navigateAfterSplash() async {
+    await Future.delayed(const Duration(seconds: 3));
+
+    if (!mounted) return;
+
+    final isOnBoardingSeen = Prefs.getBool(isOnBoardingViewSeen);
+
+    if (isOnBoardingSeen) {
+      //todo i will add this later
+      //final isLoggedIn = FirebaseAuthService().isUserLoggedIn();
+      //context.pushReplacementNamed(isLoggedIn ? Routes.homeScreen : Routes.loginScreen);
+      context.pushReplacementNamed(Routes.onBoarding);
+    } else {
+      context.pushReplacementNamed(Routes.onBoarding);
+    }
   }
 }

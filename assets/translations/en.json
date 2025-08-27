@@ -1,1 +1,11 @@
-{}
+{
+  "skip": "Skip",
+  "on_boarding_title_1": "Transfer in any way that suits you",
+  "on_boarding_title_2": "Track your expenses easily",
+  "on_boarding_title_3": "Transfer your money instantly",
+  "on_boarding_subtitle_1": "Send money to anyone using a username, mobile number, or QR code—no account number needed.",
+  "on_boarding_subtitle_2": "View your daily statistics and filter by week, month, or year to manage your expenses.",
+  "on_boarding_subtitle_3": "Transfer your money within seconds using a username, phone number, or QR code, thanks to a system designed for instant and reliable responses.",
+  "continue": "Continue",
+  "start_your_journey": "Start your journey"
+}

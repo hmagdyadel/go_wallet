@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../go_wallet.dart';
 import '../routing/app_router.dart';
 import 'custom_bloc_observer.dart';
+import 'shared_preferences_singleton.dart';
 
 Future<Widget> bootstrap() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +18,7 @@ Future<Widget> bootstrap() async {
   // await Firebase.initializeApp(
   //   options: DefaultFirebaseOptions.currentPlatform,
   // );
-  // await Prefs.init();
+  await Prefs.init();
   //
   // setUpGetIt();
 
@@ -25,7 +26,7 @@ Future<Widget> bootstrap() async {
     supportedLocales: const [Locale('en'), Locale('ar')],
     saveLocale: true,
     path: 'assets/translations',
-    startLocale: const Locale('ar'),
+   // startLocale: const Locale('ar'),
     fallbackLocale: const Locale('ar'),
     child: GoWallet(appRouter: AppRouter()),
   );

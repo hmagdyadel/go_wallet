@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/on_boarding/presentation/views/on_boarding_screen.dart';
 import '../../features/splash/views/splash_view.dart';
 import 'routes.dart';
 
@@ -9,8 +12,8 @@ class AppRouter {
     switch (settings.name) {
       case Routes.splashScreen:
         return MaterialPageRoute(builder: (_) => const SplashView());
-      // case Routes.onBoarding:
-      //   return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
+      case Routes.onBoarding:
+        return _buildRoute(OnBoardingView());
       // case Routes.loginScreen:
       //   return MaterialPageRoute(builder: (_) => const SignInView());
       // case Routes.registerScreen:
@@ -30,11 +33,11 @@ class AppRouter {
   }
 
   // this function act as native navigation for android and ios
-  // Route _buildRoute(Widget page, {bool useCupertino = false}) {
-  //   if (useCupertino || TargetPlatform.iOS == defaultTargetPlatform) {
-  //     return CupertinoPageRoute(builder: (_) => page);
-  //   } else {
-  //     return MaterialPageRoute(builder: (_) => page);
-  //   }
-  // }
+  Route _buildRoute(Widget page, {bool useCupertino = false}) {
+    if (useCupertino || TargetPlatform.iOS == defaultTargetPlatform) {
+      return CupertinoPageRoute(builder: (_) => page);
+    } else {
+      return MaterialPageRoute(builder: (_) => page);
+    }
+  }
 }
