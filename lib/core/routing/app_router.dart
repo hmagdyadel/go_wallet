@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../features/login/ui/login_view.dart';
+import '../../features/login/presentation/login_view.dart';
 import '../../features/on_boarding/presentation/views/on_boarding_screen.dart';
 import '../../features/splash/views/splash_view.dart';
 import 'routes.dart';

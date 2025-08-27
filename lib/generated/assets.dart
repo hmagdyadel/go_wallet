@@ -10,9 +10,11 @@ class Assets {
   static const String lottieBoarding3 = 'assets/lottie/boarding_3.json';
   static const String lottieGoInvitation = 'assets/lottie/go_invitation.json';
   static const String lottieGoWallet = 'assets/lottie/go_wallet.json';
-  static const String lottieSowBlobAnimation =
-      'assets/lottie/sow_blob_animation.json';
+  static const String lottieSowBlobAnimation = 'assets/lottie/sow_blob_animation.json';
+  static const String svgsLoginView = 'assets/svgs/login_view.svg';
+  static const String svgsLogo = 'assets/svgs/logo.svg';
   static const String svgsSplash = 'assets/svgs/splash.svg';
   static const String translationsAr = 'assets/translations/ar.json';
   static const String translationsEn = 'assets/translations/en.json';
+
 }
