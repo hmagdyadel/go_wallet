@@ -26,7 +26,7 @@ Future<Widget> bootstrap() async {
     supportedLocales: const [Locale('en'), Locale('ar')],
     saveLocale: true,
     path: 'assets/translations',
-   // startLocale: const Locale('ar'),
+    // startLocale: const Locale('ar'),
     fallbackLocale: const Locale('ar'),
     child: GoWallet(appRouter: AppRouter()),
   );
