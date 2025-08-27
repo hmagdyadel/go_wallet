@@ -19,8 +19,8 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    _initializeApp();
     super.initState();
+    _initializeApp();
   }
 
   Future<void> _initializeApp() async {
@@ -58,15 +58,20 @@ class _SplashViewState extends State<SplashView> {
 
     if (!mounted) return;
 
-    final isOnBoardingSeen = Prefs.getBool(isOnBoardingViewSeen);
+    try {
+      final isOnBoardingSeen = await SecurePrefs.getBool(isOnBoardingViewSeen);
 
-    if (isOnBoardingSeen) {
-      //todo i will add this later
-      //final isLoggedIn = FirebaseAuthService().isUserLoggedIn();
-      //context.pushReplacementNamed(isLoggedIn ? Routes.homeScreen : Routes.loginScreen);
-      context.pushReplacementNamed(Routes.onBoarding);
-    } else {
-      context.pushReplacementNamed(Routes.onBoarding);
+      if (!mounted) return;
+
+      if (isOnBoardingSeen) {
+        // final isLoggedIn = FirebaseAuthService().isUserLoggedIn();
+        // context.pushReplacementNamed(isLoggedIn ? Routes.homeScreen : Routes.loginScreen);
+        context.pushReplacementNamed(Routes.loginScreen);
+      } else {
+        context.pushReplacementNamed(Routes.onBoarding);
+      }
+    } catch (e) {
+      debugPrint("Navigation error: $e");
     }
   }
 }

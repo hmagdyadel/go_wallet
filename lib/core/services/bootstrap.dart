@@ -18,7 +18,7 @@ Future<Widget> bootstrap() async {
   // await Firebase.initializeApp(
   //   options: DefaultFirebaseOptions.currentPlatform,
   // );
-  await Prefs.init();
+  await SecurePrefs.init();
   //
   // setUpGetIt();
 

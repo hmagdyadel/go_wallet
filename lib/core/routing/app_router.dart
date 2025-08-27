@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/login/ui/login_view.dart';
 import '../../features/on_boarding/presentation/views/on_boarding_screen.dart';
 import '../../features/splash/views/splash_view.dart';
 import 'routes.dart';
@@ -11,11 +12,11 @@ class AppRouter {
     // final arguments = settings.arguments;
     switch (settings.name) {
       case Routes.splashScreen:
-        return MaterialPageRoute(builder: (_) => const SplashView());
+        return _buildRoute(SplashView());
       case Routes.onBoarding:
         return _buildRoute(OnBoardingView());
-      // case Routes.loginScreen:
-      //   return MaterialPageRoute(builder: (_) => const SignInView());
+      case Routes.loginScreen:
+        return _buildRoute(LoginView());
       // case Routes.registerScreen:
       //   return _buildRoute(
       //     BlocProvider(
@@ -28,7 +29,7 @@ class AppRouter {
       // case Routes.bestSellingViews:
       //   return MaterialPageRoute(builder: (_) => const BestSellingViews());
       default:
-        return MaterialPageRoute(builder: (_) => const SplashView());
+        return _buildRoute(SplashView());
     }
   }
 

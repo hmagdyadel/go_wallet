@@ -5,6 +5,7 @@ import 'package:go_wallet/core/constants/dimensions_constants.dart';
 import 'package:go_wallet/core/helpers/extensions.dart';
 
 import '../../../../../core/routing/routes.dart' show Routes;
+import '../../../../../core/services/shared_preferences_singleton.dart';
 import '../../../../../core/utils/app_color.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import 'on_boarding_page_view.dart';
@@ -73,6 +74,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
       decorator: DotsDecorator(
         activeColor: AppColor.primaryColor,
         color: AppColor.primaryColor.withAlpha(100),
+        activeSize: const Size.square(10),
       ),
     );
   }
@@ -107,7 +109,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
   Future<void> _completeOnboarding() async {
     try {
       // Save onboarding completion state
-      // await Prefs.setBool(isOnBoardingViewSeen, true);
+       await SecurePrefs.setBool(isOnBoardingViewSeen, true);
 
       if (!mounted) return;
 
@@ -115,7 +117,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
       // You can modify this based on your auth logic:
       // final isLoggedIn = FirebaseAuthService().isUserLoggedIn();
       // final route = isLoggedIn ? Routes.homeScreen : Routes.loginScreen;
-      context.pushReplacementNamed(Routes.splashScreen);
+      context.pushReplacementNamed(Routes.loginScreen);
     } catch (e) {
       debugPrint('Error completing onboarding: $e');
     }
