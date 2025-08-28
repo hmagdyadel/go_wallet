@@ -7,5 +7,15 @@
   "on_boarding_subtitle_2": "View your daily statistics and filter by week, month, or year to manage your expenses.",
   "on_boarding_subtitle_3": "Transfer your money within seconds using a username, phone number, or QR code, thanks to a system designed for instant and reliable responses.",
   "continue": "Continue",
-  "start_your_journey": "Start your journey"
+  "start_your_journey": "Start your journey",
+  "welcome_again": "Welcome back",
+  "login_hint": "Log in to access all wallet features",
+  "username": "Username",
+  "username_hint": "Enter your username",
+  "password": "Password",
+  "password_hint": "Enter your password",
+  "forgot_password": "Forgot password?",
+  "login": "Login",
+  "do_not_have_an_account": "Don’t have an account yet?",
+  "create_account_now": "Create an account now"
 }
