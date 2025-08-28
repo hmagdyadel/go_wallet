@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import '../../core/helpers/extensions.dart';
 import '../routing/routes.dart';
 import '../utils/app_color.dart';
+import 'subtitle_text.dart';
 import 'title_text.dart';
 
-class NotHaveAccount extends StatelessWidget {
-  const NotHaveAccount({super.key});
+class HaveAccount extends StatelessWidget {
+  const HaveAccount({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,18 +16,17 @@ class NotHaveAccount extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TitleText(
-          text: 'do_not_have_an_account'.tr(),
+          text: 'already_have_an_account'.tr(),
           fontSize: 16,
           color: AppColor.primaryColor,
         ),
-
         const SizedBox(width: 5),
         GestureDetector(
           onTap: () {
-            context.pushNamed(Routes.registerView);
+            context.pushNamed(Routes.loginView);
           },
-          child: TitleText(
-            text: "create_account_now".tr(),
+          child: SubTitleText(
+            text: "login".tr(),
             fontSize: 16,
             color: AppColor.lightPrimaryColor,
           ),

@@ -17,6 +17,16 @@
   "forgot_password": "نسيت كلمة المرور؟",
   "login": "تسجيل دخول",
   "do_not_have_an_account": "ليس لديك حساب بعد؟",
-  "create_account_now": "انشاء حساب الان"
-
+  "create_account_now": "انشاء حساب الان",
+  "create_new_account": "إنشاء حساب جديد",
+  "register_hint_title": "مرحبا بك فى جو",
+  "register_hint_sub_title": "سجل حساب جديد الان وتمتع بجميع مميزات المحفظة",
+  "name": "اسم المستخدم",
+  "name_hint": "ادخل اسم المستخدم",
+  "phone": "رقم الهاتف",
+  "phone_hint": "ادخل رقم الهاتف",
+  "confirm_password": "تاكيد كلمة المرور",
+  "confirm_password_hint": "ادخل تاكيد كلمة المرور",
+  "create_account": "انشاء حساب",
+  "already_have_an_account": "لديك حساب بالفعل؟"
 }

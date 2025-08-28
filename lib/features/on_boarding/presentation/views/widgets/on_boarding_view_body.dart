@@ -117,7 +117,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
       // You can modify this based on your auth logic:
       // final isLoggedIn = FirebaseAuthService().isUserLoggedIn();
       // final route = isLoggedIn ? Routes.homeScreen : Routes.loginScreen;
-      context.pushReplacementNamed(Routes.loginScreen);
+      context.pushReplacementNamed(Routes.loginView);
     } catch (e) {
       debugPrint('Error completing onboarding: $e');
     }

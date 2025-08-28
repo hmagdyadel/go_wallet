@@ -9,8 +9,8 @@ import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/input_text.dart';
 import '../../../../core/widgets/not_have_account.dart';
 import '../../../../core/widgets/subtitle_text.dart';
-import '../../../../core/widgets/title_text.dart';
 import '../../../../generated/assets.dart';
+import 'authentication_card.dart';
 
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});
@@ -24,67 +24,24 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // 🔹 Fixed Header
         Container(
           width: width.w,
           height: height * 0.25,
           color: AppColor.primaryColor,
-          child: SvgPicture.asset(
-            Assets.svgsLoginView,
-            fit: BoxFit.fill,
-          ),
+          child: SvgPicture.asset(Assets.svgsLoginView, fit: BoxFit.fill),
         ),
-
-        // 🔹 Scrollable content
         Expanded(
           child: CustomScrollView(
             slivers: [
+              SliverToBoxAdapter(child: SizedBox(height: edge)),
               SliverToBoxAdapter(
-                child: SizedBox(height: edge),
-              ),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: edge),
-                  child: Container(
-                    padding: EdgeInsets.all(edge * 0.8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(radiusInput),
-                      color: AppColor.blue50,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              TitleText(
-                                text: "welcome_again".tr(),
-                                color: AppColor.primaryColor,
-                                fontSize: 24,
-                                fontWeight: FontWeight.w700,
-                              ),
-                              SubTitleText(
-                                text: "login_hint".tr(),
-                                color: AppColor.blue700,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(width: edge),
-                        SvgPicture.asset(Assets.svgsLogo, width: 130.w),
-                      ],
-                    ),
-                  ),
+                child: AuthenticationCard(
+                  title: "welcome_again".tr(),
+                  subtitle: "login_hint".tr(),
+                  image: Assets.svgsLogo,
                 ),
               ),
-              SliverToBoxAdapter(
-                child: SizedBox(height: edge),
-              ),
-
-              // 🔹 Inputs and Buttons
+              SliverToBoxAdapter(child: SizedBox(height: edge)),
               SliverPadding(
                 padding: EdgeInsets.symmetric(horizontal: edge),
                 sliver: SliverList(
@@ -115,22 +72,17 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       ],
                     ),
                     SizedBox(height: edge * 1.5),
-                    CustomButton(
-                      text: "login".tr(),
-                      onPressed: () {},
-                    ),
+                    CustomButton(text: "login".tr(), onPressed: () {}),
                   ]),
                 ),
               ),
-
-              // 🔹 Always stick "Don't have account" at bottom
               SliverFillRemaining(
                 hasScrollBody: false,
                 child: Column(
                   children: [
                     const Spacer(),
                     Padding(
-                      padding: EdgeInsets.all( edge),
+                      padding: EdgeInsets.all(edge),
                       child: NotHaveAccount(),
                     ),
                   ],

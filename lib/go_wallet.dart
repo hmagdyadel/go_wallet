@@ -26,7 +26,7 @@ class GoWallet extends StatelessWidget {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         onGenerateRoute: appRouter.generateRoute,
-        initialRoute: Routes.splashScreen,
+        initialRoute: Routes.splashView,
         theme: _buildAppTheme(),
         builder: (context, widget) {
           return FutureBuilder<bool>(

@@ -1,8 +1,8 @@
 class Routes {
-  static const String splashScreen = "/splashScreen";
-  static const String loginScreen = "/loginScreen";
-  static const String onBoarding = "/onBoarding";
-  static const String registerScreen = "/registerScreen";
-  static const String homeScreen = "/homeScreen";
-  static const String bestSellingViews = "/bestSellingViews";
+  static const String splashView = "/splashView";
+  static const String loginView = "/loginView";
+  static const String onBoardingView = "/onBoardingView";
+  static const String registerView = "/registerView";
+  static const String homeView = "/homeView";
+  static const String bestSellingView = "/bestSellingView";
 }

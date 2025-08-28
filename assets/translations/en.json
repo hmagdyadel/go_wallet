@@ -17,5 +17,16 @@
   "forgot_password": "Forgot password?",
   "login": "Login",
   "do_not_have_an_account": "Don’t have an account yet?",
-  "create_account_now": "Create an account now"
+  "create_account_now": "Create an account now",
+  "create_new_account": "Create a new account",
+  "register_hint_title": "Welcome to Go",
+  "register_hint_sub_title": "Create a new account now and enjoy all the wallet features",
+  "name": "Full name",
+  "name_hint": "Enter your full name",
+  "phone": "Phone number",
+  "phone_hint": "Enter your phone number",
+  "confirm_password": "Confirm password",
+  "confirm_password_hint": "Re-enter your password",
+  "create_account": "Create account",
+  "already_have_an_account": "Already have an account?"
 }
