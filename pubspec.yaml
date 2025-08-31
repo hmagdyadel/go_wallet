@@ -25,6 +25,8 @@ dependencies:
   flutter_native_splash: ^2.4.6
   dots_indicator: ^4.0.1
   flutter_secure_storage: ^9.2.4
+  local_auth: ^2.3.0
+  another_flushbar: ^1.12.30
 
 dev_dependencies:
   flutter_test:

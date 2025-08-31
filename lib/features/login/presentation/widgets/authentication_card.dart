@@ -52,7 +52,7 @@ class AuthenticationCard extends StatelessWidget {
               ),
             ),
             SizedBox(width: edge),
-            SvgPicture.asset(image, fit: BoxFit.contain),
+            RepaintBoundary(child: SvgPicture.asset(image,width: width * 0.3,)),
           ],
         ),
       ),

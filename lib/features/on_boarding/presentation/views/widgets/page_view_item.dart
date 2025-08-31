@@ -39,8 +39,8 @@ class PageViewItem extends StatelessWidget {
                   child: Opacity(
                     opacity: 0.3,
                     child: Transform.scale(
-                      scaleX: 1.5,
-                      scaleY: 1.5,
+                      scaleX: 1.35,
+                      scaleY: 1.35,
                       child: Lottie.asset(
                         Assets.lottieSowBlobAnimation,
                         // height: height * 0.5 / 3,
@@ -53,7 +53,7 @@ class PageViewItem extends StatelessWidget {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                child: Lottie.asset(imagePath, height: height * 0.5),
+                child: Lottie.asset(imagePath, height: height * 0.45),
               ),
 
               if (showSkipButton)
@@ -83,9 +83,9 @@ class PageViewItem extends StatelessWidget {
           title,
           style: TextStyles.bold24.copyWith(color: AppColor.primaryColor),
         ),
-        const SizedBox(height: 24),
+         SizedBox(height: edge),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 37.0),
+          padding:  EdgeInsets.symmetric(horizontal: edge*1.6),
           child: Text(
             subTitle,
             textAlign: TextAlign.center,

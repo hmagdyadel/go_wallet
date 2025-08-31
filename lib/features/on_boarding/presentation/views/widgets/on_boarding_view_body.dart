@@ -60,9 +60,9 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
           ),
         ),
         _buildDotsIndicator(),
-        const SizedBox(height: 29),
+        SizedBox(height: edge * 1.5),
         _buildOnBoardingButton(),
-        const SizedBox(height: 43),
+        SizedBox(height: edge * 2),
       ],
     );
   }
@@ -109,7 +109,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
   Future<void> _completeOnboarding() async {
     try {
       // Save onboarding completion state
-       await SecurePrefs.setBool(isOnBoardingViewSeen, true);
+      await SecurePrefs.setBool(isOnBoardingViewSeen, true);
 
       if (!mounted) return;
 

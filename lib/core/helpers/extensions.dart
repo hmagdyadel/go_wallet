@@ -1,7 +1,12 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_wallet/core/utils/app_color.dart';
 
+import '../constants/dimensions_constants.dart';
 import '../routing/direction_routing.dart';
+import '../services/navigation_service.dart';
+import '../widgets/subtitle_text.dart';
 
 extension Navigation on BuildContext {
   Future<dynamic> pushNamed(String routeName, {Object? arguments}) {
@@ -111,68 +116,53 @@ extension Navigation on BuildContext {
 
   void pop() => Navigator.of(this).pop();
 
-  // showErrorToast(String msg) {
-  //   Flushbar(
-  //     messageText: Row(
-  //       children: [
-  //         GestureDetector(
-  //           onTap: () => NavigationService.navigatorKey.currentContext?.pop(),
-  //           child: Icon(Icons.clear),
-  //         ),
-  //         SizedBox(
-  //           width: edge,
-  //         ),
-  //         Expanded(
-  //             child: Column(
-  //           crossAxisAlignment: CrossAxisAlignment.start,
-  //           children: [
-  //             TitleText(
-  //               text: "error_happen".tr(),
-  //               color: mainRedColor,
-  //               fontSize: 14,
-  //             ),
-  //             SubTitleText(
-  //               text: msg,
-  //               align: TextAlign.start,
-  //               color: blue500,
-  //             )
-  //           ],
-  //         )),
-  //         GestureDetector(
-  //           onTap: () => debugPrint("object"),
-  //           child: SvgPicture.asset(errorIcon),
-  //         ),
-  //
-  //       ],
-  //     ),
-  //     // title: "error_happen".tr(),
-  //     //  titleColor: mainRedColor,
-  //     flushbarPosition: FlushbarPosition.TOP,
-  //     padding: EdgeInsets.symmetric(vertical: edge * 0.6, horizontal: edge),
-  //     margin: EdgeInsets.symmetric(horizontal: edge),
-  //     isDismissible: true,
-  //
-  //     duration: const Duration(seconds: 3),
-  //     borderRadius: BorderRadius.circular(radiusInner),
-  //     backgroundColor: errorBackgroundColor,
-  //     borderColor: mainRedColor,
-  //     /*  icon: GestureDetector(
-  //       onTap: ()=>print("object"),
-  //       child: Icon(Icons.clear),
-  //     ),*/
-  //
-  //     /*messageColor: Colors.white,
-  //     messageSize: 18,
-  //
-  //
-  //
-  //     barBlur: .1,
-  //     backgroundColor: blue900,
-  //     borderColor: blue900,
-  //     margin: const EdgeInsets.all(8),
-  //     borderRadius: BorderRadius.circular(10),*/
-  //   ).show(this);
-  // }
+  showErrorToast(String msg) {
+    Flushbar(
+      messageText: Row(
+        children: [
+          GestureDetector(
+            onTap: () => NavigationService.navigatorKey.currentContext?.pop(),
+            child: Icon(Icons.clear),
+          ),
+          SizedBox(width: edge),
+          Expanded(
+            child: SubTitleText(
+              text: msg,
+              align: TextAlign.start,
+              color: AppColor.whiteColor,
+            ),
+          ),
+        ],
+      ),
+      // title: "error_happen".tr(),
+      //  titleColor: mainRedColor,
+      flushbarPosition: FlushbarPosition.TOP,
+      padding: EdgeInsets.symmetric(vertical: edge * 0.6, horizontal: edge),
+      margin: EdgeInsets.symmetric(horizontal: edge),
+      isDismissible: true,
+
+      duration: const Duration(seconds: 3),
+      borderRadius: BorderRadius.circular(radiusInner),
+      backgroundColor: AppColor.blue900,
+      borderColor: AppColor.blue900,
+      /*  icon: GestureDetector(
+        onTap: ()=>print("object"),
+        child: Icon(Icons.clear),
+      ),*/
+
+      /*messageColor: Colors.white,
+      messageSize: 18,
+
+
+
+      barBlur: .1,
+      backgroundColor: blue900,
+      borderColor: blue900,
+      margin: const EdgeInsets.all(8),
+      borderRadius: BorderRadius.circular(10),*/
+    ).show(this);
+  }
+
   // showSuccessToast(message) {
   //   Flushbar(
   //     messageText: Row(

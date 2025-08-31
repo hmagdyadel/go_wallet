@@ -42,11 +42,13 @@ class _SplashViewState extends State<SplashView> {
       body: Center(
         child: Padding(
           padding: EdgeInsets.all(edge * 4),
-          child: SvgPicture.asset(
-            Assets.svgsSplash,
-            width: width,
-            height: height,
-            fit: BoxFit.contain,
+          child: RepaintBoundary(
+            child: SvgPicture.asset(
+              Assets.svgsSplash,
+              width: width,
+              height: height,
+              fit: BoxFit.contain,
+            ),
           ),
         ),
       ),
