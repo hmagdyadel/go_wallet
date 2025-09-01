@@ -13,6 +13,7 @@ import '../../../../core/widgets/have_account.dart';
 import '../../../../core/widgets/input_text.dart';
 import '../../../../generated/assets.dart';
 import '../../../login/presentation/widgets/authentication_card.dart';
+import 'register_card.dart';
 
 class RegisterViewBody extends StatefulWidget {
   const RegisterViewBody({super.key});
@@ -32,7 +33,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
             SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.only(top: edge * 1.5),
-                child: AuthenticationCard(
+                child: RegisterCard(
                   title: "register_hint_title".tr(),
                   subtitle: "register_hint_sub_title".tr(),
                   image: Assets.svgsRegisterView,
