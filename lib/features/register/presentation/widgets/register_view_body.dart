@@ -13,6 +13,7 @@ import '../../../../core/widgets/have_account.dart';
 import '../../../../core/widgets/input_text.dart';
 import '../../../../generated/assets.dart';
 import 'register_card.dart';
+import 'terms_and_conditions.dart';
 
 class RegisterViewBody extends StatefulWidget {
   const RegisterViewBody({super.key});
@@ -22,6 +23,7 @@ class RegisterViewBody extends StatefulWidget {
 }
 
 class _RegisterViewBodyState extends State<RegisterViewBody> {
+  late bool isTermsAccepted = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,16 +68,22 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                     keyboardType: TextInputType.phone,
                   ),
                   SizedBox(height: edge * 0.8),
-                  InputText.normal(
+                  InputText.password(
                     title: "password".tr(),
                     hint: "password_hint".tr(),
                     controller: null,
                   ),
                   SizedBox(height: edge * 0.8),
-                  InputText.normal(
+                  InputText.password(
                     title: "confirm_password".tr(),
                     hint: "confirm_password_hint".tr(),
                     controller: null,
+                  ),
+                  SizedBox(height: edge * 1.2),
+                  TermsAndConditions(
+                    onChanged: (value) {
+                      isTermsAccepted = value;
+                    },
                   ),
                 ]),
               ),

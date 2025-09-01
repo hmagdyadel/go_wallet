@@ -20,7 +20,7 @@
   "create_account_now": "Create an account now",
   "create_new_account": "Create a new account",
   "register_hint_title": "Welcome to Go",
-  "register_hint_sub_title": "Create a new account now and enjoy all the wallet features",
+  "register_hint_sub_title": "Create a new account now. enjoy all the features",
   "name": "Full name",
   "name_hint": "Enter your full name",
   "phone": "Phone number",
@@ -28,5 +28,7 @@
   "confirm_password": "Confirm password",
   "confirm_password_hint": "Re-enter your password",
   "create_account": "Create account",
+  "by_creating_account_you_agree": "By creating an account, you agree to ",
+  "our_terms_and_conditions": "our Terms and Conditions",
   "already_have_an_account": "Already have an account?"
 }

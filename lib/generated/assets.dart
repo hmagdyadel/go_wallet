@@ -11,6 +11,7 @@ class Assets {
   static const String lottieGoInvitation = 'assets/lottie/go_invitation.json';
   static const String lottieGoWallet = 'assets/lottie/go_wallet.json';
   static const String lottieSowBlobAnimation = 'assets/lottie/sow_blob_animation.json';
+  static const String svgsCheck = 'assets/svgs/check.svg';
   static const String svgsLoginView = 'assets/svgs/login_view.svg';
   static const String svgsLogo = 'assets/svgs/logo.svg';
   static const String svgsRegisterView = 'assets/svgs/register_view.svg';

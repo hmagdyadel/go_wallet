@@ -28,5 +28,7 @@
   "confirm_password": "تاكيد كلمة المرور",
   "confirm_password_hint": "ادخل تاكيد كلمة المرور",
   "create_account": "انشاء حساب",
+  "by_creating_account_you_agree": "من خلال إنشاء حساب، فإنك توافق على ",
+  "our_terms_and_conditions": "الشروط والأحكام الخاصة بنا",
   "already_have_an_account": "لديك حساب بالفعل؟"
 }
