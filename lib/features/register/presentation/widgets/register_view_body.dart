@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -24,6 +23,7 @@ class RegisterViewBody extends StatefulWidget {
 
 class _RegisterViewBodyState extends State<RegisterViewBody> {
   late bool isTermsAccepted = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

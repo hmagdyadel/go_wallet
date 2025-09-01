@@ -26,7 +26,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
       children: [
         Container(
           width: width.w,
-          height: 170,
+          height: 139.h,
           color: AppColor.primaryColor,
           child: RepaintBoundary(
             child: SvgPicture.asset(Assets.svgsLoginView, fit: BoxFit.fill),
