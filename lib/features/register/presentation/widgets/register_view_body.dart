@@ -12,7 +12,6 @@ import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/have_account.dart';
 import '../../../../core/widgets/input_text.dart';
 import '../../../../generated/assets.dart';
-import '../../../login/presentation/widgets/authentication_card.dart';
 import 'register_card.dart';
 
 class RegisterViewBody extends StatefulWidget {
