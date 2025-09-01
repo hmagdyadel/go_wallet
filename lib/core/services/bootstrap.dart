@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../firebase_options.dart';
 import '../../go_wallet.dart';
 import '../routing/app_router.dart';
 import 'custom_bloc_observer.dart';
@@ -15,9 +17,7 @@ Future<Widget> bootstrap() async {
 
   Bloc.observer = CustomBlocObserver();
 
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await SecurePrefs.init();
   //
   // setUpGetIt();

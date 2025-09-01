@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "174280179232",
+    "project_id": "go-wallet-1df76",
+    "storage_bucket": "go-wallet-1df76.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174280179232:android:f8aee58faf5305696f8645",
+        "android_client_info": {
+          "package_name": "h.magdy.go_wallet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOQzi7C_8kGQcZjUD-KTz5hnLHs7q6cJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
