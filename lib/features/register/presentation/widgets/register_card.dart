@@ -52,7 +52,7 @@ class RegisterCard extends StatelessWidget {
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
                           align: TextAlign.start,
-                          maxLines: null, // Allow multiple lines
+
                           // Allow text to wrap
                         ),
                       ],
@@ -64,7 +64,8 @@ class RegisterCard extends StatelessWidget {
             ),
           ),
           Positioned(
-            right: 8,
+            right: Localizations.localeOf(context).languageCode == 'ar' ? null : 8,
+             left:   Localizations.localeOf(context).languageCode == 'ar' ? 8 : null,
             top: -35,
             // move image 40px above container
             bottom: 0,
