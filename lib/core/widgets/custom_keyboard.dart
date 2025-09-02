@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../constants/dimensions_constants.dart';
 import '../utils/app_color.dart';
@@ -20,7 +21,7 @@ class CustomKeyboard extends StatelessWidget {
 
     // Calculate responsive width
     final keyboardWidth = isTablet ? screenSize.width * 0.5 : screenSize.width;
-    final keyboardHeight = screenSize.height * 0.45;
+    final keyboardHeight = screenSize.height * 0.42;
 
     final keys = [
       "1",
@@ -47,7 +48,7 @@ class CustomKeyboard extends StatelessWidget {
       ),
       height: keyboardHeight,
       width: keyboardWidth,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      padding: EdgeInsets.symmetric(horizontal: edge, vertical: edge * 1.3),
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -56,7 +57,7 @@ class CustomKeyboard extends StatelessWidget {
           crossAxisSpacing: 12,
           childAspectRatio: 1.0,
           // Perfect circles
-          mainAxisExtent: 75, // Fixed height for each button row
+          mainAxisExtent: 65.h,
         ),
         itemCount: keys.length,
         itemBuilder: (context, index) {
@@ -69,9 +70,10 @@ class CustomKeyboard extends StatelessWidget {
               child: Icon(
                 Icons.backspace_outlined,
                 size: 22, // Reduced icon size for smaller buttons
-                color: AppColor.primaryColor,
+                color: AppColor.lightPrimaryColor,
               ),
               onTap: onBackspace,
+              isBackspace: true,
             );
           } else {
             return _buildButton(
@@ -91,7 +93,11 @@ class CustomKeyboard extends StatelessWidget {
     );
   }
 
-  Widget _buildButton({required Widget child, required VoidCallback onTap}) {
+  Widget _buildButton({
+    required Widget child,
+    required VoidCallback onTap,
+    bool isBackspace = false,
+  }) {
     return Center(
       child: SizedBox(
         width: 80, // Half the original size
@@ -100,13 +106,13 @@ class CustomKeyboard extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(40),
             child: Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColor.blue100,
+                color: isBackspace ? AppColor.whiteColor : AppColor.blue100,
               ),
-              child: Center(child: child),
+              child: Container(alignment: Alignment.center, child: child),
             ),
           ),
         ),

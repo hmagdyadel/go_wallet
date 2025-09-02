@@ -20,18 +20,27 @@ class OtpPin extends StatefulWidget {
   State<OtpPin> createState() => _OtpPinState();
 }
 
-class _OtpPinState extends State<OtpPin> {
+class _OtpPinState extends State<OtpPin> with TickerProviderStateMixin {
   late OtpController _controller;
+  late AnimationController _cursorController;
 
   @override
   void initState() {
     super.initState();
     _controller = widget.controller ?? OtpController();
     _controller.addListener(_onOtpChanged);
+
+    // Initialize cursor animation
+    _cursorController = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+    _cursorController.repeat(reverse: true);
   }
 
   @override
   void dispose() {
+    _cursorController.dispose();
     if (widget.controller == null) {
       _controller.dispose();
     } else {
@@ -58,6 +67,7 @@ class _OtpPinState extends State<OtpPin> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: List.generate(6, (index) {
               final hasDigit = index < _controller.currentOtp.length;
+              final isCurrentField = index == _controller.currentOtp.length;
               final digit = hasDigit ? _controller.currentOtp[index] : "";
 
               return Container(
@@ -66,21 +76,52 @@ class _OtpPinState extends State<OtpPin> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(radiusInput),
                   border: Border.all(
-                    color: AppColor.blue100,
-                    width: hasDigit ? 2 : 1,
+                    color: hasDigit || isCurrentField
+                        ? AppColor.blue100
+                        : AppColor.blue50,
+                    width: hasDigit || isCurrentField ? 2 : 1,
                   ),
-                  color: hasDigit ? AppColor.blue50 : AppColor.whiteColor,
+                  color: hasDigit
+                      ? AppColor.primaryColor.withValues(alpha: 0.05)
+                      : isCurrentField
+                      ? AppColor.primaryColor.withValues(alpha: 0.02)
+                      : AppColor.whiteColor,
+
                 ),
                 child: Center(
-                  child: Text(
-                    digit,
-                    style: TextStyle(
-                      fontSize: 22.sp,
-                      fontWeight: FontWeight.w700,
-                      color: hasDigit
-                          ? AppColor.primaryColor
-                          : AppColor.blue300,
-                    ),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      // Digit text
+                      Text(
+                        digit,
+                        style: TextStyle(
+                          fontSize: 22.sp,
+                          fontWeight: FontWeight.w700,
+                          color: hasDigit
+                              ? AppColor.primaryColor
+                              : AppColor.blue300,
+                        ),
+                      ),
+                      // Animated cursor
+                      if (isCurrentField && !hasDigit)
+                        AnimatedBuilder(
+                          animation: _cursorController,
+                          builder: (context, child) {
+                            return Opacity(
+                              opacity: _cursorController.value,
+                              child: Container(
+                                width: 2,
+                                height: 24,
+                                decoration: BoxDecoration(
+                                  color: AppColor.primaryColor,
+                                  borderRadius: BorderRadius.circular(1),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                    ],
                   ),
                 ),
               );
@@ -96,8 +137,8 @@ class OtpController extends ChangeNotifier {
   String _currentOtp = "";
 
   String get currentOtp => _currentOtp;
-
   bool get isComplete => _currentOtp.length == 6;
+  int get currentIndex => _currentOtp.length;
 
   void addDigit(String digit) {
     if (_currentOtp.length < 6) {

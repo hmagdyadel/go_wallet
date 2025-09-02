@@ -10,12 +10,14 @@ class RegisterCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final String image;
+  final bool? isRegister;
 
   const RegisterCard({
     super.key,
     required this.title,
     required this.subtitle,
     required this.image,
+    this.isRegister = true,
   });
 
   @override
@@ -29,7 +31,7 @@ class RegisterCard extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: edge * 0.8),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(radiusInput),
-              color: AppColor.blue50,
+              color: isRegister == true ? AppColor.blue50 : AppColor.whiteColor,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
