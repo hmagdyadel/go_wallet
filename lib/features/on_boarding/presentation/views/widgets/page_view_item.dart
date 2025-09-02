@@ -27,8 +27,8 @@ class PageViewItem extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          width: double.infinity,
-          height: MediaQuery.of(context).size.height * 0.5,
+          width: width,
+          height: height * 0.5,
           child: Stack(
             children: [
               Positioned(

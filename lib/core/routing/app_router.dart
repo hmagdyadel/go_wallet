@@ -7,6 +7,7 @@ import '../../features/login/presentation/login_view.dart';
 import '../../features/on_boarding/presentation/views/on_boarding_screen.dart';
 import '../../features/register/presentation/register_view.dart';
 import '../../features/register/presentation/widgets/confirm_account_view.dart';
+import '../../features/register/presentation/widgets/confirm_pin_view.dart';
 import '../../features/register/presentation/widgets/create_pin_view.dart';
 import '../../features/register/presentation/widgets/success_account_view.dart';
 import '../../features/splash/views/splash_view.dart';
@@ -28,19 +29,12 @@ class AppRouter {
         return _buildRoute(ConfirmAccountView());
       case Routes.createPinView:
         return _buildRoute(CreatePinView());
+      case Routes.confirmPinView:
+        return _buildRoute(ConfirmPinView());
       case Routes.successRegisterView:
         return _buildRoute(SuccessAccountView());
       case Routes.homeView:
         return _buildRoute(HomeView());
-      //   return _buildRoute(
-      //     BlocProvider(
-      //       create: (_) => getIt<SignupCubit>(),
-      //       child: const SignupView(),
-      //     ),
-      //   );
-
-      // case Routes.bestSellingViews:
-      //   return MaterialPageRoute(builder: (_) => const BestSellingViews());
       default:
         return _buildRoute(SplashView());
     }
@@ -55,3 +49,10 @@ class AppRouter {
     }
   }
 }
+
+//   return _buildRoute(
+//     BlocProvider(
+//       create: (_) => getIt<SignupCubit>(),
+//       child: const SignupView(),
+//     ),
+//   );

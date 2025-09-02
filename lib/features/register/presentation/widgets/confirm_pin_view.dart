@@ -9,8 +9,8 @@ import '../../../../generated/assets.dart';
 import 'register_app_bar.dart';
 import 'register_card.dart';
 
-class CreatePinView extends StatelessWidget {
-  const CreatePinView({super.key});
+class ConfirmPinView extends StatelessWidget {
+  const ConfirmPinView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,8 @@ class CreatePinView extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(top: edge * 1.5),
                 child: RegisterCard(
-                  title: "wallet_password".tr(),
-                  subtitle: "wallet_password_hint".tr(),
+                  title: "confirm_wallet_password".tr(),
+                  subtitle: "confirm_wallet_password_hint".tr(),
                   image: Assets.svgsRegisterView,
                 ),
               ),
@@ -40,7 +40,7 @@ class CreatePinView extends StatelessWidget {
                   OtpPin(
                     onChanged: (v) {},
                     onSubmit: (s) {
-                      context.pushNamed(Routes.confirmPinView);
+                      context.pushNamed(Routes.successRegisterView);
                       // context.read<RegisterCubit>().verifyOTP(s);
                       debugPrint(s);
                     },

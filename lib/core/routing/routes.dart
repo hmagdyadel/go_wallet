@@ -7,5 +7,6 @@ class Routes {
   static const String bestSellingView = "/bestSellingView";
   static const String confirmAccountView = "/confirmAccountView";
   static const String createPinView = "/createPinView";
+  static const String confirmPinView = "/confirmPinView";
   static const String successRegisterView = "/successRegisterView";
 }

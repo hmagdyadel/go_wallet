@@ -43,8 +43,9 @@ class RegisterCard extends StatelessWidget {
                         TitleText(
                           text: title,
                           color: AppColor.primaryColor,
-                          fontSize: 24,
+                          fontSize: 22,
                           fontWeight: FontWeight.w700,
+                          align: TextAlign.start,
                         ),
                         SubTitleText(
                           text: subtitle,
@@ -64,8 +65,12 @@ class RegisterCard extends StatelessWidget {
             ),
           ),
           Positioned(
-            right: Localizations.localeOf(context).languageCode == 'ar' ? null : 8,
-             left:   Localizations.localeOf(context).languageCode == 'ar' ? 8 : null,
+            right: Localizations.localeOf(context).languageCode == 'ar'
+                ? null
+                : 8,
+            left: Localizations.localeOf(context).languageCode == 'ar'
+                ? 8
+                : null,
             top: -35,
             // move image 40px above container
             bottom: 0,
