@@ -28,7 +28,7 @@ class PageViewItem extends StatelessWidget {
       children: [
         SizedBox(
           width: width,
-          height: height * 0.5,
+          height: height * 0.47,
           child: Stack(
             children: [
               Positioned(
@@ -78,7 +78,7 @@ class PageViewItem extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: edge * 2.5),
+        SizedBox(height: edge * 2),
         Text(
           title,
           style: TextStyles.bold24.copyWith(color: AppColor.primaryColor),

@@ -21,10 +21,10 @@ class SuccessAccountView extends StatelessWidget {
         padding: EdgeInsets.all(edge),
         child: Column(
           children: [
-            SizedBox(height: height * 0.15),
+            SizedBox(height: height * 0.1),
             SizedBox(
               width: width,
-              height: height * 0.5,
+              height: height * 0.45,
               child: Stack(
                 children: [
                   Positioned(
@@ -35,8 +35,8 @@ class SuccessAccountView extends StatelessWidget {
                       child: Opacity(
                         opacity: 0.3,
                         child: Transform.scale(
-                          scaleX: 1.5,
-                          scaleY: 1.5,
+                          scaleX: 1.3,
+                          scaleY: 1.3,
                           child: Lottie.asset(
                             Assets.lottieSowBlobAnimation,
                             // height: height * 0.5 / 3,
@@ -51,7 +51,7 @@ class SuccessAccountView extends StatelessWidget {
                     right: 0,
                     child: Lottie.asset(
                       Assets.lottieGoWallet,
-                      height: height * 0.45,
+                      height: height * 0.44,
                     ),
                   ),
                 ],

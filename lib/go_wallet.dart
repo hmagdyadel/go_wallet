@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -10,12 +11,37 @@ import 'core/widgets/no_network_banner.dart';
 
 class GoWallet extends StatelessWidget {
   final AppRouter appRouter;
+  final bool insecureDevice;
 
-  const GoWallet({super.key, required this.appRouter});
+  const GoWallet({super.key, required this.appRouter, required this.insecureDevice});
 
   @override
   Widget build(BuildContext context) {
-    // AppUtilities().init();
+    // if (insecureDevice) {
+    //   return MaterialApp(
+    //     debugShowCheckedModeBanner: false,
+    //     home: Scaffold(
+    //       body: Center(
+    //         child: AlertDialog(
+    //           title: const Text("Security Alert"),
+    //           content: const Text(
+    //             "This device is not secure (rooted/jailbroken or emulator). "
+    //                 "The app cannot run.",
+    //           ),
+    //           actions: [
+    //             TextButton(
+    //               onPressed: () {
+    //                 // Close app
+    //                 SystemNavigator.pop();
+    //               },
+    //               child: const Text("Exit"),
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     ),
+    //   );
+    // }
     return ScreenUtilInit(
       designSize: const Size(390, 844),
       minTextAdapt: true,

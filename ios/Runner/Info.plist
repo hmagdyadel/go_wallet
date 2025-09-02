@@ -36,6 +36,15 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>undecimus</string>
+        <string>sileo</string>
+        <string>zbra</string>
+        <string>filza</string>
+        <string>activator</string>
+        <string>cydia</string>
+    </array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
