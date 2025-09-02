@@ -30,5 +30,17 @@
   "create_account": "Create account",
   "by_creating_account_you_agree": "By creating an account, you agree to ",
   "our_terms_and_conditions": "our Terms and Conditions",
+  "no_internet_connections": "You're offline. Please connect to the internet to continue.",
+  "confirm_your_phone_number": "Confirm your phone number",
+  "confirm_your_phone_number_hint": "Please enter the 6-digit code sent to your phone",
+  "do_not_receive_code": "Didn't receive the code?",
+  "resend_code": "Resend code",
+  "resent_hint": "You can request a new code in {} seconds",
+  "wallet_password": "Wallet password",
+  "wallet_password_hint": "Enter a wallet password to secure all financial transactions",
+  "confirm_wallet_password": "Confirm wallet password",
+  "confirm_wallet_password_hint": "Re-enter the wallet password to secure all financial transactions",
+  "create_account_successfully": "Account created successfully",
+  "create_account_successfully_hint": "Your account has been created successfully. You can now access it and enjoy all wallet services",
   "already_have_an_account": "Already have an account?"
 }

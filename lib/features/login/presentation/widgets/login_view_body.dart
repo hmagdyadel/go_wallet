@@ -87,7 +87,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       padding: EdgeInsets.all(edge),
                       child: NotHaveAccount(),
                     ),
-                    SizedBox(height: edge * 0.5),
+                    SizedBox(height: edge * 0.7),
                   ],
                 ),
               ),

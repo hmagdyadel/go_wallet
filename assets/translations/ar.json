@@ -30,5 +30,17 @@
   "create_account": "انشاء حساب",
   "by_creating_account_you_agree": "من خلال إنشاء حساب، فإنك توافق على ",
   "our_terms_and_conditions": "الشروط والأحكام الخاصة بنا",
+  "no_internet_connections": "لا يوجد اتصال بالإنترنت. اتصل بالشبكة للمتابعة.",
+  "confirm_your_phone_number": "تاكيد رقم الهاتف",
+  "confirm_your_phone_number_hint": "الرجاء إدخال الرقم المكوّن من ٦ أرقام المرسل إلى هاتفك",
+  "do_not_receive_code": "لم يصلك الكود بعد ؟",
+  "resend_code": "إرسال مرة اخرى",
+  "resent_hint": "يمكننا إعادة إرسال الكود مرة أخرى خلال {} ثانية",
+  "wallet_password": "رقم سرى للمحفظة",
+  "wallet_password_hint": "أدخل رقم سرى للمحفظة لتأمين جميع التحويلات المالية",
+  "confirm_wallet_password": "تأكيد الرقم السرى",
+  "confirm_wallet_password_hint": "اعد ادخال الرقم سرى للمحفظة لتأمين جميع التحويلات المالية",
+  "create_account_successfully": "تم إنشاء حساب جديد",
+  "create_account_successfully_hint": "تم انشاء الحساب لنجاح يمكنك الان التوجه للحساب والتمتع بجميع خدمات المحفظة",
   "already_have_an_account": "لديك حساب بالفعل؟"
 }

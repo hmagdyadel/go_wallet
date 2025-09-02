@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/register_app_bar.dart';
@@ -8,6 +9,13 @@ class RegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: registerAppBar(context), body: RegisterViewBody());
+    return Scaffold(
+      appBar: registerAppBar(
+        "create_new_account".tr(),
+        context,
+        isRegister: true,
+      ),
+      body: RegisterViewBody(),
+    );
   }
 }

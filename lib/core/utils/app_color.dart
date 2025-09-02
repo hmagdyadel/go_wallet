@@ -12,6 +12,7 @@ abstract class AppColor {
   static const Color veryLightGrey = Color(0xFFF3F5F7);
   static const Color iconColor = Color(0xFFC9CECF);
   static const Color blue50 = Color(0xFFF6F7F9);
+  static const Color blue100 = Color(0xFFE7E8EC);
   static const Color blue300 = Color(0xffAFB1BE);
   static const Color blue700 = Color(0xFF535566);
   static const Color blue900 = Color(0xFF2D2F39);
