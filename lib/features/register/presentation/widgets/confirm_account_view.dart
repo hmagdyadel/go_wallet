@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_wallet/core/helpers/extensions.dart';
@@ -20,7 +21,7 @@ class ConfirmAccountView extends StatefulWidget {
 }
 
 class _ConfirmAccountViewState extends State<ConfirmAccountView> {
-  Key _otpPinKey = UniqueKey();
+  final OtpController _otpController = OtpController();
   late Timer _timer;
   int _resendTimeout = 15;
   bool _isTimerRunning = false;
@@ -34,13 +35,12 @@ class _ConfirmAccountViewState extends State<ConfirmAccountView> {
   @override
   void dispose() {
     _timer.cancel();
+    _otpController.dispose();
     super.dispose();
   }
 
   void resetOtpInput() {
-    setState(() {
-      _otpPinKey = UniqueKey();
-    });
+    _otpController.clear();
   }
 
   void startTimer() {
@@ -95,7 +95,7 @@ class _ConfirmAccountViewState extends State<ConfirmAccountView> {
                 SliverToBoxAdapter(child: SizedBox(height: edge * 1.6)),
                 SliverToBoxAdapter(
                   child: OtpPin(
-                    key: _otpPinKey,
+                    controller: _otpController,
                     onChanged: (v) {},
                     onSubmit: (s) {
                       context.pushNamed(Routes.createPinView);
@@ -109,38 +109,40 @@ class _ConfirmAccountViewState extends State<ConfirmAccountView> {
                     children: [
                       _isTimerRunning
                           ? Expanded(
-                        child: SubTitleText(
-                          text: "resent_hint".tr(args: ['$_resendTimeout']),
-                          fontSize: 16,
-                          color: AppColor.blue700,
-                        ),
-                      )
-                          : Expanded(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SubTitleText(
-                              text: "do_not_receive_code".tr(),
-                              fontSize: 16,
-                              color: AppColor.blue700,
-                            ),
-                            const SizedBox(width: 8),
-                            GestureDetector(
-                              onTap: () {
-                                resetTimer();
-                                resetOtpInput();
-                                startTimer();
-                              },
                               child: SubTitleText(
-                                text: "resend_code".tr(),
+                                text: "resent_hint".tr(
+                                  args: ['$_resendTimeout'],
+                                ),
                                 fontSize: 16,
-                                color: AppColor.lightPrimaryColor,
+                                color: AppColor.blue700,
+                              ),
+                            )
+                          : Expanded(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SubTitleText(
+                                    text: "do_not_receive_code".tr(),
+                                    fontSize: 16,
+                                    color: AppColor.blue700,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  GestureDetector(
+                                    onTap: () {
+                                      resetTimer();
+                                      resetOtpInput();
+                                      startTimer();
+                                    },
+                                    child: SubTitleText(
+                                      text: "resend_code".tr(),
+                                      fontSize: 16,
+                                      color: AppColor.lightPrimaryColor,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -150,12 +152,8 @@ class _ConfirmAccountViewState extends State<ConfirmAccountView> {
 
           /// Keyboard pinned at bottom
           CustomKeyboard(
-            onKeyTap: (value) {
-              print("Pressed: $value");
-            },
-            onBackspace: () {
-              print("Backspace tapped");
-            },
+            onKeyTap: (value) => _otpController.addDigit(value),
+            onBackspace: () => _otpController.removeDigit(),
           ),
         ],
       ),

@@ -16,7 +16,7 @@ class CustomKeyboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final isTablet = screenSize.width > 600; // Consider tablet if width > 600
+    final isTablet = screenSize.width > 600;
 
     // Calculate responsive width
     final keyboardWidth = isTablet ? screenSize.width * 0.5 : screenSize.width;
