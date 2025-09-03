@@ -14,14 +14,21 @@ class Assets {
   static const String svgsActiveExpenses = 'assets/svgs/active_expenses.svg';
   static const String svgsActiveProfile = 'assets/svgs/active_profile.svg';
   static const String svgsActiveWallet = 'assets/svgs/active_wallet.svg';
+  static const String svgsAttachment = 'assets/svgs/attachment.svg';
   static const String svgsCheck = 'assets/svgs/check.svg';
-  static const String svgsProfile = 'assets/svgs/profile.svg';
+  static const String svgsCopy = 'assets/svgs/copy.svg';
+  static const String svgsEgypt = 'assets/svgs/egypt.svg';
+  static const String svgsExpenses = 'assets/svgs/expenses.svg';
   static const String svgsLoginView = 'assets/svgs/login_view.svg';
   static const String svgsLogo = 'assets/svgs/logo.svg';
   static const String svgsNotActiveWallet = 'assets/svgs/not_active_wallet.svg';
-  static const String svgsExpenses = 'assets/svgs/expenses.svg';
+  static const String svgsNotifications = 'assets/svgs/notifications.svg';
+  static const String svgsProfile = 'assets/svgs/profile.svg';
+  static const String svgsQrCode = 'assets/svgs/qr_code.svg';
+  static const String svgsRecharge = 'assets/svgs/recharge.svg';
   static const String svgsRegisterView = 'assets/svgs/register_view.svg';
   static const String svgsSplash = 'assets/svgs/splash.svg';
+  static const String svgsTransfer = 'assets/svgs/transfer.svg';
   static const String translationsAr = 'assets/translations/ar.json';
   static const String translationsEn = 'assets/translations/en.json';
 
