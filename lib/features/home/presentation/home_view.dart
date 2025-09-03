@@ -71,6 +71,7 @@ class HomeView extends StatelessWidget {
                                 Assets.svgsEgypt,
                                 fit: BoxFit.fill,
                               ),
+                              SizedBox(width: edge * 0.4),
                               TitleText(
                                 text: "egyptian_pound".tr(),
                                 color: AppColor.primaryColor,
