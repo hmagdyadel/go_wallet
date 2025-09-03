@@ -40,6 +40,13 @@ class CustomKeyboard extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.1),
+            blurRadius: 8.0,
+            offset: const Offset(0, -2),
+          ),
+        ],
         color: AppColor.whiteColor,
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(keyboardRadius),
@@ -104,6 +111,8 @@ class CustomKeyboard extends StatelessWidget {
         height: 80, // Half the original size
         child: Material(
           color: Colors.transparent,
+          elevation: isBackspace ? 0 : 3,
+          type: MaterialType.circle,
           child: InkWell(
             onTap: onTap,
             borderRadius: BorderRadius.circular(40),
