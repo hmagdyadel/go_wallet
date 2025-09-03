@@ -1,9 +1,14 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_wallet/core/helpers/extensions.dart';
 
 import '../../../../core/constants/dimensions_constants.dart';
+import '../../../../core/routing/routes.dart';
+import '../../../../core/services/biometric_service.dart';
 import '../../../../core/utils/app_color.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/input_text.dart';
@@ -74,7 +79,12 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       ],
                     ),
                     SizedBox(height: edge * 1.5),
-                    CustomButton(text: "login".tr(), onPressed: () {}),
+                    CustomButton(
+                      text: "login".tr(),
+                      onPressed: () {
+                        _goToPrivatePage();
+                      },
+                    ),
                   ]),
                 ),
               ),
@@ -96,5 +106,26 @@ class _LoginViewBodyState extends State<LoginViewBody> {
         ),
       ],
     );
+  }
+
+  Future<void> _goToPrivatePage() async {
+    if (!await BiometricHelper.isBiometricSupported()) {
+      if (!mounted) return;
+      context.showErrorToast("Device does not support biometrics.");
+      return;
+    }
+
+    final availableBiometrics = await BiometricHelper.getAvailableBiometrics();
+    if (availableBiometrics.isEmpty) {
+      if (!mounted) return;
+      context.showErrorToast("No biometrics found. Please set it up.");
+      return;
+    }
+
+    final bool didAuthenticate = await BiometricHelper.authenticate();
+    if (didAuthenticate && mounted) {
+      log("Biometric authentication successful. ${availableBiometrics.first}");
+      context.pushNamed(Routes.splashView);
+    }
   }
 }

@@ -115,24 +115,5 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
     );
   }
 
-  // Future<void> _goToPrivatePage() async {
-  //   if (!await BiometricHelper.isBiometricSupported()) {
-  //     if (!mounted) return;
-  //     context.showErrorToast("Device does not support biometrics.");
-  //     return;
-  //   }
-  //
-  //   final availableBiometrics = await BiometricHelper.getAvailableBiometrics();
-  //   if (availableBiometrics.isEmpty) {
-  //     if (!mounted) return;
-  //     context.showErrorToast("No biometrics found. Please set it up.");
-  //     return;
-  //   }
-  //
-  //   final bool didAuthenticate = await BiometricHelper.authenticate();
-  //   if (didAuthenticate && mounted) {
-  //     log("Biometric authentication successful. ${availableBiometrics.first}");
-  //     context.pushNamed(Routes.splashView);
-  //   }
-  // }
+
 }
