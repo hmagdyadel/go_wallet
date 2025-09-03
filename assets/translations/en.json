@@ -47,5 +47,13 @@
   "wallet": "Wallet",
   "expenses": "Expenses",
   "welcome": "Welcome,",
+  "total_balance": "Total balance",
+  "egyptian_pound": "Egyptian Pound",
+  "transfer": "Transfer",
+  "recharge": "Recharge",
+  "fast_transfer": "Fast transfer",
+  "past_transactions": "Past transactions",
+  "all": "All",
+  "receive": "Receive",
   "already_have_an_account": "Already have an account?"
 }

@@ -2,6 +2,7 @@
 class Assets {
   Assets._();
 
+  static const String assetsSvgsClosedEye = 'assets/svgs/closed_eye_.svg';
   static const String fontsZainBold = 'assets/fonts/zain-bold.ttf';
   static const String fontsZainRegular = 'assets/fonts/zain-regular.ttf';
   static const String imagesLogo = 'assets/images/logo.png';
@@ -17,13 +18,16 @@ class Assets {
   static const String svgsAttachment = 'assets/svgs/attachment.svg';
   static const String svgsCard = 'assets/svgs/card.svg';
   static const String svgsCheck = 'assets/svgs/check.svg';
+  static const String svgsClosedEye = 'assets/svgs/closed_eye.svg';
   static const String svgsCopy = 'assets/svgs/copy.svg';
   static const String svgsEgypt = 'assets/svgs/egypt.svg';
   static const String svgsExpenses = 'assets/svgs/expenses.svg';
+  static const String svgsEye = 'assets/svgs/eye.svg';
   static const String svgsLoginView = 'assets/svgs/login_view.svg';
   static const String svgsLogo = 'assets/svgs/logo.svg';
   static const String svgsNotActiveWallet = 'assets/svgs/not_active_wallet.svg';
   static const String svgsNotifications = 'assets/svgs/notifications.svg';
+  static const String svgsOpenEye = 'assets/svgs/open_eye.svg';
   static const String svgsProfile = 'assets/svgs/profile.svg';
   static const String svgsQrCode = 'assets/svgs/qr_code.svg';
   static const String svgsRecharge = 'assets/svgs/recharge.svg';

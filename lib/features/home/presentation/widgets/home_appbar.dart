@@ -25,7 +25,7 @@ AppBar homeAppBar(BuildContext context, {int unreadCount = 10}) {
     title: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SubTitleText(text: "welcome".tr(), color: AppColor.blue400),
+        SubTitleText(text: "${"welcome".tr()} 👋", color: AppColor.blue400),
         TitleText(text: "Haitham Magdy", color: AppColor.blue900),
       ],
     ),
@@ -54,8 +54,8 @@ AppBar homeAppBar(BuildContext context, {int unreadCount = 10}) {
             // Badge
             if (unreadCount > 0)
               Positioned(
-                left: isArabic ? -7 : null,
-                right: isArabic ? null : -7,
+                left: isArabic ? null : -7,
+                right: isArabic ? -7 : null,
                 bottom: -7,
                 child: Container(
                   padding: const EdgeInsets.all(5),

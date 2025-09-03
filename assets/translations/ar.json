@@ -47,5 +47,13 @@
   "wallet": "المحفظة",
   "expenses": "المصروفات",
   "welcome": "اهلا بك,",
+  "total_balance": "الرصيد الكلي",
+  "egyptian_pound": "جنيه مصرى",
+  "transfer": "تحويل",
+  "recharge": "شحن",
+  "fast_transfer": "تحويل سريع",
+  "past_transactions": "تحويلات سابقة",
+  "all": "الكل",
+  "receive": "استلام",
   "already_have_an_account": "لديك حساب بالفعل؟"
 }
