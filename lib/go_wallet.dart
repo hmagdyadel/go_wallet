@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -115,7 +114,7 @@ class GoWallet extends StatelessWidget {
   ThemeData _buildAppTheme() {
     return ThemeData(
       fontFamily: 'Zain',
-      scaffoldBackgroundColor: Colors.white,
+      scaffoldBackgroundColor: AppColor.blue50,
       colorScheme: ColorScheme.fromSeed(seedColor: AppColor.primaryColor),
     );
   }

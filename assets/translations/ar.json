@@ -43,5 +43,8 @@
   "create_account_successfully": "تم إنشاء حساب جديد",
   "create_account_successfully_hint": "تم انشاء الحساب لنجاح يمكنك الان التوجه للحساب والتمتع بجميع خدمات المحفظة",
   "go_to_account": "التوجه للحساب",
+  "personal": "شخصى",
+  "wallet": "المحفظة",
+  "expenses": "المصروفات",
   "already_have_an_account": "لديك حساب بالفعل؟"
 }

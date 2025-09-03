@@ -11,9 +11,15 @@ class Assets {
   static const String lottieGoInvitation = 'assets/lottie/go_invitation.json';
   static const String lottieGoWallet = 'assets/lottie/go_wallet.json';
   static const String lottieSowBlobAnimation = 'assets/lottie/sow_blob_animation.json';
+  static const String svgsActiveExpenses = 'assets/svgs/active_expenses.svg';
+  static const String svgsActiveProfile = 'assets/svgs/active_profile.svg';
+  static const String svgsActiveWallet = 'assets/svgs/active_wallet.svg';
   static const String svgsCheck = 'assets/svgs/check.svg';
+  static const String svgsProfile = 'assets/svgs/profile.svg';
   static const String svgsLoginView = 'assets/svgs/login_view.svg';
   static const String svgsLogo = 'assets/svgs/logo.svg';
+  static const String svgsNotActiveWallet = 'assets/svgs/not_active_wallet.svg';
+  static const String svgsExpenses = 'assets/svgs/expenses.svg';
   static const String svgsRegisterView = 'assets/svgs/register_view.svg';
   static const String svgsSplash = 'assets/svgs/splash.svg';
   static const String translationsAr = 'assets/translations/ar.json';

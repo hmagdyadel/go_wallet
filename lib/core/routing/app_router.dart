@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../features/home/presentation/home_view.dart';
+import '../../features/landing/logic/landing_cubit.dart';
+import '../../features/landing/presentation/landing_view.dart';
 import '../../features/login/presentation/login_view.dart';
 import '../../features/on_boarding/presentation/views/on_boarding_screen.dart';
 import '../../features/register/presentation/register_view.dart';
@@ -11,6 +13,7 @@ import '../../features/register/presentation/widgets/confirm_pin_view.dart';
 import '../../features/register/presentation/widgets/create_pin_view.dart';
 import '../../features/register/presentation/widgets/success_account_view.dart';
 import '../../features/splash/views/splash_view.dart';
+import '../di/dependency_injection.dart';
 import 'routes.dart';
 
 class AppRouter {
@@ -33,8 +36,13 @@ class AppRouter {
         return _buildRoute(ConfirmPinView());
       case Routes.successRegisterView:
         return _buildRoute(SuccessAccountView());
-      case Routes.homeView:
-        return _buildRoute(HomeView());
+      case Routes.landingView:
+        return _buildRoute(
+          BlocProvider(
+            create: (_) => getIt<LandingCubit>(),
+            child: const LandingView(),
+          ),
+        );
       default:
         return _buildRoute(SplashView());
     }
@@ -49,10 +57,3 @@ class AppRouter {
     }
   }
 }
-
-//   return _buildRoute(
-//     BlocProvider(
-//       create: (_) => getIt<SignupCubit>(),
-//       child: const SignupView(),
-//     ),
-//   );

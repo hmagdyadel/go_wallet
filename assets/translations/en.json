@@ -43,5 +43,8 @@
   "create_account_successfully": "Account created successfully",
   "create_account_successfully_hint": "Your account has been created successfully. You can now access it and enjoy all wallet services",
   "go_to_account": "Go to account",
+  "personal": "Personal",
+  "wallet": "Wallet",
+  "expenses": "Expenses",
   "already_have_an_account": "Already have an account?"
 }

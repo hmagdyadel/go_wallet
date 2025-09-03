@@ -73,7 +73,7 @@ class SuccessAccountView extends StatelessWidget {
             CustomButton(
               text: "go_to_account".tr(),
               onPressed: () => context.pushNamedAndRemoveUntil(
-                Routes.homeView,
+                Routes.landingView,
                 predicate: false,
               ),
             ),
