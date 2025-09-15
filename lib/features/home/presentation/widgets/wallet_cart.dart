@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,8 +10,22 @@ import '../../../../core/widgets/subtitle_text.dart';
 import '../../../../core/widgets/title_text.dart';
 import '../../../../generated/assets.dart';
 
-class WalletCart extends StatelessWidget {
+class WalletCart extends StatefulWidget {
   const WalletCart({super.key});
+
+  @override
+  State<WalletCart> createState() => _WalletCartState();
+}
+
+class _WalletCartState extends State<WalletCart> {
+  bool _isVisible = true;
+  final double _balance = 1000000; // 1,000,000,000
+
+  void _toggleVisibility() {
+    setState(() {
+      _isVisible = !_isVisible;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +35,6 @@ class WalletCart extends StatelessWidget {
           width: double.infinity,
           child: SvgPicture.asset(Assets.svgsCard, fit: BoxFit.fill),
         ),
-
-        // Foreground content on top of image
         Positioned.fill(
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -35,15 +49,53 @@ class WalletCart extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TitleText(
-                      text: "0,000,000",
-                      color: AppColor.whiteColor,
-                      fontSize: 30,
-                      fontWeight: FontWeight.w700,
+                    TweenAnimationBuilder<double>(
+                      key: ValueKey(_isVisible),
+                      tween: Tween<double>(
+                        begin: _isVisible ? 0 : _balance,
+                        end: _isVisible ? _balance : 0,
+                      ),
+                      duration: const Duration(seconds: 2),
+                      builder: (context, value, child) {
+                        final int rounded = value.round();
+
+                        final formatter = NumberFormat.decimalPattern();
+
+                        final textWidget = TitleText(
+                          text: formatter.format(
+                            (_isVisible || rounded > 0)
+                                ? rounded
+                                : _balance.toInt(),
+                          ),
+                          color: AppColor.whiteColor,
+                          fontSize: 30,
+                          fontWeight: FontWeight.w700,
+                        );
+
+                        if (!_isVisible && rounded == 0) {
+                          return ClipRect(
+                            child: ImageFiltered(
+                              imageFilter: ImageFilter.blur(
+                                sigmaX: 10,
+                                sigmaY: 10,
+                              ),
+                              child: textWidget,
+                            ),
+                          );
+                        }
+
+                        return textWidget;
+                      },
                     ),
-                    SvgPicture.asset(
-                      Assets.assetsSvgsClosedEye,
-                      fit: BoxFit.fill,
+                    GestureDetector(
+                      onTap: _toggleVisibility,
+                      child: SvgPicture.asset(
+                        _isVisible
+                            ? Assets
+                                  .svgsOpenEye // 👁 open eye
+                            : Assets.assetsSvgsClosedEye, // 👁‍🗨 closed eye
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ],
                 ),

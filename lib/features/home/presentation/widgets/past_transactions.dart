@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/constants/dimensions_constants.dart';
@@ -307,7 +308,7 @@ class _PastTransactionsState extends State<PastTransactions> {
                       ),
                       SubTitleText(
                         text: transaction.email,
-                        fontSize: 16,
+                        fontSize:width.w < 400 ? 11 : 16,
                         color: AppColor.blue500,
                       ),
                       Container(
@@ -323,7 +324,7 @@ class _PastTransactionsState extends State<PastTransactions> {
                         child: SubTitleText(
                           // ✅ SOLVED: Dynamic text based on transaction status
                           text: _getStatusText(transaction.status),
-                          fontSize: 14,
+                          fontSize:width.w < 400 ? 12 : 14,
                           color: AppColor.whiteColor,
                         ),
                       ),
