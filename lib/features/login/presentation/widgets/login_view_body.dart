@@ -79,7 +79,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       ],
                     ),
                     SizedBox(height: edge * 1.5),
-                    CustomButton(
+                    CustomButton.normal(
                       text: "login".tr(),
                       onPressed: () {
                         _goToPrivatePage();

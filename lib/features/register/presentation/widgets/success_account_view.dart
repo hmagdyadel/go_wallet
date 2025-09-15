@@ -70,7 +70,7 @@ class SuccessAccountView extends StatelessWidget {
               align: TextAlign.center,
             ),
             Spacer(),
-            CustomButton(
+            CustomButton.normal(
               text: "go_to_account".tr(),
               onPressed: () => context.pushNamedAndRemoveUntil(
                 Routes.landingView,

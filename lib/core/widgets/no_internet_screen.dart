@@ -171,7 +171,7 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
 
                 return Column(
                   children: [
-                    CustomButton(
+                    CustomButton.normal(
                       text: _isCheckingConnection
                           ? "checking".tr()
                           : "try_again".tr(),

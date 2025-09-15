@@ -96,7 +96,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      CustomButton(
+                      CustomButton.normal(
                         onPressed: () =>
                             context.pushNamed(Routes.confirmAccountView),
                         text: "create_account".tr(),

@@ -82,7 +82,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
   Widget _buildOnBoardingButton() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: edge),
-      child: CustomButton(
+      child: CustomButton.normal(
         onPressed: _handleButtonPress,
         text: isLastPage ? 'start_your_journey'.tr() : 'continue'.tr(),
       ),
