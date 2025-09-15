@@ -144,44 +144,15 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
               align: TextAlign.center,
             ),
             const Spacer(),
-
-            // Connection status indicator
-            StreamBuilder<InternetConnectionStatus>(
-              stream: InternetConnectionChecker.instance.onStatusChange,
-              builder: (context, snapshot) {
-                if (snapshot.data == InternetConnectionStatus.connected) {
-                  // This case should not normally show as the overlay will disappear
-                  // but it's here as a fallback
-                  return Column(
-                    children: [
-                      const Icon(
-                        Icons.check_circle,
-                        color: Colors.green,
-                        size: 32,
-                      ),
-                      SizedBox(height: edge * 0.5),
-                      SubTitleText(
-                        text: "connection_restored".tr(),
-                        color: Colors.green,
-                        fontSize: 14,
-                      ),
-                    ],
-                  );
-                }
-
-                return Column(
-                  children: [
-                    CustomButton.normal(
-                      text: _isCheckingConnection
-                          ? "checking".tr()
-                          : "try_again".tr(),
-                      onPressed: _isCheckingConnection
-                          ? null
-                          : _checkConnection,
-                    ),
-                  ],
-                );
-              },
+            Column(
+              children: [
+                CustomButton.normal(
+                  text: _isCheckingConnection
+                      ? "checking".tr()
+                      : "try_again".tr(),
+                  onPressed: _isCheckingConnection ? null : _checkConnection,
+                ),
+              ],
             ),
 
             SizedBox(height: edge * 1.6),
