@@ -6,7 +6,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'core/routing/app_router.dart';
 import 'core/routing/routes.dart';
 import 'core/utils/app_color.dart';
-import 'core/widgets/no_network_banner.dart';
+import 'core/widgets/no_internet_screen.dart';
 
 class GoWallet extends StatelessWidget {
   final AppRouter appRouter;
@@ -60,9 +60,7 @@ class GoWallet extends StatelessWidget {
               // If we're still checking the initial connection, show the regular app
               if (!initialSnapshot.hasData) {
                 return MediaQuery(
-                  data: MediaQuery.of(
-                    context,
-                  ).copyWith(textScaler: TextScaler.noScaling),
+                  data: MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling),
                   child: widget!,
                 );
               }
@@ -73,29 +71,22 @@ class GoWallet extends StatelessWidget {
                     ? InternetConnectionStatus.connected
                     : InternetConnectionStatus.disconnected,
                 builder: (context, snapshot) {
-                  final isConnected =
-                      snapshot.data == InternetConnectionStatus.connected;
+                  final isConnected = snapshot.data == InternetConnectionStatus.connected;
 
                   return MediaQuery(
-                    data: MediaQuery.of(
-                      context,
-                    ).copyWith(textScaler: TextScaler.noScaling),
+                    data: MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling),
                     child: ValueListenableBuilder<bool>(
                       valueListenable: ValueNotifier(false),
-                      // valueListenable: AppUtilities.instance.isRecordingNotifier,
                       builder: (context, isRecording, _) {
                         return Stack(
                           children: [
-                            Scaffold(
-                              // backgroundColor: Colors.yellow,
-                              body: Column(
-                                children: [
-                                  if (!isConnected) const NoInternetBanner(),
-                                  Expanded(child: widget!),
-                                ],
-                              ),
-                            ),
-                            //   if (isRecording) const RecordingOverlay(),
+                            // Main app content
+                            widget!,
+                            // Full screen no internet overlay
+                            if (!isConnected)
+                              const NoInternetScreen(),
+                            // Recording overlay (if needed)
+                            // if (isRecording) const RecordingOverlay(),
                           ],
                         );
                       },

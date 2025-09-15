@@ -6,6 +6,7 @@ class Assets {
   static const String fontsZainBold = 'assets/fonts/zain-bold.ttf';
   static const String fontsZainRegular = 'assets/fonts/zain-regular.ttf';
   static const String imagesLogo = 'assets/images/logo.png';
+  static const String imagesNoInternetConnection = 'assets/images/no_internet_connection.png';
   static const String lottieBoarding1 = 'assets/lottie/boarding_1.json';
   static const String lottieBoarding2 = 'assets/lottie/boarding_2.json';
   static const String lottieBoarding3 = 'assets/lottie/boarding_3.json';
