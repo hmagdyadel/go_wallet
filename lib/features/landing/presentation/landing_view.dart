@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../core/constants/dimensions_constants.dart';
 import '../../../core/utils/app_color.dart';
 import '../../../generated/assets.dart';
 import '../logic/landing_cubit.dart';
@@ -21,68 +20,51 @@ class LandingView extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           body: cubit.screens[cubit.currentIndex],
-          bottomNavigationBar: Container(
-            padding: EdgeInsets.symmetric(horizontal: edge * 0.6),
-            decoration: BoxDecoration(
-              color: AppColor.whiteColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withAlpha(13),
-                  // Black color with 5% opacity
-                  blurRadius: 8,
-                  // Blur effect
-                  offset: Offset(0, -4), // Moves the shadow upwards
-                ),
-              ],
+          bottomNavigationBar: BottomNavigationBar(
+            elevation: 8,
+            currentIndex: cubit.currentIndex,
+            onTap: cubit.changeIndex,
+            selectedItemColor: AppColor.primaryColor,
+            unselectedItemColor: AppColor.blue200,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: AppColor.whiteColor,
+            iconSize: 24,
+            selectedLabelStyle: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 15,
             ),
-
-            child: BottomNavigationBar(
-              elevation: 2,
-              currentIndex: cubit.currentIndex,
-              onTap: cubit.changeIndex,
-              selectedItemColor: AppColor.primaryColor,
-              unselectedItemColor: AppColor.blue200,
-              type: BottomNavigationBarType.fixed,
-              backgroundColor: AppColor.whiteColor,
-
-              iconSize: 24,
-              selectedLabelStyle: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 15,
-              ),
-              unselectedLabelStyle: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 15,
-              ),
-              selectedIconTheme: IconThemeData(size: 24),
-              unselectedIconTheme: IconThemeData(size: 24),
-              items: [
-                BottomNavigationBarItem(
-                  icon: SvgPicture.asset(
-                    cubit.currentIndex == 0
-                        ? Assets.svgsActiveProfile
-                        : Assets.svgsProfile,
-                  ),
-                  label: "personal".tr(),
-                ),
-                BottomNavigationBarItem(
-                  icon: SvgPicture.asset(
-                    cubit.currentIndex == 1
-                        ? Assets.svgsActiveWallet
-                        : Assets.svgsNotActiveWallet,
-                  ),
-                  label: 'wallet'.tr(),
-                ),
-                BottomNavigationBarItem(
-                  icon: SvgPicture.asset(
-                    cubit.currentIndex == 2
-                        ? Assets.svgsActiveExpenses
-                        : Assets.svgsExpenses,
-                  ),
-                  label: "expenses".tr(),
-                ),
-              ],
+            unselectedLabelStyle: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 15,
             ),
+            selectedIconTheme: IconThemeData(size: 24),
+            unselectedIconTheme: IconThemeData(size: 24),
+            items: [
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  cubit.currentIndex == 0
+                      ? Assets.svgsActiveProfile
+                      : Assets.svgsProfile,
+                ),
+                label: "personal".tr(),
+              ),
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  cubit.currentIndex == 1
+                      ? Assets.svgsActiveWallet
+                      : Assets.svgsNotActiveWallet,
+                ),
+                label: 'wallet'.tr(),
+              ),
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  cubit.currentIndex == 2
+                      ? Assets.svgsActiveExpenses
+                      : Assets.svgsExpenses,
+                ),
+                label: "expenses".tr(),
+              ),
+            ],
           ),
         );
       },

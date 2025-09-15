@@ -62,5 +62,8 @@
   "past_transactions": "تحويلات سابقة",
   "all": "الكل",
   "receive": "استلام",
+  "success_transaction": "عملية ناجحة",
+  "pending_transaction": "عملية قيد الانتظار",
+  "failed_transaction": "عملية فاشلة",
   "already_have_an_account": "لديك حساب بالفعل؟"
 }

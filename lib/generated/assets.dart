@@ -16,6 +16,7 @@ class Assets {
   static const String svgsActiveExpenses = 'assets/svgs/active_expenses.svg';
   static const String svgsActiveProfile = 'assets/svgs/active_profile.svg';
   static const String svgsActiveWallet = 'assets/svgs/active_wallet.svg';
+  static const String svgsArrowBack = 'assets/svgs/arrow_back.svg';
   static const String svgsAttachment = 'assets/svgs/attachment.svg';
   static const String svgsCard = 'assets/svgs/card.svg';
   static const String svgsCheck = 'assets/svgs/check.svg';
@@ -31,10 +32,12 @@ class Assets {
   static const String svgsOpenEye = 'assets/svgs/open_eye.svg';
   static const String svgsProfile = 'assets/svgs/profile.svg';
   static const String svgsQrCode = 'assets/svgs/qr_code.svg';
+  static const String svgsReceiveArrow = 'assets/svgs/receive_arrow.svg';
   static const String svgsRecharge = 'assets/svgs/recharge.svg';
   static const String svgsRegisterView = 'assets/svgs/register_view.svg';
   static const String svgsSplash = 'assets/svgs/splash.svg';
   static const String svgsTransfer = 'assets/svgs/transfer.svg';
+  static const String svgsTransferArrow = 'assets/svgs/transfer_arrow.svg';
   static const String translationsAr = 'assets/translations/ar.json';
   static const String translationsEn = 'assets/translations/en.json';
 

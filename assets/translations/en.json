@@ -62,5 +62,8 @@
   "past_transactions": "Past transactions",
   "all": "All",
   "receive": "Receive",
+  "success_transaction": "Transfer successful",
+  "pending_transaction": "Pending transaction",
+  "failed_transaction": "Transfer failed",
   "already_have_an_account": "Already have an account?"
 }

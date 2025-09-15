@@ -16,6 +16,10 @@ abstract class AppColor {
   static const Color blue200 =Color(0xffC5C7D1);
   static const Color blue300 = Color(0xffAFB1BE);
   static const Color blue400 = Color(0xff999BAD);
+  static const Color blue500 = Color(0xff81859A);
   static const Color blue700 = Color(0xFF535566);
   static const Color blue900 = Color(0xFF2D2F39);
+  static const Color transferBackground = Color(0xFFFFEDED);
+  static const Color receiveBackground = Color(0xFFDAF7EC);
+  static const Color mainRed = Color(0xFFDE4949);
 }

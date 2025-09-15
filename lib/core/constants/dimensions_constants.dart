@@ -5,6 +5,7 @@ const double height = 844;
 double edge = 20.w;
 double heightEdge = 20.h;
 const double radius = 20;
+const double containerRadius = 30;
 const double radiusInner = 12;
 const double keyboardRadius = 50;
 const double radiusInput = 15;

@@ -8,7 +8,11 @@ import '../../../../core/widgets/subtitle_text.dart';
 import '../../../../core/widgets/title_text.dart';
 import '../../../../generated/assets.dart';
 
-AppBar homeAppBar(BuildContext context, {int unreadCount = 10}) {
+AppBar homeAppBar(
+  BuildContext context, {
+  int unreadCount = 10,
+  required String userName,
+}) {
   bool isArabic = Localizations.localeOf(context).languageCode == 'ar';
 
   return AppBar(
@@ -19,7 +23,20 @@ AppBar homeAppBar(BuildContext context, {int unreadCount = 10}) {
         left: isArabic ? 0 : edge, // Left padding for LTR
         right: isArabic ? edge : 0, // Right padding for RTL
       ),
-      child: SvgPicture.asset(Assets.svgsEgypt, height: 24, width: 24),
+      child: Container(
+        width: 50,
+        height: 50,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: AppColor.whiteColor,
+          borderRadius: BorderRadius.circular(keyboardRadius),
+        ),
+        child: TitleText(
+          text: initials(userName),
+          fontSize: 24,
+          color: AppColor.primaryColor,
+        ),
+      ),
     ),
     leadingWidth: 50 + edge,
     title: Column(
@@ -82,4 +99,15 @@ AppBar homeAppBar(BuildContext context, {int unreadCount = 10}) {
       ),
     ],
   );
+}
+
+/// Generate initials (e.g., "Haitham Magdy" → "HM")
+String initials(String name) {
+  final parts = name.trim().split(' ');
+  if (parts.length >= 2) {
+    return "${parts[0][0]}${parts[1][0]}".toUpperCase();
+  } else if (parts.isNotEmpty) {
+    return parts[0][0].toUpperCase();
+  }
+  return "";
 }
