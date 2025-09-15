@@ -47,7 +47,7 @@ class CustomButton extends StatelessWidget {
             : Text(
           text,
           style: TextStyles.bold16.copyWith(
-            color: isButtonEnabled ? Colors.white : Colors.white.withOpacity(0.7),
+            color: isButtonEnabled ? Colors.white : Colors.white.withValues(alpha: 0.7),
           ),
         ),
       ),
