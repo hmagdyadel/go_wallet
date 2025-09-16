@@ -78,6 +78,11 @@
   "own_qr_code_hint": "Use this code for quick transfers to your account or to access special features easily and quickly.",
   "share_qr_code": "Share QR code",
   "qr_code_sharing_error": "Failed to share QR",
-
+  "my_expenses": "My Expenses",
+  "today": "Today",
+  "last_week": "Last Week",
+  "last_month": "Last Month",
+  "expenses_details": "Expenses Details",
+  "add_expense": "Add Expense",
   "already_have_an_account": "Already have an account?"
 }

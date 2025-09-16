@@ -4,14 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/constants/dimensions_constants.dart';
+import '../../../../core/helpers/enums.dart';
 import '../../../../core/utils/app_color.dart';
 import '../../../../core/widgets/subtitle_text.dart';
 import '../../../../core/widgets/title_text.dart';
 import '../../../../generated/assets.dart';
 
-enum TransactionType { all, transfer, receive, recharge }
 
-enum TransactionStatus { success, pending, failed }
 
 class TransactionItem {
   final String name;

@@ -20,7 +20,20 @@ class WalletCart extends StatefulWidget {
 
 class _WalletCartState extends State<WalletCart> {
   bool _isVisible = true;
-  final double _balance = 1000000; // 1,000,000,000
+
+  double _currentValue = 0;
+  bool _animationDone = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Start animation once when screen loads
+    Future.delayed(Duration.zero, () {
+      setState(() {
+        _animationDone = false;
+      });
+    });
+  }
 
   void _toggleVisibility() {
     setState(() {
@@ -30,6 +43,8 @@ class _WalletCartState extends State<WalletCart> {
 
   @override
   Widget build(BuildContext context) {
+    final formatter = NumberFormat.decimalPattern();
+
     return Stack(
       children: [
         SizedBox(
@@ -50,44 +65,50 @@ class _WalletCartState extends State<WalletCart> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TweenAnimationBuilder<double>(
-                      key: ValueKey(_isVisible),
-                      tween: Tween<double>(
-                        begin: _isVisible ? 0 : _balance,
-                        end: _isVisible ? _balance : 0,
-                      ),
-                      duration: const Duration(seconds: 2),
-                      builder: (context, value, child) {
-                        final int rounded = value.round();
-
-                        final formatter = NumberFormat.decimalPattern();
-
-                        final textWidget = TitleText(
-                          text: formatter.format(
-                            (_isVisible || rounded > 0)
-                                ? rounded
-                                : _balance.toInt(),
-                          ),
-                          color: AppColor.whiteColor,
-                          fontSize: 30,
-                          fontWeight: FontWeight.w700,
-                        );
-
-                        if (!_isVisible && rounded == 0) {
-                          return ClipRect(
-                            child: ImageFiltered(
-                              imageFilter: ImageFilter.blur(
-                                sigmaX: 10,
-                                sigmaY: 10,
-                              ),
-                              child: textWidget,
-                            ),
-                          );
-                        }
-
-                        return textWidget;
-                      },
-                    ),
+                    // Balance display
+                    !_animationDone
+                        ? TweenAnimationBuilder<double>(
+                            tween: Tween<double>(begin: 0, end: balance),
+                            duration: const Duration(seconds: 3),
+                            onEnd: () {
+                              setState(() {
+                                _animationDone = true;
+                                _currentValue = balance;
+                              });
+                            },
+                            builder: (context, value, child) {
+                              _currentValue = value;
+                              return TitleText(
+                                text: formatter.format(value.round()),
+                                color: AppColor.whiteColor,
+                                fontSize: 30,
+                                fontWeight: FontWeight.w700,
+                              );
+                            },
+                          )
+                        : (_isVisible
+                              ? TitleText(
+                                  text: formatter.format(_currentValue.round()),
+                                  color: AppColor.whiteColor,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w700,
+                                )
+                              : ClipRect(
+                                  child: ImageFiltered(
+                                    imageFilter: ImageFilter.blur(
+                                      sigmaX: 10,
+                                      sigmaY: 10,
+                                    ),
+                                    child: TitleText(
+                                      text: formatter.format(
+                                        _currentValue.round(),
+                                      ),
+                                      color: AppColor.whiteColor,
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                )),
                     GestureDetector(
                       onTap: _toggleVisibility,
                       child: SvgPicture.asset(

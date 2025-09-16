@@ -78,6 +78,11 @@
   "own_qr_code_hint": "استخدم هذا الرمز للتحويل السريع إلى حسابك أو الوصول إلى ميزات خاصة بسرعة وسهولة.",
   "share_qr_code": "مشاركة رمز الـQR",
   "qr_code_sharing_error": "حدث خطأ في مشاركة رمز الـQR",
-
+  "my_expenses": "مصروفاتى",
+  "today": "اليوم",
+  "last_week": "اخر اسبوع",
+  "last_month": "اخر شهر",
+  "expenses_details": "تفاصيل المصروفات",
+  "add_expense": "اضافة مصروف",
   "already_have_an_account": "لديك حساب بالفعل؟"
 }
