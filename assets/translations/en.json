@@ -74,5 +74,10 @@
   "support": "Support",
   "rate_app": "Rate app",
   "logout": "Log out",
+  "own_qr_code": "My QR code",
+  "own_qr_code_hint": "Use this code for quick transfers to your account or to access special features easily and quickly.",
+  "share_qr_code": "Share QR code",
+  "qr_code_sharing_error": "Failed to share QR",
+
   "already_have_an_account": "Already have an account?"
 }

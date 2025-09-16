@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/constants/dimensions_constants.dart';
+import '../../../../core/constants/strings.dart';
 import '../../../../core/utils/app_color.dart';
 import '../../../../core/widgets/subtitle_text.dart';
 import '../../../../core/widgets/title_text.dart';
@@ -126,7 +127,7 @@ class _WalletCartState extends State<WalletCart> {
                 Row(
                   children: [
                     TitleText(
-                      text: "haithammagdy@gowallet",
+                      text: userCode,
                       color: AppColor.blue50,
                       fontSize: 16,
                       fontWeight: FontWeight.w700,

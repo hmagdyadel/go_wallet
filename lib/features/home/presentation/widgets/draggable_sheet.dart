@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/dimensions_constants.dart';
 import '../../../../core/utils/app_color.dart';
+import '../../../../core/widgets/drag_handle.dart';
 import 'past_transactions.dart';
 
 class DraggableSheet extends StatelessWidget {
@@ -42,20 +43,7 @@ class DraggableSheet extends StatelessWidget {
           child: Column(
             children: [
               // Drag handle
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(vertical: edge * 0.5),
-                child: Center(
-                  child: Container(
-                    width: 70,
-                    height: 5,
-                    decoration: BoxDecoration(
-                      color: AppColor.blue100,
-                      borderRadius: BorderRadius.circular(radiusInner),
-                    ),
-                  ),
-                ),
-              ),
+              DragHandle(),
 
               // Scrollable content
               Expanded(

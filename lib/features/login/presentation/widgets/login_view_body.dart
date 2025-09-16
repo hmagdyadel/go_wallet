@@ -125,7 +125,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
     final bool didAuthenticate = await BiometricHelper.authenticate();
     if (didAuthenticate && mounted) {
       log("Biometric authentication successful. ${availableBiometrics.first}");
-      context.pushNamed(Routes.splashView);
+      context.pushNamed(Routes.landingView);
     }
   }
 }

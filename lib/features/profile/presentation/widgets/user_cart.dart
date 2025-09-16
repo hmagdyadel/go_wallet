@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/constants/dimensions_constants.dart';
+import '../../../../core/constants/strings.dart';
 import '../../../../core/helpers/extensions.dart';
 import '../../../../core/utils/app_color.dart';
 import '../../../../core/widgets/notifications_avatar.dart';
@@ -91,12 +92,12 @@ class UserCart extends StatelessWidget {
                                       fontSize: 24,
                                     ),
                                     SubTitleText(
-                                      text: "haithammagdy@gowallet",
+                                      text: userCode,
                                       color: AppColor.whiteColor,
                                       fontSize: 18,
                                     ),
                                     SubTitleText(
-                                      text: "+201125516481",
+                                      text: userPhone,
                                       color: AppColor.whiteColor,
                                       fontSize: 18,
                                     ),

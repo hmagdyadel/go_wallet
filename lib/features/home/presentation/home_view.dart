@@ -99,7 +99,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: homeAppBar(context,userName: "Haitham Magdy"),
+      appBar: homeAppBar(context, userName: "Haitham Magdy"),
       body: LayoutBuilder(
         builder: (context, constraints) {
           final initialSize = _calculateInitialChildSize(context);
@@ -128,17 +128,24 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                               children: [
                                 WalletCart(),
                                 SizedBox(height: edge * 0.9),
-                                QuickActionsRow(),
-                                SizedBox(height: edge * 0.7),
+                              ],
+                            ),
+                          ),
+                          QuickActionsRow(),
+                          SizedBox(height: edge * 0.7),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: edge),
+                            child: Row(
+                              children: [
                                 TitleText(
                                   text: "fast_transfer".tr(),
                                   fontSize: 20,
                                   color: AppColor.blue900,
                                 ),
-                                SizedBox(height: edge * 0.6),
                               ],
                             ),
                           ),
+                          SizedBox(height: edge * 0.6),
                           FastTransferRow(
                             names: [
                               "Haitham Magdy",
