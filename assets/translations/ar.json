@@ -65,5 +65,14 @@
   "success_transaction": "عملية ناجحة",
   "pending_transaction": "عملية قيد الانتظار",
   "failed_transaction": "عملية فاشلة",
+  "pound": "جنيه",
+  "invite_friends": "ادعو اصدقائك",
+  "invite_friends_hint": "ادعو صديق جديد للتسجيل واحصل على {} جنيه",
+  "menu": "القائمة",
+  "bank_cards": "كروتى البنكية",
+  "account_settings": "إعدادات الحساب",
+  "support": "الدعم الفنى",
+  "rate_app": "تقييم التطبيق",
+  "logout": "تسجيل الخروج",
   "already_have_an_account": "لديك حساب بالفعل؟"
 }

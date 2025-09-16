@@ -11,6 +11,7 @@ class TitleText extends StatelessWidget {
     this.fontSize,
     this.fontFamily,
     this.fontWeight,
+    this.height,
     super.key,
   });
 
@@ -21,6 +22,7 @@ class TitleText extends StatelessWidget {
   final double? fontSize;
   final TextAlign? align;
   final TextDecoration? decoration;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class TitleText extends StatelessWidget {
         fontFamily: fontFamily ?? 'Zain',
         decoration: decoration ?? TextDecoration.none,
         decorationColor: AppColor.primaryColor,
+        height:height ?? 1.2,
       ),
       textAlign: align ?? TextAlign.center,
     );

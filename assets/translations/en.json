@@ -65,5 +65,14 @@
   "success_transaction": "Transfer successful",
   "pending_transaction": "Pending transaction",
   "failed_transaction": "Transfer failed",
+  "pound": "Pound",
+  "invite_friends": "Invite friends",
+  "invite_friends_hint": "Invite a new friend to register and get {} EGP",
+  "menu": "Menu",
+  "bank_cards": "My bank cards",
+  "account_settings": "Account settings",
+  "support": "Support",
+  "rate_app": "Rate app",
+  "logout": "Log out",
   "already_have_an_account": "Already have an account?"
 }

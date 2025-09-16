@@ -192,6 +192,20 @@ extension Navigation on BuildContext {
   // }
 }
 
+extension StringExtensions on String {
+  /// Generate initials from a string (e.g., "Haitham Magdy" → "HM")
+  String toInitials() {
+    final parts = trim().split(' ');
+    if (parts.length >= 2) {
+      return "${parts[0][0]}${parts[1][0]}".toUpperCase();
+    } else if (parts.isNotEmpty) {
+      return parts[0][0].toUpperCase();
+    }
+    return "";
+  }
+}
+
+
 //
 // extension NameExtension on Name {
 //   String? getNameByLanguageCode() {
