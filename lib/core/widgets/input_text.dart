@@ -3,11 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../constants/dimensions_constants.dart';
 import '../utils/app_color.dart';
+import 'subtitle_text.dart';
 import 'title_text.dart';
 
 class InputText extends StatefulWidget {
-
-
   final double? width;
   final String? title;
   final String? hint;
@@ -20,6 +19,7 @@ class InputText extends StatefulWidget {
   final bool? isError;
   final bool? isReadOnly;
   final String? suffixText;
+  final Function(String)? onChanged;
 
   const InputText._internal({
     this.title,
@@ -35,6 +35,7 @@ class InputText extends StatefulWidget {
     this.isError = false,
     this.isReadOnly = false,
     this.suffixText,
+    this.onChanged,
   });
 
   /// 🔹 Default Input
@@ -49,6 +50,7 @@ class InputText extends StatefulWidget {
     bool enable = true,
     bool isError = false,
     double? width,
+    Function(String)? onChanged,
   }) {
     return InputText._internal(
       title: title,
@@ -61,6 +63,7 @@ class InputText extends StatefulWidget {
       enable: enable,
       isError: isError,
       width: width,
+      onChanged: onChanged,
     );
   }
 
@@ -72,6 +75,7 @@ class InputText extends StatefulWidget {
     TextInputType? keyboardType,
     Widget? prefixIcon,
     double? width,
+    Function(String)? onChanged,
   }) {
     return InputText._internal(
       title: title,
@@ -81,6 +85,7 @@ class InputText extends StatefulWidget {
       isPassword: true,
       obscureText: true,
       width: width,
+      onChanged: onChanged,
     );
   }
 
@@ -103,6 +108,32 @@ class InputText extends StatefulWidget {
     );
   }
 
+  /// 🔹 Search Input
+  factory InputText.search({
+    String? title,
+    String? hint,
+    TextEditingController? controller,
+    double? width,
+    bool enable = true,
+    bool isError = false,
+    Function(String)? onChanged,
+  }) {
+    return InputText._internal(
+      title: title,
+      hint: hint ?? "Search...",
+      controller: controller,
+      keyboardType: TextInputType.text,
+      prefixIcon: Icon(
+        Icons.search,
+        color: AppColor.blue500,
+        size: 24,
+      ),
+      enable: enable,
+      isError: isError,
+      width: width,
+      onChanged: onChanged,
+    );
+  }
 
   @override
   State<InputText> createState() => _InputTextState();
@@ -126,7 +157,6 @@ class _InputTextState extends State<InputText> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.suffixText);
     return Container(
       width: widget.width ?? width.w,
       alignment: Alignment.center,
@@ -150,8 +180,9 @@ class _InputTextState extends State<InputText> {
           TextField(
             focusNode: _focusNode,
             onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
-            textInputAction: TextInputAction.next,
+            textInputAction: TextInputAction.search,
             keyboardType: widget.keyboardType,
+            onChanged: widget.onChanged,
             controller: widget.controller,
             style: TextStyle(color: AppColor.blue700),
             maxLines: 1,
@@ -208,13 +239,10 @@ class _InputTextState extends State<InputText> {
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Center(
                   widthFactor: 1.0,
-                  child: Text(
-                    widget.suffixText!,
-                    style: const TextStyle(
-                      color: AppColor.blue700,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  child: SubTitleText(
+                    text: widget.suffixText ?? "",
+                    color: AppColor.blue800,
+                    fontSize: 16,
                   ),
                 ),
               )

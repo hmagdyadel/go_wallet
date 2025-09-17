@@ -93,5 +93,10 @@
   "expense_category": "Expense Category",
   "expense_category_hint": "Search or enter a new expense category",
   "add_now": "Add Now",
+  "please_enter_expense_category": "Please enter an expense category",
+  "please_enter_valid_amount": "Please enter a valid amount",
+  "please_enter_expense_title": "Please enter an expense title",
+  "expense_added_successfully": "Expense added successfully",
+  "failed_to_add_expense": "Failed to add expense",
   "already_have_an_account": "Already have an account?"
 }

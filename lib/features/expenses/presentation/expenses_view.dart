@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-
 
 import '../../../core/constants/dimensions_constants.dart';
 import '../../../core/constants/strings.dart';
@@ -11,6 +11,7 @@ import '../../../core/widgets/notifications_avatar.dart';
 import '../../../core/widgets/subtitle_text.dart';
 import '../../../core/widgets/title_text.dart';
 import '../../../generated/assets.dart';
+import '../logic/expenses_cubit.dart';
 import 'widgets/add_expenses_bottom_sheet.dart';
 
 class ExpensesView extends StatefulWidget {
@@ -81,10 +82,15 @@ class _ExpensesViewState extends State<ExpensesView> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
+          final expensesCubit = context.read<ExpensesCubit>();
+          expensesCubit.clearAllInputs();
           showModalBottomSheet(
             context: context,
             isScrollControlled: true,
-            builder: (context) => AddExpensesBottomSheet(),
+            builder: (context) => BlocProvider.value(
+              value: expensesCubit,
+              child: AddExpensesBottomSheet(),
+            ),
           );
         },
         backgroundColor: AppColor.primaryColor,

@@ -120,17 +120,17 @@ extension Navigation on BuildContext {
     Flushbar(
       messageText: Row(
         children: [
-          GestureDetector(
-            onTap: () => NavigationService.navigatorKey.currentContext?.pop(),
-            child: Icon(Icons.clear),
-          ),
-          SizedBox(width: edge),
           Expanded(
             child: SubTitleText(
               text: msg,
               align: TextAlign.start,
               color: AppColor.whiteColor,
             ),
+          ),
+
+          GestureDetector(
+            onTap: () => NavigationService.navigatorKey.currentContext?.pop(),
+            child: Icon(Icons.clear, color: AppColor.whiteColor),
           ),
         ],
       ),
@@ -204,7 +204,6 @@ extension StringExtensions on String {
     return "";
   }
 }
-
 
 //
 // extension NameExtension on Name {

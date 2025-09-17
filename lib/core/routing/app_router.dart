@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../features/expenses/logic/expenses_cubit.dart';
 import '../../features/landing/logic/landing_cubit.dart';
 import '../../features/landing/presentation/landing_view.dart';
 import '../../features/login/presentation/login_view.dart';
@@ -38,8 +39,11 @@ class AppRouter {
         return _buildRoute(SuccessAccountView());
       case Routes.landingView:
         return _buildRoute(
-          BlocProvider(
-            create: (_) => getIt<LandingCubit>(),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (_) => getIt<LandingCubit>()),
+              BlocProvider(create: (_) => getIt<ExpensesCubit>()),
+            ],
             child: const LandingView(),
           ),
         );
