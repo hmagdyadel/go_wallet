@@ -26,9 +26,13 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
 
   // Getters
   double get currentAmount => _currentAmount;
+
   bool get isManualInput => _isManualInput;
+
   List<ExpenseModel> get expenses => _expenses;
+
   ExpensesType get currentFilter => _currentFilter;
+
   List<String> get categorySuggestions => _categorySuggestions;
 
   Future<void> _initializeService() async {
@@ -189,7 +193,6 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
     }
   }
 
-
   // Delete expense
   Future<void> deleteExpense(String expenseId) async {
     try {
@@ -224,7 +227,6 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
       emit(ExpensesStates.error(message: 'Failed to update expense: $e'));
     }
   }
-
 
   @override
   Future<void> close() {
