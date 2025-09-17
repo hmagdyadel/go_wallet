@@ -6,6 +6,21 @@ import '../utils/app_color.dart';
 import 'title_text.dart';
 
 class InputText extends StatefulWidget {
+
+
+  final double? width;
+  final String? title;
+  final String? hint;
+  final TextEditingController? controller;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final TextInputType? keyboardType;
+  final bool obscureText, isPassword;
+  final bool? enable;
+  final bool? isError;
+  final bool? isReadOnly;
+  final String? suffixText;
+
   const InputText._internal({
     this.title,
     this.width,
@@ -19,6 +34,7 @@ class InputText extends StatefulWidget {
     this.isPassword = false,
     this.isError = false,
     this.isReadOnly = false,
+    this.suffixText,
   });
 
   /// 🔹 Default Input
@@ -29,6 +45,7 @@ class InputText extends StatefulWidget {
     TextInputType? keyboardType,
     Widget? prefixIcon,
     Widget? suffixIcon,
+    String? suffixText,
     bool enable = true,
     bool isError = false,
     double? width,
@@ -40,6 +57,7 @@ class InputText extends StatefulWidget {
       keyboardType: keyboardType ?? TextInputType.text,
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
+      suffixText: suffixText,
       enable: enable,
       isError: isError,
       width: width,
@@ -85,17 +103,6 @@ class InputText extends StatefulWidget {
     );
   }
 
-  final double? width;
-  final String? title;
-  final String? hint;
-  final TextEditingController? controller;
-  final Widget? prefixIcon;
-  final Widget? suffixIcon;
-  final TextInputType? keyboardType;
-  final bool obscureText, isPassword;
-  final bool? enable;
-  final bool? isError;
-  final bool? isReadOnly;
 
   @override
   State<InputText> createState() => _InputTextState();
@@ -119,6 +126,7 @@ class _InputTextState extends State<InputText> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.suffixText);
     return Container(
       width: widget.width ?? width.w,
       alignment: Alignment.center,
@@ -190,12 +198,27 @@ class _InputTextState extends State<InputText> {
               filled: true,
               suffixIcon: widget.isPassword
                   ? IconButton(
-                      icon: Icon(
-                        _securePass ? Icons.visibility : Icons.visibility_off,
-                      ),
-                      onPressed: _changeVisibility,
-                    )
-                  : widget.suffixIcon,
+                icon: Icon(
+                  _securePass ? Icons.visibility : Icons.visibility_off,
+                ),
+                onPressed: _changeVisibility,
+              )
+                  : (widget.suffixIcon ?? (widget.suffixText != null
+                  ? Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Center(
+                  widthFactor: 1.0,
+                  child: Text(
+                    widget.suffixText!,
+                    style: const TextStyle(
+                      color: AppColor.blue700,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              )
+                  : null)),
             ),
           ),
         ],

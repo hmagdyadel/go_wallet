@@ -43,7 +43,7 @@ class _WalletCartState extends State<WalletCart> {
 
   @override
   Widget build(BuildContext context) {
-    final formatter = NumberFormat.decimalPattern();
+
 
     return Stack(
       children: [
@@ -79,7 +79,7 @@ class _WalletCartState extends State<WalletCart> {
                             builder: (context, value, child) {
                               _currentValue = value;
                               return TitleText(
-                                text: formatter.format(value.round()),
+                                text: currencyFormatter.format(value.round()),
                                 color: AppColor.whiteColor,
                                 fontSize: 30,
                                 fontWeight: FontWeight.w700,
@@ -88,7 +88,7 @@ class _WalletCartState extends State<WalletCart> {
                           )
                         : (_isVisible
                               ? TitleText(
-                                  text: formatter.format(_currentValue.round()),
+                                  text: currencyFormatter.format(_currentValue.round()),
                                   color: AppColor.whiteColor,
                                   fontSize: 30,
                                   fontWeight: FontWeight.w700,
@@ -100,7 +100,7 @@ class _WalletCartState extends State<WalletCart> {
                                       sigmaY: 10,
                                     ),
                                     child: TitleText(
-                                      text: formatter.format(
+                                      text: currencyFormatter.format(
                                         _currentValue.round(),
                                       ),
                                       color: AppColor.whiteColor,

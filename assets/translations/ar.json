@@ -84,5 +84,13 @@
   "last_month": "اخر شهر",
   "expenses_details": "تفاصيل المصروفات",
   "add_expense": "اضافة مصروف",
+  "add_new_expense": "اضافة مصروف جديد",
+  "expense_name": "عنوان المصروف",
+  "expense_name_hint": "ادخل عنوان المصروف",
+  "expense_amount": "قيمة المصروف",
+  "expense_amount_hint": "ادخل قيمة المصروف",
+  "expense_category": "فئة المصروف",
+  "expense_category_hint": "ابحث او ادخل فئة مصروف جديدة",
+  "add_now": "إضافة الأن",
   "already_have_an_account": "لديك حساب بالفعل؟"
 }

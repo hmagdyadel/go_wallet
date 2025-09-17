@@ -84,5 +84,14 @@
   "last_month": "Last Month",
   "expenses_details": "Expenses Details",
   "add_expense": "Add Expense",
+
+  "add_new_expense": "Add New Expense",
+  "expense_name": "Expense Title",
+  "expense_name_hint": "Enter the expense title",
+  "expense_amount": "Expense Amount",
+  "expense_amount_hint": "Enter the expense amount",
+  "expense_category": "Expense Category",
+  "expense_category_hint": "Search or enter a new expense category",
+  "add_now": "Add Now",
   "already_have_an_account": "Already have an account?"
 }

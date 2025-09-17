@@ -1,13 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:go_wallet/core/constants/strings.dart';
+import 'package:flutter_svg/svg.dart';
+
 
 import '../../../core/constants/dimensions_constants.dart';
+import '../../../core/constants/strings.dart';
 import '../../../core/helpers/enums.dart';
 import '../../../core/utils/app_color.dart';
 import '../../../core/widgets/notifications_avatar.dart';
 import '../../../core/widgets/subtitle_text.dart';
 import '../../../core/widgets/title_text.dart';
+import '../../../generated/assets.dart';
+import 'widgets/add_expenses_bottom_sheet.dart';
 
 class ExpensesView extends StatefulWidget {
   const ExpensesView({super.key});
@@ -70,18 +74,19 @@ class _ExpensesViewState extends State<ExpensesView> {
                 ],
               ),
               SizedBox(height: edge * 0.5),
-              Row(
-                children: [
-                  Expanded(child: TitleText(text: balance.toString(), fontSize: 24, color: AppColor.blue900)),
-                  Container(width: 10),
-                ],
-              ),
+              balanceRow(),
             ],
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (context) => AddExpensesBottomSheet(),
+          );
+        },
         backgroundColor: AppColor.primaryColor,
         icon: Icon(Icons.add, color: AppColor.whiteColor),
         label: SubTitleText(
@@ -89,6 +94,44 @@ class _ExpensesViewState extends State<ExpensesView> {
           color: AppColor.whiteColor,
         ),
       ),
+    );
+  }
+
+  Row balanceRow() {
+    return Row(
+      children: [
+        Expanded(
+          child: TitleText(
+            text: currencyFormatter.format(balance),
+            fontSize: 45,
+            color: AppColor.lightPrimaryColor,
+            align: TextAlign.start,
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: edge * 0.3,
+            vertical: edge * 0.2,
+          ),
+          decoration: BoxDecoration(
+            color: AppColor.whiteColor,
+            borderRadius: BorderRadius.circular(radius),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SvgPicture.asset(Assets.svgsEgypt, fit: BoxFit.fill),
+              SizedBox(width: edge * 0.4),
+              TitleText(
+                text: "egyptian_pound".tr(),
+                color: AppColor.primaryColor,
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
