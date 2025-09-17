@@ -92,11 +92,11 @@
   "expense_category": "فئة المصروف",
   "expense_category_hint": "ابحث او ادخل فئة مصروف جديدة",
   "add_now": "إضافة الأن",
-
   "please_enter_expense_category": "الرجاء إدخال فئة المصروف",
   "please_enter_valid_amount": "الرجاء إدخال قيمة صحيحة",
   "please_enter_expense_title": "الرجاء إدخال عنوان المصروف",
   "expense_added_successfully": "تمت إضافة المصروف بنجاح",
   "failed_to_add_expense": "فشل في إضافة المصروف",
+  "egyptian_pound_": "جنيه {} ",
   "already_have_an_account": "لديك حساب بالفعل؟"
 }

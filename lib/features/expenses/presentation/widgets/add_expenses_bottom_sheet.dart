@@ -55,15 +55,11 @@ class AddExpensesBottomSheet extends StatelessWidget {
               SizedBox(height: edge * 0.4),
               _buildAmountButtons(cubit),
               SizedBox(height: edge * 0.4),
-              InputText.search(
-                title: "expense_category".tr(),
-                hint: "expense_category_hint".tr(),
-                controller: cubit.expenseCategory,
-              ),
+              _buildCategoryInput(cubit, context),
               SizedBox(height: edge * 1.2),
               CustomButton.normal(
                 text: "add_now".tr(),
-                onPressed:isLoading ? null : () => cubit.addExpense(),
+                onPressed: isLoading ? null : () => cubit.addExpense(),
               ),
               SizedBox(height: edge * 2),
             ],
@@ -72,9 +68,9 @@ class AddExpensesBottomSheet extends StatelessWidget {
       },
       listener: (context, state) {
         state.whenOrNull(
-         success: (message){
-           context.showErrorToast(message);
-         },
+          success: (message) {
+            context.showErrorToast(message);
+          },
           error: (message) {
             context.showErrorToast(message);
           },
@@ -136,6 +132,82 @@ class AddExpensesBottomSheet extends StatelessWidget {
           borderRadius: BorderRadius.circular(radiusInput),
         ),
         child: SubTitleText(text: text, fontSize: 16, color: AppColor.blue900),
+      ),
+    );
+  }
+
+  Widget _buildCategoryInput(ExpensesCubit cubit, BuildContext context) {
+    return BlocBuilder<ExpensesCubit, ExpensesStates>(
+      builder: (context, state) {
+        print(" length ${cubit.categorySuggestions.length}");
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            InputText.search(
+              title: "expense_category".tr(),
+              hint: "expense_category_hint".tr(),
+              controller: cubit.expenseCategory,
+              onChanged: cubit.onCategoryChanged,
+            ),
+            if (cubit.categorySuggestions.isNotEmpty &&
+                cubit.expenseCategory.text.isEmpty) ...[
+              SizedBox(height: edge * 0.5),
+              _buildCategorySuggestions(cubit),
+            ] else if (cubit.categorySuggestions.isNotEmpty &&
+                cubit.expenseCategory.text.isNotEmpty) ...[
+              SizedBox(height: edge * 0.5),
+              _buildCategorySuggestions(cubit),
+            ],
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildCategorySuggestions(ExpensesCubit cubit) {
+
+    return Container(
+      constraints: BoxConstraints(maxHeight: 150),
+      child: SingleChildScrollView(
+        child: Column(
+          children: cubit.categorySuggestions
+              .map(
+                (category) => GestureDetector(
+                  onTap: () => cubit.selectCategory(category),
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: edge * 0.5,
+                      vertical: edge * 0.4,
+                    ),
+                    margin: EdgeInsets.only(bottom: edge * 0.2),
+                    decoration: BoxDecoration(
+                      color: AppColor.blue50,
+                      borderRadius: BorderRadius.circular(radiusInput * 0.5),
+                      border: Border.all(color: AppColor.blue200, width: 1),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.category_outlined,
+                          color: AppColor.blue900,
+                          size: 16,
+                        ),
+                        SizedBox(width: edge * 0.3),
+                        Expanded(
+                          child: SubTitleText(
+                            text: category,
+                            fontSize: 14,
+                            color: AppColor.blue900,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
+        ),
       ),
     );
   }

@@ -7,7 +7,6 @@ import '../../../core/services/expenses_hive_service.dart';
 import '../data/models/expenses_model.dart';
 import 'expenses_states.dart';
 
-
 class ExpensesCubit extends Cubit<ExpensesStates> {
   ExpensesCubit(this._hiveService) : super(const ExpensesStates.initial()) {
     _initializeService();
@@ -23,20 +22,20 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
   bool _isManualInput = false;
   List<ExpenseModel> _expenses = [];
   ExpensesType _currentFilter = ExpensesType.today;
+  List<String> _categorySuggestions = [];
 
   // Getters
   double get currentAmount => _currentAmount;
-
   bool get isManualInput => _isManualInput;
-
   List<ExpenseModel> get expenses => _expenses;
-
   ExpensesType get currentFilter => _currentFilter;
+  List<String> get categorySuggestions => _categorySuggestions;
 
   Future<void> _initializeService() async {
     try {
       await _hiveService.init();
       await loadExpenses(); // Load expenses after initialization
+      _loadCategorySuggestions(''); // Load all categories initially
     } catch (e) {
       emit(ExpensesStates.error(message: 'Failed to initialize service: $e'));
     }
@@ -50,6 +49,25 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
     } else {
       _currentAmount = double.tryParse(value) ?? 0.0;
     }
+    emit(const ExpensesStates.loaded());
+  }
+
+  void onCategoryChanged(String value) {
+    _loadCategorySuggestions(value);
+    emit(const ExpensesStates.loaded());
+  }
+
+  void _loadCategorySuggestions(String input) {
+    try {
+      _categorySuggestions = _hiveService.getCategorySuggestions(input);
+    } catch (e) {
+      _categorySuggestions = [];
+    }
+  }
+
+  void selectCategory(String category) {
+    expenseCategory.text = category;
+    _categorySuggestions = [];
     emit(const ExpensesStates.loaded());
   }
 
@@ -73,6 +91,7 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
     expenseCategory.clear();
     _currentAmount = 0.0;
     _isManualInput = false;
+    _categorySuggestions = [];
     emit(const ExpensesStates.loaded());
   }
 
@@ -114,9 +133,8 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
       clearAllInputs();
 
       // Reload expenses
-      await loadExpenses();
-
       emit(ExpensesStates.success('Expense added successfully'));
+      await loadExpenses();
     } catch (e) {
       emit(ExpensesStates.error(message: 'Failed to add expense: $e'));
     }
@@ -138,8 +156,10 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
           _expenses = _hiveService.getThisMonthExpenses(userCode);
           break;
       }
-
       emit(const ExpensesStates.loaded());
+      if (_expenses.isEmpty) {
+        emit(const ExpensesStates.empty());
+      }
     } catch (e) {
       emit(ExpensesStates.error(message: 'Failed to load expenses: $e'));
     }
@@ -168,6 +188,7 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
       return 0.0;
     }
   }
+
 
   // Delete expense
   Future<void> deleteExpense(String expenseId) async {
@@ -203,6 +224,7 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
       emit(ExpensesStates.error(message: 'Failed to update expense: $e'));
     }
   }
+
 
   @override
   Future<void> close() {

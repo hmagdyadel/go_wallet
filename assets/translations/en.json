@@ -84,7 +84,6 @@
   "last_month": "Last Month",
   "expenses_details": "Expenses Details",
   "add_expense": "Add Expense",
-
   "add_new_expense": "Add New Expense",
   "expense_name": "Expense Title",
   "expense_name_hint": "Enter the expense title",
@@ -98,5 +97,6 @@
   "please_enter_expense_title": "Please enter an expense title",
   "expense_added_successfully": "Expense added successfully",
   "failed_to_add_expense": "Failed to add expense",
+  "egyptian_pound_": "EGP {} ",
   "already_have_an_account": "Already have an account?"
 }

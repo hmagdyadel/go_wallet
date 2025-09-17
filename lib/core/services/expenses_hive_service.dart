@@ -4,18 +4,21 @@ import '../../features/expenses/data/models/expenses_model.dart';
 
 class ExpensesHiveService {
   static const String _boxName = 'expenses_box';
+  static const String _categoriesBoxName = 'categories_box';
   Box<ExpenseModel>? _expensesBox;
+  Box<String>? _categoriesBox;
 
-  // Initialize Hive box
+  // Initialize Hive boxes
   Future<void> init() async {
     try {
       _expensesBox = await Hive.openBox<ExpenseModel>(_boxName);
+      _categoriesBox = await Hive.openBox<String>(_categoriesBoxName);
     } catch (e) {
       throw Exception('Failed to initialize expenses box: $e');
     }
   }
 
-  // Get the box instance
+  // Get the expenses box instance
   Box<ExpenseModel> get box {
     if (_expensesBox == null || !_expensesBox!.isOpen) {
       throw Exception('Expenses box is not initialized. Call init() first.');
@@ -23,12 +26,58 @@ class ExpensesHiveService {
     return _expensesBox!;
   }
 
+  // Get the categories box instance
+  Box<String> get categoriesBox {
+    if (_categoriesBox == null || !_categoriesBox!.isOpen) {
+      throw Exception('Categories box is not initialized. Call init() first.');
+    }
+    return _categoriesBox!;
+  }
+
   // Add new expense
   Future<void> addExpense(ExpenseModel expense) async {
     try {
       await box.add(expense);
+      // Save category if it doesn't exist
+      await _saveCategoryIfNotExists(expense.category);
     } catch (e) {
       throw Exception('Failed to add expense: $e');
+    }
+  }
+
+  // Save category if it doesn't exist
+  Future<void> _saveCategoryIfNotExists(String category) async {
+    try {
+      final existingCategories = getSavedCategories();
+      if (!existingCategories.contains(category.toLowerCase())) {
+        await categoriesBox.add(category);
+      }
+    } catch (e) {
+      throw Exception('Failed to save category: $e');
+    }
+  }
+
+  // Get all saved categories
+  List<String> getSavedCategories() {
+    try {
+      return categoriesBox.values.toList();
+    } catch (e) {
+      return [];
+    }
+  }
+
+  // Get category suggestions based on input
+  List<String> getCategorySuggestions(String input) {
+    try {
+      if (input.isEmpty) return getSavedCategories();
+
+      final allCategories = getSavedCategories();
+      return allCategories
+          .where((category) =>
+          category.toLowerCase().contains(input.toLowerCase()))
+          .toList();
+    } catch (e) {
+      return [];
     }
   }
 
@@ -56,8 +105,8 @@ class ExpensesHiveService {
   List<ExpenseModel> getTodayExpenses(String userCode) {
     try {
       return getExpensesByUserCode(
-          userCode,
-        ).where((expense) => expense.isToday).toList()
+        userCode,
+      ).where((expense) => expense.isToday).toList()
         ..sort((a, b) => b.createdAt.compareTo(a.createdAt)); // Latest first
     } catch (e) {
       throw Exception('Failed to get today expenses: $e');
@@ -68,8 +117,8 @@ class ExpensesHiveService {
   List<ExpenseModel> getThisWeekExpenses(String userCode) {
     try {
       return getExpensesByUserCode(
-          userCode,
-        ).where((expense) => expense.isThisWeek).toList()
+        userCode,
+      ).where((expense) => expense.isThisWeek).toList()
         ..sort((a, b) => b.createdAt.compareTo(a.createdAt)); // Latest first
     } catch (e) {
       throw Exception('Failed to get week expenses: $e');
@@ -80,8 +129,8 @@ class ExpensesHiveService {
   List<ExpenseModel> getThisMonthExpenses(String userCode) {
     try {
       return getExpensesByUserCode(
-          userCode,
-        ).where((expense) => expense.isThisMonth).toList()
+        userCode,
+      ).where((expense) => expense.isThisMonth).toList()
         ..sort((a, b) => b.createdAt.compareTo(a.createdAt)); // Latest first
     } catch (e) {
       throw Exception('Failed to get month expenses: $e');
@@ -90,21 +139,21 @@ class ExpensesHiveService {
 
   // Get expenses by date range
   List<ExpenseModel> getExpensesByDateRange(
-    String userCode,
-    DateTime startDate,
-    DateTime endDate,
-  ) {
+      String userCode,
+      DateTime startDate,
+      DateTime endDate,
+      ) {
     try {
       return getExpensesByUserCode(userCode)
           .where(
             (expense) =>
-                expense.createdAt.isAfter(
-                  startDate.subtract(const Duration(seconds: 1)),
-                ) &&
-                expense.createdAt.isBefore(
-                  endDate.add(const Duration(days: 1)),
-                ),
-          )
+        expense.createdAt.isAfter(
+          startDate.subtract(const Duration(seconds: 1)),
+        ) &&
+            expense.createdAt.isBefore(
+              endDate.add(const Duration(days: 1)),
+            ),
+      )
           .toList()
         ..sort((a, b) => b.createdAt.compareTo(a.createdAt)); // Latest first
     } catch (e) {
@@ -116,6 +165,8 @@ class ExpensesHiveService {
   Future<void> updateExpense(int index, ExpenseModel expense) async {
     try {
       await box.putAt(index, expense);
+      // Save category if it doesn't exist
+      await _saveCategoryIfNotExists(expense.category);
     } catch (e) {
       throw Exception('Failed to update expense: $e');
     }
@@ -187,12 +238,22 @@ class ExpensesHiveService {
     }
   }
 
-  // Close the box
+  // Clear all categories
+  Future<void> clearAllCategories() async {
+    try {
+      await categoriesBox.clear();
+    } catch (e) {
+      throw Exception('Failed to clear all categories: $e');
+    }
+  }
+
+  // Close the boxes
   Future<void> close() async {
     try {
       await _expensesBox?.close();
+      await _categoriesBox?.close();
     } catch (e) {
-      throw Exception('Failed to close expenses box: $e');
+      throw Exception('Failed to close expenses boxes: $e');
     }
   }
 }

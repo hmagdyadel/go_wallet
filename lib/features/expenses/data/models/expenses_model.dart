@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
+import 'package:intl/intl.dart';
 
 part 'expenses_model.g.dart';
 
@@ -31,7 +32,12 @@ class ExpenseModel extends HiveObject {
     required this.amount,
     required this.category,
   }) : id = id ?? const Uuid().v4(),
-       createdAt = createdAt ?? DateTime.now();
+        createdAt = createdAt ?? DateTime.now();
+
+  // Formatted date string like "03 Aug 2025 09:15 AM"
+  String get formattedDate {
+    return DateFormat('dd MMM yyyy hh:mm a').format(createdAt);
+  }
 
   // Helper method to check if expense is from today
   bool get isToday {

@@ -9,6 +9,7 @@ class ExpensesStates<T> with _$ExpensesStates<T> {
   const factory ExpensesStates.loading() = Loading;
 
   const factory ExpensesStates.loaded() = Loaded;
+  const factory ExpensesStates.empty() = Empty;
 
   const factory ExpensesStates.success(T data) = Success<T>;
 
