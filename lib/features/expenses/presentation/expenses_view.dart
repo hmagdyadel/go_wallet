@@ -75,7 +75,7 @@ class _ExpensesViewState extends State<ExpensesView> {
                         align: TextAlign.start,
                       ),
                     ),
-                    // TODO: here i need to use the fl_chart package to show the expenses chart related to the selected tab
+                    //  here i need to use the fl_chart package to show the expenses chart related to the selected tab
                     // the chart will be a line chart with the following properties:
                     // for today: the chart will show the expenses of the current day
                     // the x axis will be the categories of the day and the y axis will be the expenses of each category
@@ -109,7 +109,7 @@ class _ExpensesViewState extends State<ExpensesView> {
               SizedBox(height: edge * 0.7),
               ExpensesCategoriesChart(selectedTab: selectedTab),
               SizedBox(height: edge),
-              // TODO: here i need to show the expenses categories for the selected tab
+              //  here i need to show the expenses categories for the selected tab
               // each category will be a line chart with the following properties:
               // for today: show a horizontal line chart with the following properties:
               // each category will be a line chart with the following properties:
