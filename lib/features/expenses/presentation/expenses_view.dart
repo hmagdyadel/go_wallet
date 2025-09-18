@@ -13,6 +13,7 @@ import '../../../core/widgets/title_text.dart';
 import '../../../generated/assets.dart';
 import '../logic/expenses_cubit.dart';
 import 'widgets/add_expenses_bottom_sheet.dart';
+import 'widgets/expenses_chart.dart';
 import 'widgets/expenses_list.dart';
 
 class ExpensesView extends StatefulWidget {
@@ -96,6 +97,7 @@ class _ExpensesViewState extends State<ExpensesView> {
                     // the chart will be a line chart with the following properties:
                     // for this month: the chart will show the expenses of the current month
                     // the x axis will be the dates of the month and the y axis will be the expenses of each day
+                    ExpensesChart(selectedTab: selectedTab),
                   ],
                 ),
               ),
@@ -104,6 +106,9 @@ class _ExpensesViewState extends State<ExpensesView> {
                 text: "expenses_categories".tr(),
                 color: AppColor.blue900,
               ),
+              SizedBox(height: edge * 0.7),
+              ExpensesCategoriesChart(selectedTab: selectedTab),
+              SizedBox(height: edge),
               // TODO: here i need to show the expenses categories for the selected tab
               // each category will be a line chart with the following properties:
               // for today: show a horizontal line chart with the following properties:
