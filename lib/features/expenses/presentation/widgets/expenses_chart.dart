@@ -255,7 +255,8 @@ class ExpensesChart extends StatelessWidget {
             bottomTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
-                interval: daysInMonth > 20 ? 5 : 1, // still skip some if month is long
+                interval: daysInMonth > 20 ? 5 : 1,
+                // still skip some if month is long
                 getTitlesWidget: (double value, TitleMeta meta) {
                   final day = value.toInt() + 1;
                   // نخليها تظهر بنفس الشرط (كل 5 أيام + أول/آخر يوم)
@@ -289,7 +290,11 @@ class ExpensesChart extends StatelessWidget {
                     colors: const [Color(0xFF3EA981), Color(0xFF1A5249)],
                   ),
 
-                  width: daysInMonth > 20 ? 10 : daysInMonth > 10 ? 14 : 18,
+                  width: daysInMonth > 20
+                      ? 10
+                      : daysInMonth > 10
+                      ? 14
+                      : 18,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(2),
                     topRight: Radius.circular(2),
@@ -305,7 +310,6 @@ class ExpensesChart extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class ExpensesCategoriesChart extends StatelessWidget {
@@ -354,6 +358,13 @@ class ExpensesCategoriesChart extends StatelessWidget {
 
   Widget _buildCategoryBar(String category, double amount, double totalAmount) {
     final percentage = totalAmount > 0 ? (amount / totalAmount) * 100 : 0.0;
+    final double barWidth = (150 * percentage / 100).clamp(0, 150);
+    final amountOnlyText = amount.toStringAsFixed(0);
+    final amountWithPoundText = "${amount.toStringAsFixed(0)} جنيه";
+
+    // Check if the bar is wide enough to show "pound" text (approximately 60px needed)
+    final showPoundText = barWidth > 60;
+    final displayText = showPoundText ? amountWithPoundText : amountOnlyText;
 
     return Container(
       margin: EdgeInsets.only(bottom: edge * 0.3),
@@ -375,7 +386,7 @@ class ExpensesCategoriesChart extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Container(
-                      width: (150 * percentage / 100).clamp(0, 150),
+                      width: barWidth,
                       // fill based on %
                       height: 32,
                       decoration: BoxDecoration(
@@ -388,11 +399,21 @@ class ExpensesCategoriesChart extends StatelessWidget {
                       ),
                       alignment: Alignment.centerRight,
                       padding: EdgeInsets.symmetric(horizontal: edge * 0.4),
-                      child: SubTitleText(
-                        text: "${amount.toStringAsFixed(0)} جنيه",
-                        color: AppColor.blue700, // 🔹 text color only
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 4,
+                          vertical: 2,
+                        ),
+                        decoration: BoxDecoration(
+                          // color: Colors.white,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: SubTitleText(
+                          text: displayText,
+                          color: AppColor.whiteColor, // 🔹 text color only
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
