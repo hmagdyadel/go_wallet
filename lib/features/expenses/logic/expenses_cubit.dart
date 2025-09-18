@@ -207,6 +207,10 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
         case ExpensesType.lastMonth:
           _expenses = _hiveService.getThisMonthExpenses(userCode);
           break;
+
+        case ExpensesType.thisMonth:
+          _expenses = _hiveService.getThisMonthExpenses(userCode);
+          break;
       }
       emit(const ExpensesStates.loaded());
       if (_expenses.isEmpty) {
@@ -234,6 +238,8 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
         case ExpensesType.lastWeek:
           return _hiveService.getThisWeekTotal(userCode);
         case ExpensesType.lastMonth:
+          return _hiveService.getThisMonthTotal(userCode);
+        case ExpensesType.thisMonth:
           return _hiveService.getThisMonthTotal(userCode);
       }
     } catch (e) {

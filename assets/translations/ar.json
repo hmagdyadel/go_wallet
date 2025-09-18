@@ -82,6 +82,7 @@
   "today": "اليوم",
   "last_week": "اخر اسبوع",
   "last_month": "اخر شهر",
+  "this_month": "هذا الشهر",
   "expenses_details": "تفاصيل المصروفات",
   "add_expense": "اضافة مصروف",
   "add_new_expense": "اضافة مصروف جديد",
@@ -114,5 +115,6 @@
   "technology": "التكنولوجيا",
   "sports_fitness": "الرياضة واللياقة",
   "others": "أخرى",
+  "expenses_categories": "فئات المصروفات",
   "already_have_an_account": "لديك حساب بالفعل؟"
 }

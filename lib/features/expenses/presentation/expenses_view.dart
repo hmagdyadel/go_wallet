@@ -11,10 +11,9 @@ import '../../../core/widgets/notifications_avatar.dart';
 import '../../../core/widgets/subtitle_text.dart';
 import '../../../core/widgets/title_text.dart';
 import '../../../generated/assets.dart';
-import '../data/models/expenses_model.dart';
 import '../logic/expenses_cubit.dart';
-import '../logic/expenses_states.dart';
 import 'widgets/add_expenses_bottom_sheet.dart';
+import 'widgets/expenses_list.dart';
 
 class ExpensesView extends StatefulWidget {
   const ExpensesView({super.key});
@@ -47,90 +46,85 @@ class _ExpensesViewState extends State<ExpensesView> {
               dateTabs(),
               SizedBox(height: edge * 0.5),
               balanceRow(),
-              SizedBox(height: edge * 0.5),
-              TitleText(text: "expenses".tr(), color: AppColor.blue900),
-              SizedBox(height: edge * 0.4),
-              BlocBuilder<ExpensesCubit, ExpensesStates>(
-                buildWhen: (previous, current) => previous != current,
-                bloc: context.read<ExpensesCubit>()..loadExpenses(),
-                builder: (context, state) {
-                  return state.mapOrNull(
-                        loaded: (_) {
-                          final List<ExpenseModel> expenses = context
-                              .read<ExpensesCubit>()
-                              .expenses;
+              SizedBox(height: edge * 0.7),
+              Container(
+                decoration: BoxDecoration(
+                  color: AppColor.whiteColor,
+                  borderRadius: BorderRadius.circular(radius),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(
+                        vertical: edge * 0.4,
+                        horizontal: edge * 0.8,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColor.blue100,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(radius),
+                          topRight: Radius.circular(radius),
+                        ),
+                      ),
+                      child: TitleText(
+                        text: "expenses_details".tr(),
+                        color: AppColor.primaryColor,
+                        align: TextAlign.start,
+                      ),
+                    ),
+                    // TODO: here i need to use the fl_chart package to show the expenses chart related to the selected tab
+                    // the chart will be a line chart with the following properties:
+                    // for today: the chart will show the expenses of the current day
+                    // the x axis will be the categories of the day and the y axis will be the expenses of each category
 
-                          return ListView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: expenses.length,
-                            itemBuilder: (context, index) {
-                              final expense = expenses[index];
-                              return Container(
-                                margin: EdgeInsets.only(bottom: edge * 0.4),
-                                padding: EdgeInsets.symmetric(
-                                  vertical: edge * 0.6,
-                                  horizontal: edge * 0.8,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: AppColor.whiteColor,
-                                  borderRadius: BorderRadius.circular(
-                                    radiusInput,
-                                  ),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: SubTitleText(
-                                            text: expense.title,
-                                            color: AppColor.blue900,
-                                            fontSize: 18,
-                                            align: TextAlign.start,
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: SubTitleText(
-                                            text: expense.createdAt.toString(),
-                                            color: AppColor.blue200,
-                                            fontSize: 14,
-                                            align: TextAlign.end,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: SubTitleText(
-                                            text: expense.category,
-                                            color: AppColor.blue900,
-                                            fontSize: 18,
-                                            align: TextAlign.start,
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: TitleText(
-                                            text:
-                                                "${"egyptian_pound_".tr(args: [expense.amount.toString()])} -",
-                                            color: AppColor.mainRed,
-                                            fontSize: 20,
-                                            align: TextAlign.end,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      ) ??
-                      Container();
-                },
+                    // for last week: the chart will show the expenses of the last week
+                    // the x axis will be the days of the week and the y axis will be the expenses of each day
+                    // the chart will be a line chart with the following properties:
+                    // for last week: the chart will show the expenses of the last week
+                    // the x axis will be the days of the week and the y axis will be the expenses of each day
+
+                    // for last month: the chart will show the expenses of the last month
+                    // the x axis will be the days of the month and the y axis will be the expenses of each day
+                    // the chart will be a line chart with the following properties:
+                    // for last month: the chart will show the expenses of the last month
+                    // the x axis will be the days of the month and the y axis will be the expenses of each day
+
+                    // for this month: the chart will show the expenses of the current month
+                    // the x axis will be the dates of the month and the y axis will be the expenses of each day
+                    // the chart will be a line chart with the following properties:
+                    // for this month: the chart will show the expenses of the current month
+                    // the x axis will be the dates of the month and the y axis will be the expenses of each day
+                  ],
+                ),
               ),
+              SizedBox(height: edge * 1.5),
+              TitleText(
+                text: "expenses_categories".tr(),
+                color: AppColor.blue900,
+              ),
+              // TODO: here i need to show the expenses categories for the selected tab
+              // each category will be a line chart with the following properties:
+              // for today: show a horizontal line chart with the following properties:
+              // each category will be a line chart with the following properties:
+              // in the chart line will be the expenses of the category
+              // out the chart line will be the total expenses of this category and the percentage of this category in the total expenses of this day
+              // for last week: show a vertical line chart with the following properties:
+              // each category will be a line chart with the following properties:
+              // in the chart line will be the expenses of the category
+              // out the chart line will be the total expenses of this category and the percentage of this category in the total expenses of this week
+              // for last month: show a vertical line chart with the following properties:
+              // each category will be a line chart with the following properties:
+              // in the chart line will be the expenses of the category
+              // out the chart line will be the total expenses of this category and the percentage of this category in the total expenses of this month
+              // for this month: show a vertical line chart with the following properties:
+              // each category will be a line chart with the following properties:
+              // in the chart line will be the expenses of the category
+              // out the chart line will be the total expenses of this category and the percentage of this category in the total expenses of this month
+
+              //also i need to show the list of expenses of the selected tab
+              ExpensesList(),
             ],
           ),
         ),
@@ -164,6 +158,16 @@ class _ExpensesViewState extends State<ExpensesView> {
           () {
             setState(() {
               selectedTab = ExpensesType.lastMonth;
+            });
+          },
+        ),
+        SizedBox(width: edge * 0.3),
+        _buildTabButton(
+          "this_month".tr(),
+          selectedTab == ExpensesType.thisMonth,
+          () {
+            setState(() {
+              selectedTab = ExpensesType.thisMonth;
             });
           },
         ),

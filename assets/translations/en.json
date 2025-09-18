@@ -82,6 +82,7 @@
   "today": "Today",
   "last_week": "Last Week",
   "last_month": "Last Month",
+  "this_month": "This Month",
   "expenses_details": "Expenses Details",
   "add_expense": "Add Expense",
   "add_new_expense": "Add New Expense",
@@ -114,5 +115,6 @@
   "technology": "Technology",
   "sports_fitness": "Sports & Fitness",
   "others": "Others",
+  "expenses_categories": "Expenses Categories",
   "already_have_an_account": "Already have an account?"
 }
