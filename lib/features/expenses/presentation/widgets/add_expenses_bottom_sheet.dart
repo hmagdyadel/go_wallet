@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_wallet/core/helpers/extensions.dart';
 
 import '../../../../core/constants/dimensions_constants.dart';
@@ -69,9 +70,11 @@ class AddExpensesBottomSheet extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           success: (message) {
+            context.pop();
             context.showErrorToast(message);
           },
           error: (message) {
+            context.pop();
             context.showErrorToast(message);
           },
         );
@@ -139,7 +142,6 @@ class AddExpensesBottomSheet extends StatelessWidget {
   Widget _buildCategoryInput(ExpensesCubit cubit, BuildContext context) {
     return BlocBuilder<ExpensesCubit, ExpensesStates>(
       builder: (context, state) {
-        print(" length ${cubit.categorySuggestions.length}");
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -150,12 +152,8 @@ class AddExpensesBottomSheet extends StatelessWidget {
               onChanged: cubit.onCategoryChanged,
             ),
             if (cubit.categorySuggestions.isNotEmpty &&
-                cubit.expenseCategory.text.isEmpty) ...[
-              SizedBox(height: edge * 0.5),
-              _buildCategorySuggestions(cubit),
-            ] else if (cubit.categorySuggestions.isNotEmpty &&
                 cubit.expenseCategory.text.isNotEmpty) ...[
-              SizedBox(height: edge * 0.5),
+              SizedBox(height: edge * 0.2),
               _buildCategorySuggestions(cubit),
             ],
           ],
@@ -165,50 +163,88 @@ class AddExpensesBottomSheet extends StatelessWidget {
   }
 
   Widget _buildCategorySuggestions(ExpensesCubit cubit) {
+    return Row(
+      children: [
+        Container(
+          width: width.w / 2 - edge * 2,
+          decoration: BoxDecoration(
+            color: AppColor.whiteColor,
+          ),
+        ),
+        Container(
+          constraints: BoxConstraints(maxHeight: 150),
+          width: width.w / 2,
+          decoration: BoxDecoration(
+            color: AppColor.whiteColor,
+            borderRadius: BorderRadius.circular(radiusInput * 0.5),
+            border: Border.all(color: AppColor.blue200, width: 1),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.1),
+                blurRadius: 4,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(radiusInput * 0.5),
+            child: SingleChildScrollView(
+              child: Column(
+                children: cubit.categorySuggestions
+                    .asMap()
+                    .entries
+                    .map(
+                      (entry) {
+                    int index = entry.key;
+                    String category = entry.value;
+                    bool isLast = index == cubit.categorySuggestions.length - 1;
 
-    return Container(
-      constraints: BoxConstraints(maxHeight: 150),
-      child: SingleChildScrollView(
-        child: Column(
-          children: cubit.categorySuggestions
-              .map(
-                (category) => GestureDetector(
-                  onTap: () => cubit.selectCategory(category),
-                  child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: edge * 0.5,
-                      vertical: edge * 0.4,
-                    ),
-                    margin: EdgeInsets.only(bottom: edge * 0.2),
-                    decoration: BoxDecoration(
-                      color: AppColor.blue50,
-                      borderRadius: BorderRadius.circular(radiusInput * 0.5),
-                      border: Border.all(color: AppColor.blue200, width: 1),
-                    ),
-                    child: Row(
+                    return Column(
                       children: [
-                        Icon(
-                          Icons.category_outlined,
-                          color: AppColor.blue900,
-                          size: 16,
-                        ),
-                        SizedBox(width: edge * 0.3),
-                        Expanded(
-                          child: SubTitleText(
-                            text: category,
-                            fontSize: 14,
-                            color: AppColor.blue900,
+                        GestureDetector(
+                          onTap: () => cubit.selectCategory(category),
+                          child: Container(
+                            width: double.infinity,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: edge * 0.5,
+                              vertical: edge * 0.4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: SubTitleText(
+                                    text: category,
+                                    fontSize: 14,
+                                    color: AppColor.blue900,
+                                    align: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
+                        // Add separator between items (but not after the last item)
+                        if (!isLast)
+                          Divider(
+                            height: 1,
+                            thickness: 0.5,
+                            color: AppColor.blue100,
+                            indent: edge * 0.5,
+                            endIndent: edge * 0.5,
+                          ),
                       ],
-                    ),
-                  ),
-                ),
-              )
-              .toList(),
+                    );
+                  },
+                )
+                    .toList(),
+              ),
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }

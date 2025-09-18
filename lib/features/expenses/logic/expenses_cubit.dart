@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -38,8 +39,7 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
   Future<void> _initializeService() async {
     try {
       await _hiveService.init();
-      await loadExpenses(); // Load expenses after initialization
-      _loadCategorySuggestions(''); // Load all categories initially
+      await loadExpenses();
     } catch (e) {
       emit(ExpensesStates.error(message: 'Failed to initialize service: $e'));
     }
@@ -57,19 +57,67 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
   }
 
   void onCategoryChanged(String value) {
-    _loadCategorySuggestions(value);
+    emit(const ExpensesStates.loadingCategory());
+    if (value.isEmpty) {
+      _categorySuggestions = [];
+    } else {
+      _loadCategorySuggestions(value);
+    }
     emit(const ExpensesStates.loaded());
   }
 
   void _loadCategorySuggestions(String input) {
     try {
-      _categorySuggestions = _hiveService.getCategorySuggestions(input);
+      List<String> suggestions = _hiveService.getCategorySuggestions(input);
+
+      // Remove duplicates by converting to Set and back to List
+      suggestions = suggestions.toSet().toList();
+
+      // If no suggestions found but user is typing, provide default categories
+      if (suggestions.isEmpty && input.isNotEmpty) {
+        suggestions = _getDefaultCategories()
+            .where((category) => category.toLowerCase().contains(input.toLowerCase()))
+            .toList();
+      }
+
+      _categorySuggestions = suggestions;
     } catch (e) {
-      _categorySuggestions = [];
+      // If there's an error and user is typing, provide filtered default categories
+      if (input.isNotEmpty) {
+        _categorySuggestions = _getDefaultCategories()
+            .where((category) => category.toLowerCase().contains(input.toLowerCase()))
+            .toList();
+      } else {
+        _categorySuggestions = [];
+      }
     }
   }
 
+  List<String> _getDefaultCategories() {
+    return [
+      "food_dining".tr(),
+      "transportation".tr(),
+      "shopping".tr(),
+      "entertainment".tr(),
+      "bills_utilities".tr(),
+      "healthcare".tr(),
+      "education".tr(),
+      "travel".tr(),
+      "personal_care".tr(),
+      "groceries".tr(),
+      "gas_fuel".tr(),
+      "home_garden".tr(),
+      "clothing".tr(),
+      "technology".tr(),
+      "sports_fitness".tr(),
+      "others".tr(),
+    ];
+  }
+
+
+
   void selectCategory(String category) {
+    emit(const ExpensesStates.loadingCategory());
     expenseCategory.text = category;
     _categorySuggestions = [];
     emit(const ExpensesStates.loaded());
@@ -236,3 +284,5 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
     return super.close();
   }
 }
+
+//dropdown_flutter

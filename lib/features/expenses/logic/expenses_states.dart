@@ -7,6 +7,7 @@ class ExpensesStates<T> with _$ExpensesStates<T> {
   const factory ExpensesStates.initial() = _Initial;
 
   const factory ExpensesStates.loading() = Loading;
+  const factory ExpensesStates.loadingCategory() = LoadingCategory;
 
   const factory ExpensesStates.loaded() = Loaded;
   const factory ExpensesStates.empty() = Empty;

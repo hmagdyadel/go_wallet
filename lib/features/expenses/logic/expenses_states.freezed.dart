@@ -20,6 +20,7 @@ mixin _$ExpensesStates<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingCategory,
     required TResult Function() loaded,
     required TResult Function() empty,
     required TResult Function(T data) success,
@@ -30,6 +31,7 @@ mixin _$ExpensesStates<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingCategory,
     TResult? Function()? loaded,
     TResult? Function()? empty,
     TResult? Function(T data)? success,
@@ -40,6 +42,7 @@ mixin _$ExpensesStates<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingCategory,
     TResult Function()? loaded,
     TResult Function()? empty,
     TResult Function(T data)? success,
@@ -51,6 +54,7 @@ mixin _$ExpensesStates<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(Loading<T> value) loading,
+    required TResult Function(LoadingCategory<T> value) loadingCategory,
     required TResult Function(Loaded<T> value) loaded,
     required TResult Function(Empty<T> value) empty,
     required TResult Function(Success<T> value) success,
@@ -61,6 +65,7 @@ mixin _$ExpensesStates<T> {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(Loading<T> value)? loading,
+    TResult? Function(LoadingCategory<T> value)? loadingCategory,
     TResult? Function(Loaded<T> value)? loaded,
     TResult? Function(Empty<T> value)? empty,
     TResult? Function(Success<T> value)? success,
@@ -71,6 +76,7 @@ mixin _$ExpensesStates<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
     TResult Function(Loading<T> value)? loading,
+    TResult Function(LoadingCategory<T> value)? loadingCategory,
     TResult Function(Loaded<T> value)? loaded,
     TResult Function(Empty<T> value)? empty,
     TResult Function(Success<T> value)? success,
@@ -144,6 +150,7 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingCategory,
     required TResult Function() loaded,
     required TResult Function() empty,
     required TResult Function(T data) success,
@@ -157,6 +164,7 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingCategory,
     TResult? Function()? loaded,
     TResult? Function()? empty,
     TResult? Function(T data)? success,
@@ -170,6 +178,7 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingCategory,
     TResult Function()? loaded,
     TResult Function()? empty,
     TResult Function(T data)? success,
@@ -187,6 +196,7 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(Loading<T> value) loading,
+    required TResult Function(LoadingCategory<T> value) loadingCategory,
     required TResult Function(Loaded<T> value) loaded,
     required TResult Function(Empty<T> value) empty,
     required TResult Function(Success<T> value) success,
@@ -200,6 +210,7 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(Loading<T> value)? loading,
+    TResult? Function(LoadingCategory<T> value)? loadingCategory,
     TResult? Function(Loaded<T> value)? loaded,
     TResult? Function(Empty<T> value)? empty,
     TResult? Function(Success<T> value)? success,
@@ -213,6 +224,7 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
     TResult Function(Loading<T> value)? loading,
+    TResult Function(LoadingCategory<T> value)? loadingCategory,
     TResult Function(Loaded<T> value)? loaded,
     TResult Function(Empty<T> value)? empty,
     TResult Function(Success<T> value)? success,
@@ -273,6 +285,7 @@ class _$LoadingImpl<T> implements Loading<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingCategory,
     required TResult Function() loaded,
     required TResult Function() empty,
     required TResult Function(T data) success,
@@ -286,6 +299,7 @@ class _$LoadingImpl<T> implements Loading<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingCategory,
     TResult? Function()? loaded,
     TResult? Function()? empty,
     TResult? Function(T data)? success,
@@ -299,6 +313,7 @@ class _$LoadingImpl<T> implements Loading<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingCategory,
     TResult Function()? loaded,
     TResult Function()? empty,
     TResult Function(T data)? success,
@@ -316,6 +331,7 @@ class _$LoadingImpl<T> implements Loading<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(Loading<T> value) loading,
+    required TResult Function(LoadingCategory<T> value) loadingCategory,
     required TResult Function(Loaded<T> value) loaded,
     required TResult Function(Empty<T> value) empty,
     required TResult Function(Success<T> value) success,
@@ -329,6 +345,7 @@ class _$LoadingImpl<T> implements Loading<T> {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(Loading<T> value)? loading,
+    TResult? Function(LoadingCategory<T> value)? loadingCategory,
     TResult? Function(Loaded<T> value)? loaded,
     TResult? Function(Empty<T> value)? empty,
     TResult? Function(Success<T> value)? success,
@@ -342,6 +359,7 @@ class _$LoadingImpl<T> implements Loading<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
     TResult Function(Loading<T> value)? loading,
+    TResult Function(LoadingCategory<T> value)? loadingCategory,
     TResult Function(Loaded<T> value)? loaded,
     TResult Function(Empty<T> value)? empty,
     TResult Function(Success<T> value)? success,
@@ -357,6 +375,141 @@ class _$LoadingImpl<T> implements Loading<T> {
 
 abstract class Loading<T> implements ExpensesStates<T> {
   const factory Loading() = _$LoadingImpl<T>;
+}
+
+/// @nodoc
+abstract class _$$LoadingCategoryImplCopyWith<T, $Res> {
+  factory _$$LoadingCategoryImplCopyWith(_$LoadingCategoryImpl<T> value,
+          $Res Function(_$LoadingCategoryImpl<T>) then) =
+      __$$LoadingCategoryImplCopyWithImpl<T, $Res>;
+}
+
+/// @nodoc
+class __$$LoadingCategoryImplCopyWithImpl<T, $Res>
+    extends _$ExpensesStatesCopyWithImpl<T, $Res, _$LoadingCategoryImpl<T>>
+    implements _$$LoadingCategoryImplCopyWith<T, $Res> {
+  __$$LoadingCategoryImplCopyWithImpl(_$LoadingCategoryImpl<T> _value,
+      $Res Function(_$LoadingCategoryImpl<T>) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ExpensesStates
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$LoadingCategoryImpl<T> implements LoadingCategory<T> {
+  const _$LoadingCategoryImpl();
+
+  @override
+  String toString() {
+    return 'ExpensesStates<$T>.loadingCategory()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadingCategoryImpl<T>);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() loadingCategory,
+    required TResult Function() loaded,
+    required TResult Function() empty,
+    required TResult Function(T data) success,
+    required TResult Function(String message) error,
+  }) {
+    return loadingCategory();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? loadingCategory,
+    TResult? Function()? loaded,
+    TResult? Function()? empty,
+    TResult? Function(T data)? success,
+    TResult? Function(String message)? error,
+  }) {
+    return loadingCategory?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loadingCategory,
+    TResult Function()? loaded,
+    TResult Function()? empty,
+    TResult Function(T data)? success,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (loadingCategory != null) {
+      return loadingCategory();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial<T> value) initial,
+    required TResult Function(Loading<T> value) loading,
+    required TResult Function(LoadingCategory<T> value) loadingCategory,
+    required TResult Function(Loaded<T> value) loaded,
+    required TResult Function(Empty<T> value) empty,
+    required TResult Function(Success<T> value) success,
+    required TResult Function(Error<T> value) error,
+  }) {
+    return loadingCategory(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial<T> value)? initial,
+    TResult? Function(Loading<T> value)? loading,
+    TResult? Function(LoadingCategory<T> value)? loadingCategory,
+    TResult? Function(Loaded<T> value)? loaded,
+    TResult? Function(Empty<T> value)? empty,
+    TResult? Function(Success<T> value)? success,
+    TResult? Function(Error<T> value)? error,
+  }) {
+    return loadingCategory?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial<T> value)? initial,
+    TResult Function(Loading<T> value)? loading,
+    TResult Function(LoadingCategory<T> value)? loadingCategory,
+    TResult Function(Loaded<T> value)? loaded,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Success<T> value)? success,
+    TResult Function(Error<T> value)? error,
+    required TResult orElse(),
+  }) {
+    if (loadingCategory != null) {
+      return loadingCategory(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadingCategory<T> implements ExpensesStates<T> {
+  const factory LoadingCategory() = _$LoadingCategoryImpl<T>;
 }
 
 /// @nodoc
@@ -402,6 +555,7 @@ class _$LoadedImpl<T> implements Loaded<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingCategory,
     required TResult Function() loaded,
     required TResult Function() empty,
     required TResult Function(T data) success,
@@ -415,6 +569,7 @@ class _$LoadedImpl<T> implements Loaded<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingCategory,
     TResult? Function()? loaded,
     TResult? Function()? empty,
     TResult? Function(T data)? success,
@@ -428,6 +583,7 @@ class _$LoadedImpl<T> implements Loaded<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingCategory,
     TResult Function()? loaded,
     TResult Function()? empty,
     TResult Function(T data)? success,
@@ -445,6 +601,7 @@ class _$LoadedImpl<T> implements Loaded<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(Loading<T> value) loading,
+    required TResult Function(LoadingCategory<T> value) loadingCategory,
     required TResult Function(Loaded<T> value) loaded,
     required TResult Function(Empty<T> value) empty,
     required TResult Function(Success<T> value) success,
@@ -458,6 +615,7 @@ class _$LoadedImpl<T> implements Loaded<T> {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(Loading<T> value)? loading,
+    TResult? Function(LoadingCategory<T> value)? loadingCategory,
     TResult? Function(Loaded<T> value)? loaded,
     TResult? Function(Empty<T> value)? empty,
     TResult? Function(Success<T> value)? success,
@@ -471,6 +629,7 @@ class _$LoadedImpl<T> implements Loaded<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
     TResult Function(Loading<T> value)? loading,
+    TResult Function(LoadingCategory<T> value)? loadingCategory,
     TResult Function(Loaded<T> value)? loaded,
     TResult Function(Empty<T> value)? empty,
     TResult Function(Success<T> value)? success,
@@ -531,6 +690,7 @@ class _$EmptyImpl<T> implements Empty<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingCategory,
     required TResult Function() loaded,
     required TResult Function() empty,
     required TResult Function(T data) success,
@@ -544,6 +704,7 @@ class _$EmptyImpl<T> implements Empty<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingCategory,
     TResult? Function()? loaded,
     TResult? Function()? empty,
     TResult? Function(T data)? success,
@@ -557,6 +718,7 @@ class _$EmptyImpl<T> implements Empty<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingCategory,
     TResult Function()? loaded,
     TResult Function()? empty,
     TResult Function(T data)? success,
@@ -574,6 +736,7 @@ class _$EmptyImpl<T> implements Empty<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(Loading<T> value) loading,
+    required TResult Function(LoadingCategory<T> value) loadingCategory,
     required TResult Function(Loaded<T> value) loaded,
     required TResult Function(Empty<T> value) empty,
     required TResult Function(Success<T> value) success,
@@ -587,6 +750,7 @@ class _$EmptyImpl<T> implements Empty<T> {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(Loading<T> value)? loading,
+    TResult? Function(LoadingCategory<T> value)? loadingCategory,
     TResult? Function(Loaded<T> value)? loaded,
     TResult? Function(Empty<T> value)? empty,
     TResult? Function(Success<T> value)? success,
@@ -600,6 +764,7 @@ class _$EmptyImpl<T> implements Empty<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
     TResult Function(Loading<T> value)? loading,
+    TResult Function(LoadingCategory<T> value)? loadingCategory,
     TResult Function(Loaded<T> value)? loaded,
     TResult Function(Empty<T> value)? empty,
     TResult Function(Success<T> value)? success,
@@ -688,6 +853,7 @@ class _$SuccessImpl<T> implements Success<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingCategory,
     required TResult Function() loaded,
     required TResult Function() empty,
     required TResult Function(T data) success,
@@ -701,6 +867,7 @@ class _$SuccessImpl<T> implements Success<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingCategory,
     TResult? Function()? loaded,
     TResult? Function()? empty,
     TResult? Function(T data)? success,
@@ -714,6 +881,7 @@ class _$SuccessImpl<T> implements Success<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingCategory,
     TResult Function()? loaded,
     TResult Function()? empty,
     TResult Function(T data)? success,
@@ -731,6 +899,7 @@ class _$SuccessImpl<T> implements Success<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(Loading<T> value) loading,
+    required TResult Function(LoadingCategory<T> value) loadingCategory,
     required TResult Function(Loaded<T> value) loaded,
     required TResult Function(Empty<T> value) empty,
     required TResult Function(Success<T> value) success,
@@ -744,6 +913,7 @@ class _$SuccessImpl<T> implements Success<T> {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(Loading<T> value)? loading,
+    TResult? Function(LoadingCategory<T> value)? loadingCategory,
     TResult? Function(Loaded<T> value)? loaded,
     TResult? Function(Empty<T> value)? empty,
     TResult? Function(Success<T> value)? success,
@@ -757,6 +927,7 @@ class _$SuccessImpl<T> implements Success<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
     TResult Function(Loading<T> value)? loading,
+    TResult Function(LoadingCategory<T> value)? loadingCategory,
     TResult Function(Loaded<T> value)? loaded,
     TResult Function(Empty<T> value)? empty,
     TResult Function(Success<T> value)? success,
@@ -852,6 +1023,7 @@ class _$ErrorImpl<T> implements Error<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingCategory,
     required TResult Function() loaded,
     required TResult Function() empty,
     required TResult Function(T data) success,
@@ -865,6 +1037,7 @@ class _$ErrorImpl<T> implements Error<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingCategory,
     TResult? Function()? loaded,
     TResult? Function()? empty,
     TResult? Function(T data)? success,
@@ -878,6 +1051,7 @@ class _$ErrorImpl<T> implements Error<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingCategory,
     TResult Function()? loaded,
     TResult Function()? empty,
     TResult Function(T data)? success,
@@ -895,6 +1069,7 @@ class _$ErrorImpl<T> implements Error<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(Loading<T> value) loading,
+    required TResult Function(LoadingCategory<T> value) loadingCategory,
     required TResult Function(Loaded<T> value) loaded,
     required TResult Function(Empty<T> value) empty,
     required TResult Function(Success<T> value) success,
@@ -908,6 +1083,7 @@ class _$ErrorImpl<T> implements Error<T> {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(Loading<T> value)? loading,
+    TResult? Function(LoadingCategory<T> value)? loadingCategory,
     TResult? Function(Loaded<T> value)? loaded,
     TResult? Function(Empty<T> value)? empty,
     TResult? Function(Success<T> value)? success,
@@ -921,6 +1097,7 @@ class _$ErrorImpl<T> implements Error<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
     TResult Function(Loading<T> value)? loading,
+    TResult Function(LoadingCategory<T> value)? loadingCategory,
     TResult Function(Loaded<T> value)? loaded,
     TResult Function(Empty<T> value)? empty,
     TResult Function(Success<T> value)? success,
