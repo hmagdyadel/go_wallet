@@ -51,17 +51,41 @@ class ExpenseModel extends HiveObject {
     return expenseDate == today;
   }
 
-  // Helper method to check if expense is from this week
-  bool get isThisWeek {
+  // Helper method to check if expense is from last week (past 7 days)
+  bool get isLastWeek {
     final now = DateTime.now();
-    final startOfWeek = now.subtract(Duration(days: now.weekday - 1));
-    final startOfWeekDate = DateTime(
-      startOfWeek.year,
-      startOfWeek.month,
-      startOfWeek.day,
+    final sevenDaysAgo = now.subtract(const Duration(days: 7));
+    final sevenDaysAgoDate = DateTime(
+      sevenDaysAgo.year,
+      sevenDaysAgo.month,
+      sevenDaysAgo.day,
     );
-    return createdAt.isAfter(
-      startOfWeekDate.subtract(const Duration(seconds: 1)),
+    final expenseDate = DateTime(
+      createdAt.year,
+      createdAt.month,
+      createdAt.day,
+    );
+    return expenseDate.isAfter(sevenDaysAgoDate) && expenseDate.isBefore(
+      DateTime(now.year, now.month, now.day).add(const Duration(days: 1)),
+    );
+  }
+
+  // Helper method to check if expense is from last month (past 30 days)
+  bool get isLastMonth {
+    final now = DateTime.now();
+    final thirtyDaysAgo = now.subtract(const Duration(days: 30));
+    final thirtyDaysAgoDate = DateTime(
+      thirtyDaysAgo.year,
+      thirtyDaysAgo.month,
+      thirtyDaysAgo.day,
+    );
+    final expenseDate = DateTime(
+      createdAt.year,
+      createdAt.month,
+      createdAt.day,
+    );
+    return expenseDate.isAfter(thirtyDaysAgoDate) && expenseDate.isBefore(
+      DateTime(now.year, now.month, now.day).add(const Duration(days: 1)),
     );
   }
 

@@ -76,7 +76,10 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
       // If no suggestions found but user is typing, provide default categories
       if (suggestions.isEmpty && input.isNotEmpty) {
         suggestions = _getDefaultCategories()
-            .where((category) => category.toLowerCase().contains(input.toLowerCase()))
+            .where(
+              (category) =>
+                  category.toLowerCase().contains(input.toLowerCase()),
+            )
             .toList();
       }
 
@@ -85,7 +88,10 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
       // If there's an error and user is typing, provide filtered default categories
       if (input.isNotEmpty) {
         _categorySuggestions = _getDefaultCategories()
-            .where((category) => category.toLowerCase().contains(input.toLowerCase()))
+            .where(
+              (category) =>
+                  category.toLowerCase().contains(input.toLowerCase()),
+            )
             .toList();
       } else {
         _categorySuggestions = [];
@@ -113,8 +119,6 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
       "others".tr(),
     ];
   }
-
-
 
   void selectCategory(String category) {
     emit(const ExpensesStates.loadingCategory());
@@ -202,10 +206,10 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
           _expenses = _hiveService.getTodayExpenses(userCode);
           break;
         case ExpensesType.lastWeek:
-          _expenses = _hiveService.getThisWeekExpenses(userCode);
+          _expenses = _hiveService.getLastWeekExpenses(userCode);
           break;
         case ExpensesType.lastMonth:
-          _expenses = _hiveService.getThisMonthExpenses(userCode);
+          _expenses = _hiveService.getLastMonthExpenses(userCode);
           break;
 
         case ExpensesType.thisMonth:
@@ -224,10 +228,14 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
   // Change time filter
   Future<void> changeTimeFilter(ExpensesType filter) async {
     if (_currentFilter != filter) {
+      emit(const ExpensesStates.loading());
       _currentFilter = filter;
       await loadExpenses();
     }
   }
+
+  // Add this getter to ExpensesCubit class
+  ExpensesType get selectedTab => _currentFilter;
 
   // Get total amount for current filter
   double getCurrentTotal() {
@@ -236,9 +244,9 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
         case ExpensesType.today:
           return _hiveService.getTodayTotal(userCode);
         case ExpensesType.lastWeek:
-          return _hiveService.getThisWeekTotal(userCode);
+          return _hiveService.getLastWeekTotal(userCode);
         case ExpensesType.lastMonth:
-          return _hiveService.getThisMonthTotal(userCode);
+          return _hiveService.getLastMonthTotal(userCode);
         case ExpensesType.thisMonth:
           return _hiveService.getThisMonthTotal(userCode);
       }

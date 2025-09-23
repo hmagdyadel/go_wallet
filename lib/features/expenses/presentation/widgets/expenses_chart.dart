@@ -68,7 +68,18 @@ class ExpensesChart extends StatelessWidget {
           alignment: BarChartAlignment.spaceAround,
           maxY: maxValue * 1.3,
           // keep headroom
-          barTouchData: BarTouchData(enabled: false),
+          barTouchData: BarTouchData(
+            enabled: true,
+            touchTooltipData: BarTouchTooltipData(
+              getTooltipColor: (group) => Colors.transparent,
+              getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                return BarTooltipItem(
+                  rod.toY.toString(),
+                  TextStyle(color: AppColor.blue600),
+                );
+              },
+            ),
+          ),
           titlesData: FlTitlesData(
             show: true,
             rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
@@ -117,7 +128,7 @@ class ExpensesChart extends StatelessWidget {
                         end: Alignment.bottomCenter,
                         colors: const [Color(0xFF3EA981), Color(0xFF1A5249)],
                       ),
-                      width: 15,
+                      width: 12,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(4),
                         topRight: Radius.circular(4),
@@ -137,7 +148,7 @@ class ExpensesChart extends StatelessWidget {
   }
 
   Widget _buildWeekChart(List<ExpenseModel> expenses) {
-    final weekDays = ['Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr'];
+    final weekDays = ['Sat', 'Sun', 'Mon', 'Tue', 'Wen', 'Thu', 'Fri'];
     final dailyTotals = <int, double>{};
 
     // Initialize all days with 0
@@ -162,7 +173,18 @@ class ExpensesChart extends StatelessWidget {
         BarChartData(
           alignment: BarChartAlignment.spaceAround,
           maxY: maxValue * 1.3,
-          barTouchData: BarTouchData(enabled: false),
+          barTouchData: BarTouchData(
+            enabled: true,
+            touchTooltipData: BarTouchTooltipData(
+              getTooltipColor: (group) => Colors.transparent,
+              getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                return BarTooltipItem(
+                  rod.toY.toString(),
+                  TextStyle(color: AppColor.blue600),
+                );
+              },
+            ),
+          ),
           titlesData: FlTitlesData(
             show: true,
             rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
@@ -196,12 +218,13 @@ class ExpensesChart extends StatelessWidget {
               barRods: [
                 BarChartRodData(
                   toY: e.value,
+
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: const [Color(0xFF3EA981), Color(0xFF1A5249)],
                   ),
-                  width: 18,
+                  width: 12,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(4),
                     topRight: Radius.circular(4),
@@ -220,20 +243,18 @@ class ExpensesChart extends StatelessWidget {
   }
 
   Widget _buildMonthChart(List<ExpenseModel> expenses) {
-    final now = DateTime.now();
-    final daysInMonth = DateTime(now.year, now.month + 1, 0).day;
     final dailyTotals = <int, double>{};
+    final availableDays = <int>{};
 
-    // initialize
-    for (int i = 1; i <= daysInMonth; i++) {
-      dailyTotals[i] = 0;
-    }
-
-    // collect totals
+    // Collect totals and track which days have expenses
     for (final expense in expenses) {
       final day = expense.createdAt.day;
       dailyTotals[day] = (dailyTotals[day] ?? 0) + expense.amount;
+      availableDays.add(day);
     }
+
+    // Sort days for consistent ordering
+    final sortedDays = availableDays.toList()..sort();
 
     final maxValue = dailyTotals.values.isEmpty
         ? 100.0
@@ -246,7 +267,18 @@ class ExpensesChart extends StatelessWidget {
         BarChartData(
           alignment: BarChartAlignment.spaceAround,
           maxY: maxValue * 1.3,
-          barTouchData: BarTouchData(enabled: false),
+          barTouchData: BarTouchData(
+            enabled: true,
+            touchTooltipData: BarTouchTooltipData(
+              getTooltipColor: (group) => Colors.transparent,
+              getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                return BarTooltipItem(
+                  rod.toY.toString(),
+                  TextStyle(color: AppColor.blue600),
+                );
+              },
+            ),
+          ),
           titlesData: FlTitlesData(
             show: true,
             rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
@@ -255,19 +287,19 @@ class ExpensesChart extends StatelessWidget {
             bottomTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
-                interval: daysInMonth > 20 ? 5 : 1,
-                // still skip some if month is long
                 getTitlesWidget: (double value, TitleMeta meta) {
-                  final day = value.toInt() + 1;
-                  // نخليها تظهر بنفس الشرط (كل 5 أيام + أول/آخر يوم)
-                  if (day == 1 || day % 5 == 0 || day == daysInMonth) {
-                    final label = "$day/${now.month}";
+                  final index = value.toInt();
+                  if (index >= 0 && index < sortedDays.length) {
+                    final day = sortedDays[index];
+                    final month = expenses.isNotEmpty
+                        ? expenses.first.createdAt.month
+                        : DateTime.now().month;
                     return Padding(
                       padding: EdgeInsets.only(top: 8),
                       child: SubTitleText(
-                        text: label,
+                        text: "$day/$month",
                         color: AppColor.blue400,
-                        fontSize: 11,
+                        fontSize: 12,
                       ),
                     );
                   }
@@ -278,23 +310,26 @@ class ExpensesChart extends StatelessWidget {
             ),
           ),
           borderData: FlBorderData(show: false),
-          barGroups: dailyTotals.entries.where((e) => e.value > 0).map((e) {
+          barGroups: sortedDays.asMap().entries.map((entry) {
+            final index = entry.key;
+            final day = entry.value;
+            final amount = dailyTotals[day] ?? 0.0;
+
             return BarChartGroupData(
-              x: e.key - 1,
+              x: index,
               barRods: [
                 BarChartRodData(
-                  toY: e.value,
+                  toY: amount,
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: const [Color(0xFF3EA981), Color(0xFF1A5249)],
                   ),
-
-                  width: daysInMonth > 20
-                      ? 10
-                      : daysInMonth > 10
-                      ? 14
-                      : 18,
+                  width: sortedDays.length > 20
+                      ? 8
+                      : sortedDays.length > 10
+                      ? 12
+                      : 16,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(2),
                     topRight: Radius.circular(2),
@@ -307,138 +342,6 @@ class ExpensesChart extends StatelessWidget {
           gridData: FlGridData(show: false),
         ),
         duration: Duration(milliseconds: 300),
-      ),
-    );
-  }
-}
-
-class ExpensesCategoriesChart extends StatelessWidget {
-  final ExpensesType selectedTab;
-
-  const ExpensesCategoriesChart({super.key, required this.selectedTab});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ExpensesCubit, dynamic>(
-      builder: (context, state) {
-        final expenses = context.read<ExpensesCubit>().expenses;
-        final totalAmount = context.read<ExpensesCubit>().getCurrentTotal();
-
-        if (expenses.isEmpty) {
-          return Container(
-            padding: EdgeInsets.all(edge),
-            child: SubTitleText(
-              text: "no_categories_data".tr(),
-              color: AppColor.blue200,
-            ),
-          );
-        }
-
-        // Group expenses by category
-        final categoryTotals = <String, double>{};
-        for (final expense in expenses) {
-          categoryTotals[expense.category] =
-              (categoryTotals[expense.category] ?? 0) + expense.amount;
-        }
-
-        final sortedCategories = categoryTotals.entries.toList()
-          ..sort((a, b) => b.value.compareTo(a.value));
-
-        return Column(
-          children: sortedCategories
-              .map(
-                (entry) =>
-                    _buildCategoryBar(entry.key, entry.value, totalAmount),
-              )
-              .toList(),
-        );
-      },
-    );
-  }
-
-  Widget _buildCategoryBar(String category, double amount, double totalAmount) {
-    final percentage = totalAmount > 0 ? (amount / totalAmount) * 100 : 0.0;
-    final double barWidth = (150 * percentage / 100).clamp(0, 150);
-    final amountOnlyText = amount.toStringAsFixed(0);
-    final amountWithPoundText = "${amount.toStringAsFixed(0)} جنيه";
-
-    // Check if the bar is wide enough to show "pound" text (approximately 60px needed)
-    final showPoundText = barWidth > 60;
-    final displayText = showPoundText ? amountWithPoundText : amountOnlyText;
-
-    return Container(
-      margin: EdgeInsets.only(bottom: edge * 0.3),
-      child: Row(
-        children: [
-          // Category name and percentage
-          Expanded(
-            flex: 2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: 150, // 🔹 total available width for the bar
-                  height: 20,
-                  decoration: BoxDecoration(
-                    //color: Colors.grey.shade200, // background track
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      width: barWidth,
-                      // fill based on %
-                      height: 32,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: const [Color(0xFF3EA981), Color(0xFF1A5249)],
-                        ),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      alignment: Alignment.centerRight,
-                      padding: EdgeInsets.symmetric(horizontal: edge * 0.4),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 4,
-                          vertical: 2,
-                        ),
-                        decoration: BoxDecoration(
-                          // color: Colors.white,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: SubTitleText(
-                          text: displayText,
-                          color: AppColor.whiteColor, // 🔹 text color only
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: edge * 0.4),
-                SubTitleText(
-                  text: "(${percentage.toStringAsFixed(0)}%)",
-                  color: AppColor.blue200,
-                  fontSize: 12,
-                ),
-                SizedBox(width: edge * 0.4),
-                Expanded(
-                  child: SubTitleText(
-                    text: category,
-                    color: AppColor.blue900,
-                    fontSize: 14,
-                    align: TextAlign.start,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // Fixed width bar
-        ],
       ),
     );
   }

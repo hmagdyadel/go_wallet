@@ -113,15 +113,27 @@ class ExpensesHiveService {
     }
   }
 
-  // Get this week's expenses for a user
-  List<ExpenseModel> getThisWeekExpenses(String userCode) {
+// Get last week's expenses (past 7 days) for a user
+  List<ExpenseModel> getLastWeekExpenses(String userCode) {
     try {
       return getExpensesByUserCode(
         userCode,
-      ).where((expense) => expense.isThisWeek).toList()
+      ).where((expense) => expense.isLastWeek).toList()
         ..sort((a, b) => b.createdAt.compareTo(a.createdAt)); // Latest first
     } catch (e) {
-      throw Exception('Failed to get week expenses: $e');
+      throw Exception('Failed to get last week expenses: $e');
+    }
+  }
+
+  // Get last month's expenses (past 30 days) for a user
+  List<ExpenseModel> getLastMonthExpenses(String userCode) {
+    try {
+      return getExpensesByUserCode(
+        userCode,
+      ).where((expense) => expense.isLastMonth).toList()
+        ..sort((a, b) => b.createdAt.compareTo(a.createdAt)); // Latest first
+    } catch (e) {
+      throw Exception('Failed to get last month expenses: $e');
     }
   }
 
@@ -207,14 +219,25 @@ class ExpensesHiveService {
     }
   }
 
-  // Get total amount for this week
-  double getThisWeekTotal(String userCode) {
+// Get total amount for last week (past 7 days)
+  double getLastWeekTotal(String userCode) {
     try {
-      return getThisWeekExpenses(
+      return getLastWeekExpenses(
         userCode,
       ).fold(0.0, (total, expense) => total + expense.amount);
     } catch (e) {
-      throw Exception('Failed to get week total: $e');
+      throw Exception('Failed to get last week total: $e');
+    }
+  }
+
+  // Get total amount for last month (past 30 days)
+  double getLastMonthTotal(String userCode) {
+    try {
+      return getLastMonthExpenses(
+        userCode,
+      ).fold(0.0, (total, expense) => total + expense.amount);
+    } catch (e) {
+      throw Exception('Failed to get last month total: $e');
     }
   }
 
