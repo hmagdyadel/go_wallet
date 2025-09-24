@@ -8,6 +8,8 @@ class HomeCubit extends Cubit<HomeStates> {
   HomeCubit() : super(const HomeStates.initial());
 
   final TextEditingController expenseAmount = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+
 
   double _currentAmount = 0.0;
   bool _isManualInput = false;
@@ -16,7 +18,13 @@ class HomeCubit extends Cubit<HomeStates> {
   double get currentAmount => _currentAmount;
   bool get isManualInput => _isManualInput;
   bool get isUsername => _isUsername;
+  String get fullUsername => '${usernameController.text}@gowallet';
 
+
+  void setUsername(String value) {
+    //usernameController.text = value;
+    emit(const HomeStates.loaded());
+  }
   // Transfer method selection
   void setTransferMethod(bool isUsername) {
     emit(const HomeStates.toggleMethod());

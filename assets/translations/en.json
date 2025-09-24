@@ -137,5 +137,6 @@
   "transfer_reason_hint": "Enter the reason for transfer (if any)",
   "wallet_amount_after_transfer": "Wallet Balance After Transfer",
   "transfer_now": "Proceed with Transfer",
+  "copied": "Copied!",
 "already_have_an_account": "Already have an account?"
 }

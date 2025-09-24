@@ -137,6 +137,7 @@
   "transfer_reason_hint": "ادخل سبب التحويل",
   "wallet_amount_after_transfer": "قيمة المحفظة بعد التحويل",
   "transfer_now": "تحويل الأن",
+"copied": "تم النسخ!",
 
   "already_have_an_account": "لديك حساب بالفعل؟"
 }

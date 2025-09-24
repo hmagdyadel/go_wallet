@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../../../core/constants/dimensions_constants.dart';
 import '../../../../core/constants/strings.dart';
@@ -174,11 +177,20 @@ class TransferBottomSheet extends StatelessWidget {
             suffixText: suffixText,
             title: title,
             hint: hint,
+            controller: isUsername ? GetIt.I<HomeCubit>().usernameController : null,
             keyboardType: keyboardType,
+            inputFormatters: isUsername ? [UsernameFormatter()] : [],
+            onChanged: (value) {
+              if (isUsername) {
+                GetIt.I<HomeCubit>().setUsername(value);
+              }
+            },
           ),
         ),
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            log("username: ${GetIt.I<HomeCubit>().fullUsername}");
+          },
           child: Container(
             width: 50,
             height: 50,
@@ -254,3 +266,28 @@ class BalanceValues extends StatelessWidget {
     );
   }
 }
+
+
+class UsernameFormatter extends TextInputFormatter {
+  final String suffix = '@gowallet';
+
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    String text = newValue.text;
+
+    // Remove @gowallet if pasted
+    if (text.endsWith(suffix)) {
+      text = text.replaceAll(suffix, '');
+    }
+
+    // Remove all non-letter characters
+    text = text.replaceAll(RegExp(r'[^a-zA-Z]'), '');
+
+    return TextEditingValue(
+      text: text,
+      selection: TextSelection.collapsed(offset: text.length),
+    );
+  }
+}
+

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/constants/dimensions_constants.dart';
@@ -23,6 +24,7 @@ class _WalletCartState extends State<WalletCart> {
 
   double _currentValue = 0;
   bool _animationDone = false;
+  bool _showCopied = false;
 
   @override
   void initState() {
@@ -43,8 +45,6 @@ class _WalletCartState extends State<WalletCart> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Stack(
       children: [
         SizedBox(
@@ -88,7 +88,9 @@ class _WalletCartState extends State<WalletCart> {
                           )
                         : (_isVisible
                               ? TitleText(
-                                  text: currencyFormatter.format(_currentValue.round()),
+                                  text: currencyFormatter.format(
+                                    _currentValue.round(),
+                                  ),
                                   color: AppColor.whiteColor,
                                   fontSize: 30,
                                   fontWeight: FontWeight.w700,
@@ -154,7 +156,54 @@ class _WalletCartState extends State<WalletCart> {
                       fontWeight: FontWeight.w700,
                     ),
                     SizedBox(width: edge * 0.4),
-                    SvgPicture.asset(Assets.svgsCopy, fit: BoxFit.fill),
+                    GestureDetector(
+                      onTap: () async {
+                        await Clipboard.setData(ClipboardData(text: userCode));
+                        if (mounted) {
+                          setState(() {
+                            _showCopied = true;
+                          });
+                          Future.delayed(const Duration(seconds: 2), () {
+                            if (mounted) {
+                              setState(() {
+                                _showCopied = false;
+                              });
+                            }
+                          });
+                        }
+                      },
+                      child: SvgPicture.asset(
+                        Assets.svgsCopy,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    SizedBox(width: edge * 0.3),
+                    AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 300),
+                      child: _showCopied
+                          ? Container(
+                              key: const ValueKey("copiedText"),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: edge * 0.5,
+                                vertical: edge * 0.2,
+                              ),
+                              decoration: BoxDecoration(
+                                color: AppColor.primaryColor.withValues(
+                                  alpha: 0.7,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                "copied".tr(),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            )
+                          : const SizedBox.shrink(),
+                    ),
                   ],
                 ),
               ],

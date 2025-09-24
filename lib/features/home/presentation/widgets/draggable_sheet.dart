@@ -20,7 +20,7 @@ class DraggableSheet extends StatelessWidget {
     return DraggableScrollableSheet(
       controller: _draggableController,
       initialChildSize: initialSize,
-      minChildSize: 0.2,
+      minChildSize: initialSize,
       maxChildSize: 0.98,
       snap: true,
       snapSizes: [initialSize, 0.6, 0.95],
