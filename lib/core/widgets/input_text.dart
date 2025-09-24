@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../constants/dimensions_constants.dart';
@@ -19,7 +20,10 @@ class InputText extends StatefulWidget {
   final bool? isError;
   final bool? isReadOnly;
   final String? suffixText;
+  final int? maxLines;
   final Function(String)? onChanged;
+  final List<TextInputFormatter>? inputFormatters;
+
 
   const InputText._internal({
     this.title,
@@ -36,6 +40,9 @@ class InputText extends StatefulWidget {
     this.isReadOnly = false,
     this.suffixText,
     this.onChanged,
+    this.maxLines,
+    this.inputFormatters,
+
   });
 
   /// 🔹 Default Input
@@ -47,10 +54,13 @@ class InputText extends StatefulWidget {
     Widget? prefixIcon,
     Widget? suffixIcon,
     String? suffixText,
+    int? maxLines,
     bool enable = true,
     bool isError = false,
     double? width,
     Function(String)? onChanged,
+    List<TextInputFormatter>? inputFormatters,
+
   }) {
     return InputText._internal(
       title: title,
@@ -60,10 +70,13 @@ class InputText extends StatefulWidget {
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
       suffixText: suffixText,
+      maxLines: maxLines,
       enable: enable,
       isError: isError,
       width: width,
       onChanged: onChanged,
+      inputFormatters: inputFormatters,
+
     );
   }
 
@@ -185,13 +198,14 @@ class _InputTextState extends State<InputText> {
             onChanged: widget.onChanged,
             controller: widget.controller,
             style: TextStyle(color: AppColor.blue700),
-            maxLines: 1,
+            maxLines: widget.maxLines??1,
+            inputFormatters: widget.inputFormatters,
             obscureText: widget.isPassword ? _securePass : widget.obscureText,
             enabled: widget.enable ?? true,
             readOnly: widget.isReadOnly ?? false,
             textAlignVertical: TextAlignVertical.center,
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical:(widget.maxLines??0) > 1 ? edge*0.5 : 0),
               prefixIcon: widget.prefixIcon,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(radiusInput),

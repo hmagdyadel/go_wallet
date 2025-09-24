@@ -41,7 +41,7 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
       await _hiveService.init();
       await loadExpenses();
     } catch (e) {
-      emit(ExpensesStates.error(message: 'Failed to initialize service: $e'));
+      emit(ExpensesStates.error(message: "general_issue".tr()));
     }
   }
 
@@ -156,21 +156,17 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
     try {
       // Validation
       if (expenseTitle.text.trim().isEmpty) {
-        emit(const ExpensesStates.error(message: 'Please enter expense title'));
+        emit(ExpensesStates.error(message: "enter_expense_title".tr()));
         return;
       }
 
       if (_currentAmount <= 0) {
-        emit(
-          const ExpensesStates.error(message: 'Please enter a valid amount'),
-        );
+        emit(ExpensesStates.error(message: "enter_valid_amount".tr()));
         return;
       }
 
       if (expenseCategory.text.trim().isEmpty) {
-        emit(
-          const ExpensesStates.error(message: 'Please enter expense category'),
-        );
+        emit(ExpensesStates.error(message: "enter_expense_category".tr()));
         return;
       }
 
@@ -189,10 +185,10 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
       clearAllInputs();
 
       // Reload expenses
-      emit(ExpensesStates.success('Expense added successfully'));
+      emit(ExpensesStates.success("expense_added_success".tr()));
       await loadExpenses();
     } catch (e) {
-      emit(ExpensesStates.error(message: 'Failed to add expense: $e'));
+      emit(ExpensesStates.error(message: "expense_add_failed".tr()));
     }
   }
 
@@ -221,7 +217,7 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
         emit(const ExpensesStates.empty());
       }
     } catch (e) {
-      emit(ExpensesStates.error(message: 'Failed to load expenses: $e'));
+      emit(ExpensesStates.error(message: "expense_load_failed".tr()));
     }
   }
 
@@ -263,9 +259,9 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
       await _hiveService.deleteExpenseById(expenseId);
       await loadExpenses();
 
-      emit(ExpensesStates.success('Expense deleted successfully'));
+      emit(ExpensesStates.success("expense_deleted_success".tr()));
     } catch (e) {
-      emit(ExpensesStates.error(message: 'Failed to delete expense: $e'));
+      emit(ExpensesStates.error(message: "expense_delete_failed".tr()));
     }
   }
 
@@ -284,9 +280,9 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
       }
 
       await loadExpenses();
-      emit(ExpensesStates.success('Expense updated successfully'));
+      emit(ExpensesStates.success("expense_updated_success".tr()));
     } catch (e) {
-      emit(ExpensesStates.error(message: 'Failed to update expense: $e'));
+      emit(ExpensesStates.error(message: "expense_update_failed".tr()));
     }
   }
 
@@ -298,5 +294,3 @@ class ExpensesCubit extends Cubit<ExpensesStates> {
     return super.close();
   }
 }
-
-//dropdown_flutter

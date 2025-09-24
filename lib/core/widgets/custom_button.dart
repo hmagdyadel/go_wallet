@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_wallet/core/constants/dimensions_constants.dart';
 
 import '../utils/app_color.dart';
@@ -9,6 +10,8 @@ class CustomButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool isEnabled;
   final bool isLoading;
+  final String? svgIconPath;
+  final Color color;
 
   const CustomButton._({
     super.key,
@@ -16,6 +19,8 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
     required this.isEnabled,
     required this.isLoading,
+    this.svgIconPath,
+    this.color = AppColor.primaryColor,
   });
 
   /// 🟢 Normal button
@@ -23,6 +28,7 @@ class CustomButton extends StatelessWidget {
     Key? key,
     required String text,
     required VoidCallback? onPressed,
+    Color color = AppColor.primaryColor,
   }) {
     return CustomButton._(
       key: key,
@@ -30,6 +36,7 @@ class CustomButton extends StatelessWidget {
       onPressed: onPressed,
       isEnabled: true,
       isLoading: false,
+      color: color,
     );
   }
 
@@ -37,6 +44,7 @@ class CustomButton extends StatelessWidget {
   factory CustomButton.loading({
     Key? key,
     required String text,
+    Color color = AppColor.primaryColor,
   }) {
     return CustomButton._(
       key: key,
@@ -44,6 +52,7 @@ class CustomButton extends StatelessWidget {
       onPressed: null,
       isEnabled: false,
       isLoading: true,
+      color: color,
     );
   }
 
@@ -52,6 +61,7 @@ class CustomButton extends StatelessWidget {
     Key? key,
     required String text,
     VoidCallback? onPressed,
+    Color color = AppColor.primaryColor,
   }) {
     return CustomButton._(
       key: key,
@@ -59,6 +69,26 @@ class CustomButton extends StatelessWidget {
       onPressed: onPressed,
       isEnabled: false,
       isLoading: false,
+      color: color,
+    );
+  }
+
+  /// 🎨 Button with SVG icon
+  factory CustomButton.withIcon({
+    Key? key,
+    required String text,
+    required String svgIconPath,
+    required VoidCallback? onPressed,
+    Color color = AppColor.primaryColor,
+  }) {
+    return CustomButton._(
+      key: key,
+      text: text,
+      onPressed: onPressed,
+      isEnabled: true,
+      isLoading: false,
+      svgIconPath: svgIconPath,
+      color: color,
     );
   }
 
@@ -76,26 +106,51 @@ class CustomButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(radiusInput),
           ),
           backgroundColor: isButtonEnabled
-              ? AppColor.primaryColor
-              : AppColor.primaryColor.withValues(alpha: 0.5),
+              ? color
+              : color.withValues(alpha: 0.5),
         ),
         child: isLoading
             ? const SizedBox(
-          height: 20,
-          width: 20,
-          child: CircularProgressIndicator(
-            strokeWidth: 2,
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-          ),
-        )
+                height: 20,
+                width: 20,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+              )
+            : svgIconPath != null
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    svgIconPath!,
+                    width: 24,
+                    height: 24,
+                    colorFilter: ColorFilter.mode(
+                      Colors.white,
+
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  SizedBox(width: edge * 0.3),
+                  Text(
+                    text,
+                    style: TextStyles.bold16.copyWith(
+                      color: isButtonEnabled
+                          ? Colors.white
+                          : Colors.white.withValues(alpha: 0.7),
+                    ),
+                  ),
+                ],
+              )
             : Text(
-          text,
-          style: TextStyles.bold16.copyWith(
-            color: isButtonEnabled
-                ? Colors.white
-                : Colors.white.withValues(alpha: 0.7),
-          ),
-        ),
+                text,
+                style: TextStyles.bold16.copyWith(
+                  color: isButtonEnabled
+                      ? Colors.white
+                      : Colors.white.withValues(alpha: 0.7),
+                ),
+              ),
       ),
     );
   }

@@ -16,6 +16,7 @@ class Assets {
   static const String lottieSowBlobAnimation = 'assets/lottie/sow_blob_animation.json';
   static const String svgsAccountSettings = 'assets/svgs/account_settings.svg';
   static const String svgsActiveExpenses = 'assets/svgs/active_expenses.svg';
+  static const String svgsActiveMobile = 'assets/svgs/active_mobile.svg';
   static const String svgsActiveProfile = 'assets/svgs/active_profile.svg';
   static const String svgsActiveWallet = 'assets/svgs/active_wallet.svg';
   static const String svgsArrowBack = 'assets/svgs/arrow_back.svg';
@@ -24,12 +25,15 @@ class Assets {
   static const String svgsCard = 'assets/svgs/card.svg';
   static const String svgsCheck = 'assets/svgs/check.svg';
   static const String svgsClosedEye = 'assets/svgs/closed_eye.svg';
+  static const String svgsContacts = 'assets/svgs/contacts.svg';
   static const String svgsCopy = 'assets/svgs/copy.svg';
   static const String svgsEgypt = 'assets/svgs/egypt.svg';
   static const String svgsExpenses = 'assets/svgs/expenses.svg';
   static const String svgsEye = 'assets/svgs/eye.svg';
   static const String svgsLoginView = 'assets/svgs/login_view.svg';
   static const String svgsLogo = 'assets/svgs/logo.svg';
+  static const String svgsMobile = 'assets/svgs/mobile.svg';
+  static const String svgsNormalQr = 'assets/svgs/normal_qr.svg';
   static const String svgsNotActiveWallet = 'assets/svgs/not_active_wallet.svg';
   static const String svgsNotifications = 'assets/svgs/notifications.svg';
   static const String svgsOpenEye = 'assets/svgs/open_eye.svg';
