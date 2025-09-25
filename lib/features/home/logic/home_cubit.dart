@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_contact_picker_plus/flutter_native_contact_picker_plus.dart';
+import 'package:flutter_native_contact_picker_plus/model/contact_model.dart';
 
 import '../../../core/constants/strings.dart';
 import 'home_states.dart';
@@ -12,6 +14,7 @@ class HomeCubit extends Cubit<HomeStates> {
   final TextEditingController expenseAmount = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+  final FlutterContactPickerPlus _contactPicker = FlutterContactPickerPlus();
 
 
   double _currentAmount = 0.0;
@@ -67,6 +70,52 @@ class HomeCubit extends Cubit<HomeStates> {
     _isManualInput = false;
     expenseAmount.text = _currentAmount.toInt().toString();
     emit(const HomeStates.loaded());
+  }
+
+  Future<void> openContactPicker() async {
+    try {
+      // This opens the native contacts app and returns selected contact
+      Contact? contact = await _contactPicker.selectContact();
+
+      if (contact != null && contact.phoneNumbers != null && contact.phoneNumbers!.isNotEmpty) {
+        // Use the first phone number if multiple exist
+        String selectedPhone = contact.phoneNumbers!.first;
+        setPhoneNumber(selectedPhone);
+      }
+    } catch (e) {
+      log("Error opening contacts: $e");
+    }
+  }
+
+  void setPhoneNumber(String rawPhone) {
+    String cleanPhone = _formatEgyptianPhone(rawPhone);
+    if (cleanPhone.isNotEmpty) {
+      phoneController.text = cleanPhone;
+      emit(const HomeStates.loaded());
+    }
+  }
+
+  String _formatEgyptianPhone(String rawPhone) {
+    // Remove all non-digits
+    String digits = rawPhone.replaceAll(RegExp(r'[^0-9]'), '');
+
+    // Handle different formats
+    if (digits.startsWith('2010') || digits.startsWith('2011') ||
+        digits.startsWith('2012') || digits.startsWith('2015')) {
+      // Remove country code +20
+      digits = digits.substring(2);
+    } else if (digits.startsWith('20') && digits.length == 13) {
+      // Remove country code 20
+      digits = digits.substring(2);
+    }
+
+    // Ensure it's 11 digits starting with 01
+    if (digits.length == 11 && digits.startsWith('01') &&
+        ['010', '011', '012', '015'].any((prefix) => digits.startsWith(prefix))) {
+      return digits;
+    }
+
+    return '';
   }
 
 }

@@ -1,3 +1,4 @@
+
 import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -201,8 +202,14 @@ class TransferBottomSheet extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            log("username: ${cubit.fullUsername}");
-          },
+            if (isUsername) {
+              // QR code logic for username
+              log("username: ${cubit.fullUsername}");
+            } else {
+              // Open contacts for phone number
+              cubit.openContactPicker();
+            }
+           },
           child: Container(
             width: 50,
             height: 50,
