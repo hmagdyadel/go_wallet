@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get_it/get_it.dart';
 
 import '../../../../core/constants/dimensions_constants.dart';
 import '../../../../core/constants/strings.dart';
@@ -18,6 +17,8 @@ import '../../../../core/widgets/title_text.dart';
 import '../../../../generated/assets.dart';
 import '../../logic/home_cubit.dart';
 import '../../logic/home_states.dart';
+import 'balance_values.dart';
+import 'formatters.dart';
 import 'toggle_transfer_method.dart';
 
 class TransferBottomSheet extends StatelessWidget {
@@ -54,8 +55,11 @@ class TransferBottomSheet extends StatelessWidget {
               ToggleTransferMethod(),
               SizedBox(height: edge * 0.8),
               cubit.isUsername
-                  ? _buildInputRow(isUsername: true)
-                  : _buildInputRow(isUsername: false),
+                  ? _buildTransferMethodInputRow(isUsername: true, cubit: cubit)
+                  : _buildTransferMethodInputRow(
+                      isUsername: false,
+                      cubit: cubit,
+                    ),
 
               SizedBox(height: edge * 0.2),
               SubTitleText(
@@ -98,8 +102,9 @@ class TransferBottomSheet extends StatelessWidget {
       builder: (context, state) {
         return InputText.normal(
           title: "expense_amount".tr(),
-          hint: (cubit.currentAmount == 0.0 && !cubit.isManualInput) ||
-              cubit.expenseAmount.text.isEmpty
+          hint:
+              (cubit.currentAmount == 0.0 && !cubit.isManualInput) ||
+                  cubit.expenseAmount.text.isEmpty
               ? "expense_amount_hint".tr()
               : null,
           suffixText: "egyptian_pound".tr(),
@@ -161,7 +166,10 @@ class TransferBottomSheet extends StatelessWidget {
     );
   }
 
-  Widget _buildInputRow({required bool isUsername}) {
+  Widget _buildTransferMethodInputRow({
+    required bool isUsername,
+    required HomeCubit cubit,
+  }) {
     final title = isUsername ? "username".tr() : "phone".tr();
     final hint = isUsername ? "username_hint".tr() : "phone_hint".tr();
     final keyboardType = isUsername ? TextInputType.text : TextInputType.phone;
@@ -177,19 +185,23 @@ class TransferBottomSheet extends StatelessWidget {
             suffixText: suffixText,
             title: title,
             hint: hint,
-            controller: isUsername ? GetIt.I<HomeCubit>().usernameController : null,
+            controller: isUsername
+                ? cubit.usernameController
+                : cubit.phoneController,
             keyboardType: keyboardType,
-            inputFormatters: isUsername ? [UsernameFormatter()] : [],
+            inputFormatters: isUsername
+                ? [UsernameFormatter()]
+                : [PhoneFormatter()],
             onChanged: (value) {
               if (isUsername) {
-                GetIt.I<HomeCubit>().setUsername(value);
+                cubit.setUsername(value);
               }
             },
           ),
         ),
         GestureDetector(
           onTap: () {
-            log("username: ${GetIt.I<HomeCubit>().fullUsername}");
+            log("username: ${cubit.fullUsername}");
           },
           child: Container(
             width: 50,
@@ -214,80 +226,3 @@ class TransferBottomSheet extends StatelessWidget {
     );
   }
 }
-
-class BalanceValues extends StatelessWidget {
-  const BalanceValues({super.key, required this.cubit});
-
-  final HomeCubit cubit;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeStates>(
-      buildWhen: (previous, current) => true,
-      builder: (context, state) {
-        return Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SubTitleText(
-                  text: "transfer_amount".tr(),
-                  color: AppColor.blue900,
-                  fontSize: 16,
-                ),
-                SubTitleText(
-                  text: "- ${cubit.currentAmount.toInt()} ${"pound".tr()}",
-                  color: AppColor.mainRed,
-                  fontSize: 16,
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SubTitleText(
-                  text: "wallet_amount_after_transfer".tr(),
-                  color: AppColor.blue900,
-                  fontSize: 16,
-                ),
-                TitleText(
-                  text:
-                      "${balance - cubit.currentAmount.toInt()} ${"pound".tr()}",
-                  color: (balance - cubit.currentAmount.toInt()) < 0
-                      ? AppColor.mainRed
-                      : AppColor.lightPrimaryColor,
-                  fontSize: 24,
-                ),
-              ],
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
-
-
-class UsernameFormatter extends TextInputFormatter {
-  final String suffix = '@gowallet';
-
-  @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
-    String text = newValue.text;
-
-    // Remove @gowallet if pasted
-    if (text.endsWith(suffix)) {
-      text = text.replaceAll(suffix, '');
-    }
-
-    // Remove all non-letter characters
-    text = text.replaceAll(RegExp(r'[^a-zA-Z]'), '');
-
-    return TextEditingValue(
-      text: text,
-      selection: TextSelection.collapsed(offset: text.length),
-    );
-  }
-}
-

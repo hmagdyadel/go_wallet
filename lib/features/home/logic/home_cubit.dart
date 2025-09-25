@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,6 +11,7 @@ class HomeCubit extends Cubit<HomeStates> {
 
   final TextEditingController expenseAmount = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
 
 
   double _currentAmount = 0.0;
@@ -22,7 +25,8 @@ class HomeCubit extends Cubit<HomeStates> {
 
 
   void setUsername(String value) {
-    //usernameController.text = value;
+    usernameController.text = value;
+    log("username: ${usernameController.text}");
     emit(const HomeStates.loaded());
   }
   // Transfer method selection
