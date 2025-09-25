@@ -51,7 +51,7 @@ class PhoneFormatter extends TextInputFormatter {
         if (!['01'].contains(prefix)) {
           return oldValue;
         }
-      } else if (text.length >= 1) {
+      } else if (text.isNotEmpty) {
         if (text[0] != '0') {
           return oldValue;
         }

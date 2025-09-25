@@ -1,5 +1,4 @@
 
-import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,6 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../core/constants/dimensions_constants.dart';
 import '../../../../core/constants/strings.dart';
 import '../../../../core/utils/app_color.dart';
-import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/drag_handle.dart';
 import '../../../../core/widgets/input_text.dart';
 import '../../../../core/widgets/subtitle_text.dart';
@@ -18,7 +16,6 @@ import '../../../../core/widgets/title_text.dart';
 import '../../../../generated/assets.dart';
 import '../../logic/home_cubit.dart';
 import '../../logic/home_states.dart';
-import 'balance_values.dart';
 import 'formatters.dart';
 import 'toggle_transfer_method.dart';
 
@@ -261,16 +258,5 @@ class TransferBottomSheet extends StatelessWidget {
     );
   }
 
-  Widget _buildTransferMethodInputRow({
-    required bool isUsername,
-    required HomeCubit cubit,
-  }) {
-    final title = isUsername ? "username".tr() : "phone".tr();
-    final hint = isUsername ? "username_hint".tr() : "phone_hint".tr();
-    final keyboardType = isUsername ? TextInputType.text : TextInputType.phone;
-    final suffixText = isUsername ? "@gowallet" : null;
-    final iconAsset = isUsername ? Assets.svgsNormalQr : Assets.svgsContacts;
 
-    return Container();
-  }
 }
