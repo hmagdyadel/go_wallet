@@ -16,4 +16,6 @@ class HomeStates<T> with _$HomeStates<T> {
   const factory HomeStates.success(T data) = Success<T>;
 
   const factory HomeStates.error({required String message}) = Error;
+  const factory HomeStates.transferMethodChanged(bool isUsername) = TransferMethodChanged;
+
 }

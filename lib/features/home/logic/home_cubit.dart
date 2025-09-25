@@ -27,17 +27,24 @@ class HomeCubit extends Cubit<HomeStates> {
   String get fullUsername => '${usernameController.text}@gowallet';
 
 
-  void setUsername(String value) {
-    usernameController.text = value;
-    log("username: ${usernameController.text}");
-    emit(const HomeStates.loaded());
-  }
-  // Transfer method selection
+  // void setUsername(String value) {
+  //   usernameController.text = value;
+  //   log("username: ${usernameController.text}");
+  //  // emit(const HomeStates.loaded());
+  // }
   void setTransferMethod(bool isUsername) {
-    emit(const HomeStates.toggleMethod());
-    _isUsername = isUsername;
-    emit(const HomeStates.loaded());
+    if (_isUsername != isUsername) {
+      _isUsername = isUsername;
+      // Clear the text when switching to prevent cross-contamination
+      if (isUsername) {
+        phoneController.clear();
+      } else {
+        usernameController.clear();
+      }
+      emit(HomeStates.transferMethodChanged(isUsername));
+    }
   }
+
 
   void onAmountChanged(String value) {
     emit(const HomeStates.toggleMethod());

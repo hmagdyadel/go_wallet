@@ -28,73 +28,167 @@ class TransferBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<HomeCubit>();
-    return BlocConsumer<HomeCubit, HomeStates>(
-      buildWhen: (previous, current) => previous != current,
-      builder: (context, state) {
-        return Container(
-          padding: EdgeInsets.symmetric(horizontal: edge),
-          decoration: BoxDecoration(
-            color: AppColor.whiteColor,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(radius),
-              topRight: Radius.circular(radius),
-            ),
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: edge),
+      decoration: BoxDecoration(
+        color: AppColor.whiteColor,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(radius),
+          topRight: Radius.circular(radius),
+        ),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          DragHandle(),
+          SizedBox(height: edge * 1.5),
+          TitleText(
+            text: "transfer_method".tr(),
+            color: AppColor.blue900,
+            fontSize: 20,
+            align: TextAlign.start,
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              DragHandle(),
-              SizedBox(height: edge * 1.5),
-              TitleText(
-                text: "transfer_method".tr(),
-                color: AppColor.blue900,
-                fontSize: 20,
-                align: TextAlign.start,
-              ),
-              SizedBox(height: edge * 0.5),
-              ToggleTransferMethod(),
-              SizedBox(height: edge * 0.8),
-              cubit.isUsername
-                  ? _buildTransferMethodInputRow(isUsername: true, cubit: cubit)
-                  : _buildTransferMethodInputRow(
-                      isUsername: false,
-                      cubit: cubit,
+          SizedBox(height: edge * 0.5),
+          ToggleTransferMethod(),
+          SizedBox(height: edge * 0.8),
+          //cubit.isUsername ?
+          // Replace the existing Row with InputText.normal with:
+          BlocBuilder<HomeCubit, HomeStates>(
+            buildWhen: (previous, current) => current is TransferMethodChanged,
+            builder: (context, state) {
+              return Row(
+                spacing: edge * 0.4,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Expanded(
+                    child: InputText.normal(
+                      suffixText: cubit.isUsername ? "@gowallet" : null,
+                      title: cubit.isUsername ? "username".tr() : "phone".tr(),
+                      hint: cubit.isUsername ? "username_hint".tr() : "phone_hint".tr(),
+                      controller: cubit.isUsername ? cubit.usernameController : cubit.phoneController,
+                      keyboardType: cubit.isUsername ? TextInputType.text : TextInputType.phone,
+                      inputFormatters: cubit.isUsername ? [UsernameFormatter()] : [PhoneFormatter()],
                     ),
-
-              SizedBox(height: edge * 0.2),
-              SubTitleText(
-                text: !cubit.isUsername ? "phone_transfer_hint".tr() : "",
-                color: AppColor.lightPrimaryColor,
-                fontSize: 14,
-              ),
-              SizedBox(height: edge * 0.4),
-              _buildAmountInput(cubit),
-              SizedBox(height: edge * 0.4),
-              _buildAmountButtons(cubit),
-              SizedBox(height: edge * 0.6),
-              InputText.normal(
-                title: "transfer_reason".tr(),
-                hint: "transfer_reason_hint".tr(),
-                maxLines: 3,
-                keyboardType: TextInputType.phone,
-              ),
-              SizedBox(height: edge * 0.9),
-              BalanceValues(cubit: cubit),
-              SizedBox(height: edge * 1.2),
-              CustomButton.normal(
-                text: "transfer_now".tr(),
-                onPressed:
-                    cubit.currentAmount <= balance && cubit.currentAmount > 0
-                    ? () {}
-                    : () {},
-              ),
-              SizedBox(height: edge * 2),
-            ],
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      // if (isUsername) {
+                      //   // QR code logic for username
+                      //   log("username: ${cubit.fullUsername}");
+                      // } else {
+                      // Open contacts for phone number
+                      cubit.openContactPicker();
+                      //}
+                    },
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      padding: EdgeInsets.all(edge * 0.6),
+                      decoration: BoxDecoration(
+                        color: AppColor.lightPrimaryColor,
+                        borderRadius: BorderRadius.circular(radiusInput),
+                      ),
+                      child: SvgPicture.asset(
+                        Assets.svgsNormalQr,
+                        width: 24,
+                        height: 24,
+                        colorFilter: const ColorFilter.mode(
+                          AppColor.whiteColor,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
-        );
-      },
-      listener: (context, state) {},
+          //     : Row(
+          //   spacing: edge * 0.4,
+          //   crossAxisAlignment: CrossAxisAlignment.end,
+          //   children: [
+          //     Expanded(
+          //       child: InputText.normal(
+          //         suffixText: suffixText,
+          //         title: title,
+          //         hint: hint,
+          //         controller: isUsername
+          //             ? cubit.usernameController
+          //             : cubit.phoneController,
+          //         keyboardType: keyboardType,
+          //         inputFormatters: isUsername
+          //             ? [UsernameFormatter()]
+          //             : [PhoneFormatter()],
+          //         // onChanged: (value) {
+          //         //   if (isUsername) {
+          //         //     cubit.setUsername(value);
+          //         //   }
+          //         // },
+          //       ),
+          //     ),
+          //     GestureDetector(
+          //       onTap: () {
+          //         if (isUsername) {
+          //           // QR code logic for username
+          //           log("username: ${cubit.fullUsername}");
+          //         } else {
+          //           // Open contacts for phone number
+          //           cubit.openContactPicker();
+          //         }
+          //       },
+          //       child: Container(
+          //         width: 50,
+          //         height: 50,
+          //         padding: EdgeInsets.all(edge * 0.6),
+          //         decoration: BoxDecoration(
+          //           color: AppColor.lightPrimaryColor,
+          //           borderRadius: BorderRadius.circular(radiusInput),
+          //         ),
+          //         child: SvgPicture.asset(
+          //           iconAsset,
+          //           width: 24,
+          //           height: 24,
+          //           colorFilter: const ColorFilter.mode(
+          //             AppColor.whiteColor,
+          //             BlendMode.srcIn,
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          //
+          // SizedBox(height: edge * 0.2),
+          // SubTitleText(
+          //   text: !cubit.isUsername ? "phone_transfer_hint".tr() : "",
+          //   color: AppColor.lightPrimaryColor,
+          //   fontSize: 14,
+          // ),
+          // SizedBox(height: edge * 0.4),
+          // _buildAmountInput(cubit),
+          // SizedBox(height: edge * 0.4),
+          // _buildAmountButtons(cubit),
+          // SizedBox(height: edge * 0.6),
+          // InputText.normal(
+          //   title: "transfer_reason".tr(),
+          //   hint: "transfer_reason_hint".tr(),
+          //   maxLines: 3,
+          //   keyboardType: TextInputType.phone,
+          // ),
+          // SizedBox(height: edge * 0.9),
+          // BalanceValues(cubit: cubit),
+          // SizedBox(height: edge * 1.2),
+          // CustomButton.normal(
+          //   text: "transfer_now".tr(),
+          //   onPressed:
+          //   cubit.currentAmount <= balance && cubit.currentAmount > 0
+          //       ? () {}
+          //       : () {},
+          // ),
+          SizedBox(height: edge * 12),
+        ],
+      ),
     );
   }
 
@@ -177,59 +271,6 @@ class TransferBottomSheet extends StatelessWidget {
     final suffixText = isUsername ? "@gowallet" : null;
     final iconAsset = isUsername ? Assets.svgsNormalQr : Assets.svgsContacts;
 
-    return Row(
-      spacing: edge * 0.4,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        Expanded(
-          child: InputText.normal(
-            suffixText: suffixText,
-            title: title,
-            hint: hint,
-            controller: isUsername
-                ? cubit.usernameController
-                : cubit.phoneController,
-            keyboardType: keyboardType,
-            inputFormatters: isUsername
-                ? [UsernameFormatter()]
-                : [PhoneFormatter()],
-            onChanged: (value) {
-              if (isUsername) {
-                cubit.setUsername(value);
-              }
-            },
-          ),
-        ),
-        GestureDetector(
-          onTap: () {
-            if (isUsername) {
-              // QR code logic for username
-              log("username: ${cubit.fullUsername}");
-            } else {
-              // Open contacts for phone number
-              cubit.openContactPicker();
-            }
-           },
-          child: Container(
-            width: 50,
-            height: 50,
-            padding: EdgeInsets.all(edge * 0.6),
-            decoration: BoxDecoration(
-              color: AppColor.lightPrimaryColor,
-              borderRadius: BorderRadius.circular(radiusInput),
-            ),
-            child: SvgPicture.asset(
-              iconAsset,
-              width: 24,
-              height: 24,
-              colorFilter: const ColorFilter.mode(
-                AppColor.whiteColor,
-                BlendMode.srcIn,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
+    return Container();
   }
 }

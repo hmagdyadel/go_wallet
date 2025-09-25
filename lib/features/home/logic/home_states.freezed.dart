@@ -25,6 +25,7 @@ mixin _$HomeStates<T> {
     required TResult Function() empty,
     required TResult Function(T data) success,
     required TResult Function(String message) error,
+    required TResult Function(bool isUsername) transferMethodChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,6 +37,7 @@ mixin _$HomeStates<T> {
     TResult? Function()? empty,
     TResult? Function(T data)? success,
     TResult? Function(String message)? error,
+    TResult? Function(bool isUsername)? transferMethodChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,6 +49,7 @@ mixin _$HomeStates<T> {
     TResult Function()? empty,
     TResult Function(T data)? success,
     TResult Function(String message)? error,
+    TResult Function(bool isUsername)? transferMethodChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -59,6 +62,8 @@ mixin _$HomeStates<T> {
     required TResult Function(Empty<T> value) empty,
     required TResult Function(Success<T> value) success,
     required TResult Function(Error<T> value) error,
+    required TResult Function(TransferMethodChanged<T> value)
+        transferMethodChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +75,7 @@ mixin _$HomeStates<T> {
     TResult? Function(Empty<T> value)? empty,
     TResult? Function(Success<T> value)? success,
     TResult? Function(Error<T> value)? error,
+    TResult? Function(TransferMethodChanged<T> value)? transferMethodChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,6 +87,7 @@ mixin _$HomeStates<T> {
     TResult Function(Empty<T> value)? empty,
     TResult Function(Success<T> value)? success,
     TResult Function(Error<T> value)? error,
+    TResult Function(TransferMethodChanged<T> value)? transferMethodChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -155,6 +162,7 @@ class _$InitialImpl<T> implements _Initial<T> {
     required TResult Function() empty,
     required TResult Function(T data) success,
     required TResult Function(String message) error,
+    required TResult Function(bool isUsername) transferMethodChanged,
   }) {
     return initial();
   }
@@ -169,6 +177,7 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult? Function()? empty,
     TResult? Function(T data)? success,
     TResult? Function(String message)? error,
+    TResult? Function(bool isUsername)? transferMethodChanged,
   }) {
     return initial?.call();
   }
@@ -183,6 +192,7 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult Function()? empty,
     TResult Function(T data)? success,
     TResult Function(String message)? error,
+    TResult Function(bool isUsername)? transferMethodChanged,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -201,6 +211,8 @@ class _$InitialImpl<T> implements _Initial<T> {
     required TResult Function(Empty<T> value) empty,
     required TResult Function(Success<T> value) success,
     required TResult Function(Error<T> value) error,
+    required TResult Function(TransferMethodChanged<T> value)
+        transferMethodChanged,
   }) {
     return initial(this);
   }
@@ -215,6 +227,7 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult? Function(Empty<T> value)? empty,
     TResult? Function(Success<T> value)? success,
     TResult? Function(Error<T> value)? error,
+    TResult? Function(TransferMethodChanged<T> value)? transferMethodChanged,
   }) {
     return initial?.call(this);
   }
@@ -229,6 +242,7 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult Function(Empty<T> value)? empty,
     TResult Function(Success<T> value)? success,
     TResult Function(Error<T> value)? error,
+    TResult Function(TransferMethodChanged<T> value)? transferMethodChanged,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -290,6 +304,7 @@ class _$LoadingImpl<T> implements Loading<T> {
     required TResult Function() empty,
     required TResult Function(T data) success,
     required TResult Function(String message) error,
+    required TResult Function(bool isUsername) transferMethodChanged,
   }) {
     return loading();
   }
@@ -304,6 +319,7 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult? Function()? empty,
     TResult? Function(T data)? success,
     TResult? Function(String message)? error,
+    TResult? Function(bool isUsername)? transferMethodChanged,
   }) {
     return loading?.call();
   }
@@ -318,6 +334,7 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult Function()? empty,
     TResult Function(T data)? success,
     TResult Function(String message)? error,
+    TResult Function(bool isUsername)? transferMethodChanged,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -336,6 +353,8 @@ class _$LoadingImpl<T> implements Loading<T> {
     required TResult Function(Empty<T> value) empty,
     required TResult Function(Success<T> value) success,
     required TResult Function(Error<T> value) error,
+    required TResult Function(TransferMethodChanged<T> value)
+        transferMethodChanged,
   }) {
     return loading(this);
   }
@@ -350,6 +369,7 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult? Function(Empty<T> value)? empty,
     TResult? Function(Success<T> value)? success,
     TResult? Function(Error<T> value)? error,
+    TResult? Function(TransferMethodChanged<T> value)? transferMethodChanged,
   }) {
     return loading?.call(this);
   }
@@ -364,6 +384,7 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult Function(Empty<T> value)? empty,
     TResult Function(Success<T> value)? success,
     TResult Function(Error<T> value)? error,
+    TResult Function(TransferMethodChanged<T> value)? transferMethodChanged,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -425,6 +446,7 @@ class _$LoadedImpl<T> implements Loaded<T> {
     required TResult Function() empty,
     required TResult Function(T data) success,
     required TResult Function(String message) error,
+    required TResult Function(bool isUsername) transferMethodChanged,
   }) {
     return loaded();
   }
@@ -439,6 +461,7 @@ class _$LoadedImpl<T> implements Loaded<T> {
     TResult? Function()? empty,
     TResult? Function(T data)? success,
     TResult? Function(String message)? error,
+    TResult? Function(bool isUsername)? transferMethodChanged,
   }) {
     return loaded?.call();
   }
@@ -453,6 +476,7 @@ class _$LoadedImpl<T> implements Loaded<T> {
     TResult Function()? empty,
     TResult Function(T data)? success,
     TResult Function(String message)? error,
+    TResult Function(bool isUsername)? transferMethodChanged,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -471,6 +495,8 @@ class _$LoadedImpl<T> implements Loaded<T> {
     required TResult Function(Empty<T> value) empty,
     required TResult Function(Success<T> value) success,
     required TResult Function(Error<T> value) error,
+    required TResult Function(TransferMethodChanged<T> value)
+        transferMethodChanged,
   }) {
     return loaded(this);
   }
@@ -485,6 +511,7 @@ class _$LoadedImpl<T> implements Loaded<T> {
     TResult? Function(Empty<T> value)? empty,
     TResult? Function(Success<T> value)? success,
     TResult? Function(Error<T> value)? error,
+    TResult? Function(TransferMethodChanged<T> value)? transferMethodChanged,
   }) {
     return loaded?.call(this);
   }
@@ -499,6 +526,7 @@ class _$LoadedImpl<T> implements Loaded<T> {
     TResult Function(Empty<T> value)? empty,
     TResult Function(Success<T> value)? success,
     TResult Function(Error<T> value)? error,
+    TResult Function(TransferMethodChanged<T> value)? transferMethodChanged,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -560,6 +588,7 @@ class _$ToggleMethodImpl<T> implements ToggleMethod<T> {
     required TResult Function() empty,
     required TResult Function(T data) success,
     required TResult Function(String message) error,
+    required TResult Function(bool isUsername) transferMethodChanged,
   }) {
     return toggleMethod();
   }
@@ -574,6 +603,7 @@ class _$ToggleMethodImpl<T> implements ToggleMethod<T> {
     TResult? Function()? empty,
     TResult? Function(T data)? success,
     TResult? Function(String message)? error,
+    TResult? Function(bool isUsername)? transferMethodChanged,
   }) {
     return toggleMethod?.call();
   }
@@ -588,6 +618,7 @@ class _$ToggleMethodImpl<T> implements ToggleMethod<T> {
     TResult Function()? empty,
     TResult Function(T data)? success,
     TResult Function(String message)? error,
+    TResult Function(bool isUsername)? transferMethodChanged,
     required TResult orElse(),
   }) {
     if (toggleMethod != null) {
@@ -606,6 +637,8 @@ class _$ToggleMethodImpl<T> implements ToggleMethod<T> {
     required TResult Function(Empty<T> value) empty,
     required TResult Function(Success<T> value) success,
     required TResult Function(Error<T> value) error,
+    required TResult Function(TransferMethodChanged<T> value)
+        transferMethodChanged,
   }) {
     return toggleMethod(this);
   }
@@ -620,6 +653,7 @@ class _$ToggleMethodImpl<T> implements ToggleMethod<T> {
     TResult? Function(Empty<T> value)? empty,
     TResult? Function(Success<T> value)? success,
     TResult? Function(Error<T> value)? error,
+    TResult? Function(TransferMethodChanged<T> value)? transferMethodChanged,
   }) {
     return toggleMethod?.call(this);
   }
@@ -634,6 +668,7 @@ class _$ToggleMethodImpl<T> implements ToggleMethod<T> {
     TResult Function(Empty<T> value)? empty,
     TResult Function(Success<T> value)? success,
     TResult Function(Error<T> value)? error,
+    TResult Function(TransferMethodChanged<T> value)? transferMethodChanged,
     required TResult orElse(),
   }) {
     if (toggleMethod != null) {
@@ -695,6 +730,7 @@ class _$EmptyImpl<T> implements Empty<T> {
     required TResult Function() empty,
     required TResult Function(T data) success,
     required TResult Function(String message) error,
+    required TResult Function(bool isUsername) transferMethodChanged,
   }) {
     return empty();
   }
@@ -709,6 +745,7 @@ class _$EmptyImpl<T> implements Empty<T> {
     TResult? Function()? empty,
     TResult? Function(T data)? success,
     TResult? Function(String message)? error,
+    TResult? Function(bool isUsername)? transferMethodChanged,
   }) {
     return empty?.call();
   }
@@ -723,6 +760,7 @@ class _$EmptyImpl<T> implements Empty<T> {
     TResult Function()? empty,
     TResult Function(T data)? success,
     TResult Function(String message)? error,
+    TResult Function(bool isUsername)? transferMethodChanged,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -741,6 +779,8 @@ class _$EmptyImpl<T> implements Empty<T> {
     required TResult Function(Empty<T> value) empty,
     required TResult Function(Success<T> value) success,
     required TResult Function(Error<T> value) error,
+    required TResult Function(TransferMethodChanged<T> value)
+        transferMethodChanged,
   }) {
     return empty(this);
   }
@@ -755,6 +795,7 @@ class _$EmptyImpl<T> implements Empty<T> {
     TResult? Function(Empty<T> value)? empty,
     TResult? Function(Success<T> value)? success,
     TResult? Function(Error<T> value)? error,
+    TResult? Function(TransferMethodChanged<T> value)? transferMethodChanged,
   }) {
     return empty?.call(this);
   }
@@ -769,6 +810,7 @@ class _$EmptyImpl<T> implements Empty<T> {
     TResult Function(Empty<T> value)? empty,
     TResult Function(Success<T> value)? success,
     TResult Function(Error<T> value)? error,
+    TResult Function(TransferMethodChanged<T> value)? transferMethodChanged,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -858,6 +900,7 @@ class _$SuccessImpl<T> implements Success<T> {
     required TResult Function() empty,
     required TResult Function(T data) success,
     required TResult Function(String message) error,
+    required TResult Function(bool isUsername) transferMethodChanged,
   }) {
     return success(data);
   }
@@ -872,6 +915,7 @@ class _$SuccessImpl<T> implements Success<T> {
     TResult? Function()? empty,
     TResult? Function(T data)? success,
     TResult? Function(String message)? error,
+    TResult? Function(bool isUsername)? transferMethodChanged,
   }) {
     return success?.call(data);
   }
@@ -886,6 +930,7 @@ class _$SuccessImpl<T> implements Success<T> {
     TResult Function()? empty,
     TResult Function(T data)? success,
     TResult Function(String message)? error,
+    TResult Function(bool isUsername)? transferMethodChanged,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -904,6 +949,8 @@ class _$SuccessImpl<T> implements Success<T> {
     required TResult Function(Empty<T> value) empty,
     required TResult Function(Success<T> value) success,
     required TResult Function(Error<T> value) error,
+    required TResult Function(TransferMethodChanged<T> value)
+        transferMethodChanged,
   }) {
     return success(this);
   }
@@ -918,6 +965,7 @@ class _$SuccessImpl<T> implements Success<T> {
     TResult? Function(Empty<T> value)? empty,
     TResult? Function(Success<T> value)? success,
     TResult? Function(Error<T> value)? error,
+    TResult? Function(TransferMethodChanged<T> value)? transferMethodChanged,
   }) {
     return success?.call(this);
   }
@@ -932,6 +980,7 @@ class _$SuccessImpl<T> implements Success<T> {
     TResult Function(Empty<T> value)? empty,
     TResult Function(Success<T> value)? success,
     TResult Function(Error<T> value)? error,
+    TResult Function(TransferMethodChanged<T> value)? transferMethodChanged,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -1028,6 +1077,7 @@ class _$ErrorImpl<T> implements Error<T> {
     required TResult Function() empty,
     required TResult Function(T data) success,
     required TResult Function(String message) error,
+    required TResult Function(bool isUsername) transferMethodChanged,
   }) {
     return error(message);
   }
@@ -1042,6 +1092,7 @@ class _$ErrorImpl<T> implements Error<T> {
     TResult? Function()? empty,
     TResult? Function(T data)? success,
     TResult? Function(String message)? error,
+    TResult? Function(bool isUsername)? transferMethodChanged,
   }) {
     return error?.call(message);
   }
@@ -1056,6 +1107,7 @@ class _$ErrorImpl<T> implements Error<T> {
     TResult Function()? empty,
     TResult Function(T data)? success,
     TResult Function(String message)? error,
+    TResult Function(bool isUsername)? transferMethodChanged,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1074,6 +1126,8 @@ class _$ErrorImpl<T> implements Error<T> {
     required TResult Function(Empty<T> value) empty,
     required TResult Function(Success<T> value) success,
     required TResult Function(Error<T> value) error,
+    required TResult Function(TransferMethodChanged<T> value)
+        transferMethodChanged,
   }) {
     return error(this);
   }
@@ -1088,6 +1142,7 @@ class _$ErrorImpl<T> implements Error<T> {
     TResult? Function(Empty<T> value)? empty,
     TResult? Function(Success<T> value)? success,
     TResult? Function(Error<T> value)? error,
+    TResult? Function(TransferMethodChanged<T> value)? transferMethodChanged,
   }) {
     return error?.call(this);
   }
@@ -1102,6 +1157,7 @@ class _$ErrorImpl<T> implements Error<T> {
     TResult Function(Empty<T> value)? empty,
     TResult Function(Success<T> value)? success,
     TResult Function(Error<T> value)? error,
+    TResult Function(TransferMethodChanged<T> value)? transferMethodChanged,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1121,4 +1177,186 @@ abstract class Error<T> implements HomeStates<T> {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<T, _$ErrorImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TransferMethodChangedImplCopyWith<T, $Res> {
+  factory _$$TransferMethodChangedImplCopyWith(
+          _$TransferMethodChangedImpl<T> value,
+          $Res Function(_$TransferMethodChangedImpl<T>) then) =
+      __$$TransferMethodChangedImplCopyWithImpl<T, $Res>;
+  @useResult
+  $Res call({bool isUsername});
+}
+
+/// @nodoc
+class __$$TransferMethodChangedImplCopyWithImpl<T, $Res>
+    extends _$HomeStatesCopyWithImpl<T, $Res, _$TransferMethodChangedImpl<T>>
+    implements _$$TransferMethodChangedImplCopyWith<T, $Res> {
+  __$$TransferMethodChangedImplCopyWithImpl(
+      _$TransferMethodChangedImpl<T> _value,
+      $Res Function(_$TransferMethodChangedImpl<T>) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeStates
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isUsername = null,
+  }) {
+    return _then(_$TransferMethodChangedImpl<T>(
+      null == isUsername
+          ? _value.isUsername
+          : isUsername // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TransferMethodChangedImpl<T> implements TransferMethodChanged<T> {
+  const _$TransferMethodChangedImpl(this.isUsername);
+
+  @override
+  final bool isUsername;
+
+  @override
+  String toString() {
+    return 'HomeStates<$T>.transferMethodChanged(isUsername: $isUsername)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TransferMethodChangedImpl<T> &&
+            (identical(other.isUsername, isUsername) ||
+                other.isUsername == isUsername));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isUsername);
+
+  /// Create a copy of HomeStates
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TransferMethodChangedImplCopyWith<T, _$TransferMethodChangedImpl<T>>
+      get copyWith => __$$TransferMethodChangedImplCopyWithImpl<T,
+          _$TransferMethodChangedImpl<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() loaded,
+    required TResult Function() toggleMethod,
+    required TResult Function() empty,
+    required TResult Function(T data) success,
+    required TResult Function(String message) error,
+    required TResult Function(bool isUsername) transferMethodChanged,
+  }) {
+    return transferMethodChanged(isUsername);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? loaded,
+    TResult? Function()? toggleMethod,
+    TResult? Function()? empty,
+    TResult? Function(T data)? success,
+    TResult? Function(String message)? error,
+    TResult? Function(bool isUsername)? transferMethodChanged,
+  }) {
+    return transferMethodChanged?.call(isUsername);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loaded,
+    TResult Function()? toggleMethod,
+    TResult Function()? empty,
+    TResult Function(T data)? success,
+    TResult Function(String message)? error,
+    TResult Function(bool isUsername)? transferMethodChanged,
+    required TResult orElse(),
+  }) {
+    if (transferMethodChanged != null) {
+      return transferMethodChanged(isUsername);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial<T> value) initial,
+    required TResult Function(Loading<T> value) loading,
+    required TResult Function(Loaded<T> value) loaded,
+    required TResult Function(ToggleMethod<T> value) toggleMethod,
+    required TResult Function(Empty<T> value) empty,
+    required TResult Function(Success<T> value) success,
+    required TResult Function(Error<T> value) error,
+    required TResult Function(TransferMethodChanged<T> value)
+        transferMethodChanged,
+  }) {
+    return transferMethodChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial<T> value)? initial,
+    TResult? Function(Loading<T> value)? loading,
+    TResult? Function(Loaded<T> value)? loaded,
+    TResult? Function(ToggleMethod<T> value)? toggleMethod,
+    TResult? Function(Empty<T> value)? empty,
+    TResult? Function(Success<T> value)? success,
+    TResult? Function(Error<T> value)? error,
+    TResult? Function(TransferMethodChanged<T> value)? transferMethodChanged,
+  }) {
+    return transferMethodChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial<T> value)? initial,
+    TResult Function(Loading<T> value)? loading,
+    TResult Function(Loaded<T> value)? loaded,
+    TResult Function(ToggleMethod<T> value)? toggleMethod,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Success<T> value)? success,
+    TResult Function(Error<T> value)? error,
+    TResult Function(TransferMethodChanged<T> value)? transferMethodChanged,
+    required TResult orElse(),
+  }) {
+    if (transferMethodChanged != null) {
+      return transferMethodChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TransferMethodChanged<T> implements HomeStates<T> {
+  const factory TransferMethodChanged(final bool isUsername) =
+      _$TransferMethodChangedImpl<T>;
+
+  bool get isUsername;
+
+  /// Create a copy of HomeStates
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TransferMethodChangedImplCopyWith<T, _$TransferMethodChangedImpl<T>>
+      get copyWith => throw _privateConstructorUsedError;
 }
